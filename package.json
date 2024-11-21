@@ -4,7 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build:local": "env-cmd -f env/.env.local next build",
+    "build:dev": "env-cmd -f env/.env.dev next build",
+    "build:prod": "next build",
+    "start:local": "env-cmd -f env/.env.local next dev",
+    "start:dev": "env-cmd -f env/.env.dev next dev",
+    "start:prod": "env-cmd -f env/.env.prod next start",
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky"
