@@ -4,17 +4,20 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build:local": "env-cmd -f env/.env.local next build",
-    "build:dev": "env-cmd -f env/.env.dev next build",
+    "build:local": "env-cmd -f ./env/.env.local next build",
+    "build:dev": "env-cmd -f ./env/.env.dev next build",
     "build:prod": "next build",
-    "start:local": "env-cmd -f env/.env.local next dev",
-    "start:dev": "env-cmd -f env/.env.dev next dev",
-    "start:prod": "env-cmd -f env/.env.prod next start",
+    "start:local": "env-cmd -f .env/.env.local next dev",
+    "start:dev": "env-cmd -f ./env/.env.dev next dev",
+    "start:prod": "env-cmd -f ./env/.env.prod next start",
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky"
   },
   "dependencies": {
+    "@tanstack/react-query": "5.61.0",
+    "@tanstack/react-query-devtools": "5.61.0",
+    "axios": "1.7.7",
     "env-cmd": "10.1.0",
     "next": "15.0.3",
     "react": "18.3.1",
@@ -24,6 +27,7 @@
   "devDependencies": {
     "@commitlint/cli": "19.5.0",
     "@commitlint/config-conventional": "19.5.0",
+    "@tanstack/eslint-plugin-query": "5.60.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
