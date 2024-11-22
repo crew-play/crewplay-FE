@@ -18,14 +18,14 @@
       [
         "🎉 Init",
         "✨ Feature",
-        "📦️ Chore",
+        "📦 Chore",
         "💄 Design",
-        "🚑️ Fix",
+        "🐛 Fix",
         "✅ Test",
         "🚀 Deploy",
         "♻️ Refactor",
         "🚚 Rename",
-        "📚 Docs",
+        "📝 Docs",
         "🔥 Remove"
       ]
     ]
