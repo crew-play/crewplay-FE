@@ -1,7 +1,7 @@
 "use server";
 
-import { instance } from "@/middleware/interceptor";
-import { getToken } from "@/utils/token";
+import { instance, setAccessToken } from "@/api/interceptor";
+import { getToken, setToken } from "@/utils/token";
 
 export const tokenRefresh = async () => {
   const refreshToken = await getToken("refreshToken");
@@ -16,5 +16,6 @@ export const tokenRefresh = async () => {
   const newAccessToken = response.data.accessToken;
   const newRefreshToken = response.data.refreshToken;
 
-  return { newAccessToken, newRefreshToken };
+  setAccessToken(newAccessToken);
+  setToken({ type: "refreshToken", token: newRefreshToken });
 };

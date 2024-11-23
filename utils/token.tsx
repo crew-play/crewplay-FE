@@ -11,13 +11,24 @@ interface ISetToken {
 
 export const setToken = async ({ type, token }: ISetToken) => {
   const cookieStores = await cookies();
-  cookieStores.set(type, token);
+
+  const TOKEN_MAX_AGE = {
+    accessToken: 60 * 60 * 10,
+    refreshToken: 60 * 60 * 24,
+  };
+
+  cookieStores.set(type, token, {
+    maxAge: TOKEN_MAX_AGE[type], // 유효 시간
+    httpOnly: true, // JavaScript에서 접근 불가
+    sameSite: "strict", // CSRF 방지
+    secure: process.env.NODE_ENV === "production",
+  });
 };
 
 export const getToken = async (type: TToken) => {
   const cookieStores = await cookies();
-  const accessToken = cookieStores.get(type);
-  return accessToken;
+  const token = cookieStores.get(type);
+  return token;
 };
 
 export const removeToken = async (type: TToken) => {
