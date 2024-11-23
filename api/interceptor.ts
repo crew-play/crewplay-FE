@@ -31,10 +31,13 @@ instance.interceptors.response.use(
 
     switch (status) {
       case 403: {
-        await tokenRefresh();
-
-        error.config.headers.Authorization = `Bearer ${accessToken}`;
-        return instance(error.config);
+        try {
+          await tokenRefresh();
+          error.config.headers.Authorization = `Bearer ${accessToken}`;
+          return instance(error.config);
+        } catch (refreshError) {
+          return Promise.reject(refreshError);
+        }
       }
       case 500: {
         if (retryCount < MAX_RETRY_COUNT) {
@@ -48,6 +51,9 @@ instance.interceptors.response.use(
           alert("서버에 문제가 발생했습니다.");
           window.location.href = "/";
         }
+      }
+      default: {
+        return Promise.reject(error);
       }
     }
   },
