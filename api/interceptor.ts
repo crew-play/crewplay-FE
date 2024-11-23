@@ -1,8 +1,6 @@
 import { tokenRefresh } from "@/api/token-refresh";
 import axios from "axios";
 
-export let accessToken: string | null = null;
-
 let retryCount = 0;
 const MAX_RETRY_COUNT = 3;
 
@@ -12,9 +10,9 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    config.headers["Content-Type"] = "application/json";
-    config.headers["Authorization"] = `Bearer ${accessToken}`;
+    const accessToken = instance.defaults.headers.common["Authorization"];
 
+    config.headers["Authorization"] = accessToken;
     return config;
   },
   (error) => {
@@ -32,7 +30,7 @@ instance.interceptors.response.use(
     switch (status) {
       case 403: {
         try {
-          await tokenRefresh();
+          const accessToken = await tokenRefresh();
           error.config.headers.Authorization = `Bearer ${accessToken}`;
           return instance(error.config);
         } catch (refreshError) {
@@ -58,7 +56,3 @@ instance.interceptors.response.use(
     }
   },
 );
-
-export const setAccessToken = (token: string) => {
-  accessToken = token;
-};

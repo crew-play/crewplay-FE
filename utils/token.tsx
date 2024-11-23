@@ -4,30 +4,20 @@ import { cookies } from "next/headers";
 
 type TToken = "accessToken" | "refreshToken";
 
-interface ISetToken {
-  readonly type: TToken;
-  readonly token: string;
-}
-
-export const setToken = async ({ type, token }: ISetToken) => {
+export const setRefreshToken = async (token: string) => {
   const cookieStores = await cookies();
 
-  const TOKEN_MAX_AGE = {
-    accessToken: 60 * 60 * 10,
-    refreshToken: 60 * 60 * 24,
-  };
-
-  cookieStores.set(type, token, {
-    maxAge: TOKEN_MAX_AGE[type], // 유효 시간
+  cookieStores.set("refreshToken", token, {
+    maxAge: 60 * 60 * 24, // 유효 시간
     httpOnly: true, // JavaScript에서 접근 불가
     sameSite: "strict", // CSRF 방지
-    secure: process.env.NODE_ENV === "production",
+    secure: process.env.NODE_ENV === "production", // 운영 서버일 때 Https에서만 전송
   });
 };
 
-export const getToken = async (type: TToken) => {
+export const getRefreshToken = async () => {
   const cookieStores = await cookies();
-  const token = cookieStores.get(type);
+  const token = cookieStores.get("refreshToken");
   return token;
 };
 

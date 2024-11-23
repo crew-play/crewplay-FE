@@ -1,19 +1,19 @@
 "use server";
 
-import { instance, setAccessToken } from "@/api/interceptor";
-import { getToken } from "@/utils/token";
+import { instance } from "@/api/interceptor";
+import { setRefreshToken } from "@/utils/token";
 
 export const tokenRefresh = async () => {
-  const refreshToken = await getToken("refreshToken");
-
   const response = await instance.get("/refresh", {
-    headers: {
-      "Content-Type": "application/json",
-      RefreshToken: `Bearer ${refreshToken}`,
-    },
+    withCredentials: true,
   });
 
   if (response.status === 200) {
-    setAccessToken(response.data.accessToken);
+    const { accessToken, refreshToken } = response.data.data;
+
+    instance.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+    setRefreshToken(refreshToken);
+
+    return response.data.accessToken;
   }
 };
