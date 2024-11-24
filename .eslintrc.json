@@ -3,9 +3,9 @@
   "extends": [
     "next/core-web-vitals",
     "next/typescript",
-    "prettier",
     "plugin:tailwindcss/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "prettier"
   ],
   "rules": {
     // for 루프에서 ++/--와 같은 단항 연산자를 최종 표현식으로 사용하는 것을 허용합니다. 0이면 이 규칙을 무시합니다.
@@ -87,7 +87,7 @@
     "spaced-comment": "off",
 
     // Tailwind CSS 클래스 이름을 정렬하는 규칙을 무시합니다.
-    "tailwindcss/classnames-order": 0,
+    "tailwindcss/classnames-order": 1,
 
     // Tailwind CSS 클래스명 외에 사용자 정의 클래스를 사용하는 규칙을 무시합니다.
     "tailwindcss/no-custom-classnames": 0
