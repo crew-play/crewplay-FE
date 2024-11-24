@@ -11,6 +11,8 @@ export default {
       colors: {
         "default-default": "var(--text-default-default)",
         "default-secondary": "var(--text-default-secondary)",
+        "brand-default": "var(--text-brand-default)",
+        "brand-onBrand": "var(--text-brand-onBrand)",
       },
       borderColor: {
         "default-default": "var(--border-default-default)",
