@@ -9,8 +9,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        "default-default": "var(--text-default-default)",
+        "default-secondary": "var(--text-default-secondary)",
+      },
+      borderColor: {
+        "default-default": "var(--border-default-default)",
+      },
+      backgroundColor: {
+        "default-default": "var(--background-default-default)",
+        "default-secondary": "var(--background-default-secondary)",
       },
     },
   },
