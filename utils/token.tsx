@@ -4,15 +4,29 @@ import { cookies } from "next/headers";
 
 type TToken = "accessToken" | "refreshToken";
 
+interface ICookieOption {
+  readonly maxAge: number;
+  readonly httpOnly: boolean;
+  sameSite?: "strict" | "lax" | "none";
+  readonly secure: boolean;
+}
+
 export const setRefreshToken = async (token: string) => {
   const cookieStores = await cookies();
 
-  cookieStores.set("refreshToken", token, {
-    maxAge: 60 * 60 * 24, // 유효 시간
-    httpOnly: true, // JavaScript에서 접근 불가
-    sameSite: "strict", // CSRF 방지
-    secure: process.env.NODE_ENV === "production", // 운영 서버일 때 Https에서만 전송
-  });
+  const isProduction = process.env.NODE_ENV === "production";
+
+  const cookieOption: ICookieOption = {
+    maxAge: 60 * 60 * 24,
+    httpOnly: true,
+    secure: isProduction,
+  };
+
+  if (isProduction) {
+    cookieOption.sameSite = "none";
+  }
+
+  cookieStores.set("refreshToken", token, cookieOption);
 };
 
 export const getRefreshToken = async () => {
