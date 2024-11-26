@@ -6,6 +6,7 @@ const MAX_RETRY_COUNT = 3;
 
 export const instance = axios.create({
   baseURL: process.env.API_URL,
+  withCredentials: true,
 });
 
 instance.interceptors.request.use(
