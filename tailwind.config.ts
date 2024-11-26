@@ -13,6 +13,7 @@ export default {
         "default-secondary": "var(--text-default-secondary)",
         "brand-default": "var(--text-brand-default)",
         "brand-onBrand": "var(--text-brand-onBrand)",
+        "neutral-onNeutral": "var(--text-neutral-onNeutral)",
       },
       borderColor: {
         "default-default": "var(--border-default-default)",
