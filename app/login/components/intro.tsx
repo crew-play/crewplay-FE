@@ -1,0 +1,14 @@
+import { decodeToken } from "@/constants/test";
+
+export default function Intro() {
+  decodeToken();
+
+  return (
+    <div className="mb-[64px] w-full text-center text-brand-default">
+      <p className="text-2xl font-bold">함께하는 더 즐거운 야구</p>
+      <p className="mt-4 text-sm font-medium">
+        지금 바로 쉽고 재미있게 시작해요!
+      </p>
+    </div>
+  );
+}

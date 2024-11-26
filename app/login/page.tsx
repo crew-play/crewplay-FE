@@ -1,13 +1,11 @@
-import { KAKAO_LOGIN_URL, NAVER_LOGIN_URL } from "@/constants/social-login-url";
-import Link from "next/link";
+import Intro from "./components/intro";
+import SocialLoginButton from "./components/social-login-button";
 
 export default function Login() {
   return (
-    <div className="flex">
-      <Link href={NAVER_LOGIN_URL} className="mr-2">
-        네이버로 로그인
-      </Link>
-      <Link href={KAKAO_LOGIN_URL}>카카오로 로그인</Link>
+    <div className="mx-auto flex h-[calc(100vh-164px)] min-h-[400px] w-[341px] flex-col justify-center overflow-auto">
+      <Intro />
+      <SocialLoginButton />
     </div>
   );
 }

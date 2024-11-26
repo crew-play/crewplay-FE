@@ -3,9 +3,9 @@
   "extends": [
     "next/core-web-vitals",
     "next/typescript",
-    "prettier",
     "plugin:tailwindcss/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "prettier"
   ],
   "rules": {
     // for 루프에서 ++/--와 같은 단항 연산자를 최종 표현식으로 사용하는 것을 허용합니다. 0이면 이 규칙을 무시합니다.
