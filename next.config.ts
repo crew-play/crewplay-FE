@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
 
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: "/:path*",
+        destination: `${process.env.NEXT_PUBLIC_SERVER_URL}/:path*`,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
