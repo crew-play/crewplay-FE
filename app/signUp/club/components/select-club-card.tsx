@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-interface ISelectTeamCardProps {
+interface ISelectClubCardProps {
   readonly team: {
     readonly id: string;
     readonly name: string;
@@ -8,7 +8,7 @@ interface ISelectTeamCardProps {
   };
 }
 
-export default function SelectTeamCard({ team }: ISelectTeamCardProps) {
+export default function SelectClubCard({ team }: ISelectClubCardProps) {
   return (
     <div className="mb-[12px] flex h-[70.51px] cursor-pointer items-center rounded-[8px] border border-default-default bg-white px-4">
       {team.image}

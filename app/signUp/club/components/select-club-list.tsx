@@ -11,7 +11,7 @@ import Ssg from "@/public/svg/team/ssg.svg";
 import { useMemo } from "react";
 import SelectTeamCard from "./select-club-card";
 
-export default function SelectTeamList() {
+export default function SelectClubList() {
   const TEAM_INFORMATION = useMemo(() => {
     return [
       {

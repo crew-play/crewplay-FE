@@ -1,4 +1,4 @@
-export default function SelectTeamDescription() {
+export default function SelectClubDescription() {
   return (
     <div>
       <p className="text-[20px] font-semibold leading-[28px] text-brand-default">
