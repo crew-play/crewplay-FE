@@ -14,9 +14,11 @@ export default {
         "brand-default": "var(--text-brand-default)",
         "brand-onBrand": "var(--text-brand-onBrand)",
         "neutral-onNeutral": "var(--text-neutral-onNeutral)",
+        "danger-secondary": "var(--text-danger-secondary)",
       },
       borderColor: {
         "default-default": "var(--border-default-default)",
+        "danger-secondary": "var(--text-danger-secondary)",
       },
       backgroundColor: {
         "default-default": "var(--background-default-default)",

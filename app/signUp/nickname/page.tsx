@@ -1,7 +1,7 @@
 "use client";
 
-import NicknameDescription from "../components/nickname/nickname-description";
-import NicknameForm from "../components/nickname/nickname-form";
+import NicknameDescription from "./components/nickname-description";
+import NicknameForm from "./components/nickname-form";
 
 export default function signUpNickname() {
   return (
