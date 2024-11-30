@@ -13,13 +13,15 @@
     "@hookform/resolvers": "3.9.1",
     "@tanstack/react-query": "5.61.0",
     "@tanstack/react-query-devtools": "5.61.0",
+    "@types/ol": "7.0.0",
     "axios": "1.7.7",
+    "jotai": "2.10.3",
     "js-base64": "3.7.7",
     "next": "15.0.3",
+    "ol": "10.3.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-hook-form": "7.53.2",
-    "recoil": "0.7.7",
     "yup": "1.4.0"
   },
   "devDependencies": {

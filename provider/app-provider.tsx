@@ -4,8 +4,8 @@ import { tokenRefresh } from "@/api/token-refresh";
 import { getRefreshToken } from "@/utils/token";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Provider } from "jotai";
 import { PropsWithChildren, useEffect } from "react";
-import { RecoilRoot } from "recoil";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,8 +30,8 @@ export default function AppProvider({ children }: PropsWithChildren) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <RecoilRoot>{children}</RecoilRoot>
       <ReactQueryDevtools initialIsOpen={false} />
+      <Provider>{children}</Provider>
     </QueryClientProvider>
   );
 }
