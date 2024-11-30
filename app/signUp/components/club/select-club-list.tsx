@@ -9,7 +9,7 @@ import Nc from "@/public/svg/team/nc.svg";
 import Hanwha from "@/public/svg/team/hanwha.svg";
 import Ssg from "@/public/svg/team/ssg.svg";
 import { useMemo } from "react";
-import SelectTeamCard from "./select-team-card";
+import SelectTeamCard from "./select-club-card";
 
 export default function SelectTeamList() {
   const TEAM_INFORMATION = useMemo(() => {
