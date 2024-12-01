@@ -23,21 +23,35 @@ export default function NicknameForm() {
     handleSubmit,
     getValues,
     setError,
-    reset,
+    setValue,
     clearErrors,
     formState: { errors },
   } = useForm<INicknameForm>({
     defaultValues: {
-      nickname: signUpForm.nickname === "" ? signUpForm.nickname : "",
+      nickname: signUpForm.nickname === "" ? "" : signUpForm.nickname,
     },
     mode: "onChange",
     resolver: yupResolver(nicknameSchema),
   });
 
+  const handleClearNickname = () => {
+    setSignUpForm((prev) => {
+      return { ...prev, nickname: "" };
+    });
+    setValue("nickname", "");
+  };
+
   const handleCheckNicknameSubmit = async () => {
     const nickname = getValues("nickname");
 
-    if (nickname.length === 0) return;
+    if (nickname.length === 0) {
+      setError("nickname", {
+        message: "닉네임 입력은 필수입니다.",
+      });
+      return;
+    }
+
+    if (errors.nickname) return;
 
     const { data } = await checkNickname(nickname);
 
@@ -54,10 +68,6 @@ export default function NicknameForm() {
     }
   };
 
-  const handleClearNickname = () => {
-    reset();
-  };
-
   return (
     <div className="mt-12">
       <form
@@ -72,6 +82,7 @@ export default function NicknameForm() {
           {...register("nickname")}
         />
         <button
+          type="button"
           onClick={handleClearNickname}
           className="mr-2 flex size-9 items-center justify-center"
         >
