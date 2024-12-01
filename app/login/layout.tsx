@@ -5,7 +5,7 @@ import { PropsWithChildren } from "react";
 export default function LoginLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <Header />
+      <Header isOnlyUseLogo />
       <main>{children}</main>
       <Footer />
     </>

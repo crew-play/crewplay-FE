@@ -48,5 +48,5 @@ export default function SignUpPage() {
     case "nickname":
   }
 
-  return <div className="mx-auto w-[384px]">{renderComponent()}</div>;
+  return <>{renderComponent()}</>;
 }

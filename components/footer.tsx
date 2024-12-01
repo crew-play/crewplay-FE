@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="flex h-[5.25rem] w-full items-center justify-between border-t border-default-default bg-default-secondary px-40 text-sm">
+    <footer className="mx-auto flex h-[5.25rem] items-center justify-between border-t border-default-default bg-default-secondary px-[16px] text-[10px] leading-[17.38px] md:w-[620px] md:text-sm md:leading-[20.27px] lg:w-[920px] xl:w-[1220px] 2xl:w-[1520px]">
       <div className="flex">
         <Link href="/" className="font-normal text-default-secondary">
           서비스 이용약관

@@ -2,11 +2,11 @@
 
 import { atomSignUpForm, ISignUpForm } from "@/jotai/sign-up";
 import MovePage from "@/public/svg/right-arrow.svg";
-import Lg from "@/public/svg/team/lg.svg";
 import { useAtomValue } from "jotai";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import useClubList from "../hooks/use-club-list";
+import Image from "next/image";
 
 export default function SignUpSuccessPage() {
   const router = useRouter();
@@ -26,12 +26,15 @@ export default function SignUpSuccessPage() {
 
   if (isLoading) return <div>로딩중..</div>;
 
-  if (!data) return <div>데이터 없음</div>;
+  if (!data || !data.data) return <div>데이터 없음</div>;
 
   if (isError) return <div>Error 발생</div>;
 
+  const club = data.data.find((club) => club.clubName === signUpForm.clubName);
+  const imageUrl = club ? club.emblemImg : "";
+
   return (
-    <div className="mx-auto flex h-[calc(100vh-164px)] min-h-[400px] w-[341px] flex-col justify-center text-center">
+    <>
       <p className="text-[32px] font-bold leading-[44.8px] text-brand-default">
         회원가입이
         <br />
@@ -42,7 +45,13 @@ export default function SignUpSuccessPage() {
       </p>
       <div className="mt-[32px] flex h-[76px] cursor-pointer items-center justify-between rounded-[8px] border border-default-default bg-white px-[16px]">
         <div className="flex">
-          <Lg />
+          <Image
+            src={imageUrl}
+            alt="team emblem"
+            width={60}
+            height={38.51}
+            className="max-h-[38.51px] object-contain"
+          />
           <div className="ml-[2.75px] text-left">
             <p className="text-[16px] font-semibold leading-[22.4px] text-default-default">
               {signUpForm.clubName}
@@ -56,6 +65,6 @@ export default function SignUpSuccessPage() {
           <MovePage />
         </div>
       </div>
-    </div>
+    </>
   );
 }
