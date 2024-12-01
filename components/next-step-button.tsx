@@ -2,7 +2,7 @@ interface INextStepButtonProps {
   readonly className: string;
   readonly text: string;
   readonly disabled?: boolean;
-  readonly onClick: () => void;
+  readonly onClick?: () => void;
 }
 
 export default function NextStepButton({

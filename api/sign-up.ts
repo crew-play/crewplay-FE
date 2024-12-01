@@ -4,8 +4,8 @@ import { AxiosError } from "axios";
 import { instance } from "./interceptor";
 
 export interface IClub {
-  readonly clubId: number;
   readonly clubName: string;
+  readonly emblemImg: string;
 }
 
 export const checkNickname = async (
@@ -55,9 +55,7 @@ export const getClubList = async (): Promise<IResponse<IClub[]>> => {
   }
 };
 
-export const signUp = async (
-  signUpForm: Pick<ISignUpForm, "clubName" | "nickname" | "providerId">,
-) => {
+export const signUp = async (signUpForm: ISignUpForm) => {
   const response = await instance.post("/api/v1/auth/signUp", signUpForm);
   return response;
 };

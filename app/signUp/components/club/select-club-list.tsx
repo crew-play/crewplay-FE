@@ -41,7 +41,7 @@ export default function SelectClubList() {
 
   const isDisabled = signUpForm.clubName === "";
 
-  if (isLoading) return <div>로딩중...</div>;
+  if (isLoading) return <div>로딩중</div>;
 
   if (isError) {
     alert("구단리스트 조회 오류");
@@ -49,15 +49,6 @@ export default function SelectClubList() {
   }
 
   if (!data || !data.data) return <div>데이터 오류</div>;
-  const clubList = data.data.map((club, index) => {
-    const clubId = index + 1;
-    const clubImage = TEAM_IMAGES[clubId];
-
-    return {
-      ...club,
-      clubImage,
-    };
-  });
 
   const handleSignUpSubmit = () => {
     mutate({
@@ -70,13 +61,12 @@ export default function SelectClubList() {
   return (
     <div>
       <div className="mt-6 h-[300px] overflow-auto">
-        {clubList.map((club) => {
+        {data.data.map((club) => {
           return (
             <SelectClubCard
-              key={club.clubId}
+              key={club.clubName}
               clubName={club.clubName}
-              clubImage={club.clubImage}
-              clubId={club.clubId}
+              emblemImg={club.emblemImg}
             />
           );
         })}
