@@ -26,6 +26,10 @@ export default {
         "default-secondary": "var(--background-default-secondary)",
         "default-tertiaryHover": "var(--background-default-tertiaryHover)",
       },
+      fontFamily: {
+        pretendard: "var(--font-pretendard)",
+        sfPro: "var(--font-sf-pro)",
+      },
     },
   },
   plugins: [],
