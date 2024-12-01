@@ -19,10 +19,12 @@ export default {
       borderColor: {
         "default-default": "var(--border-default-default)",
         "danger-secondary": "var(--text-danger-secondary)",
+        "default-tertiaryHover": "var(--border-default-tertiaryHover)",
       },
       backgroundColor: {
         "default-default": "var(--background-default-default)",
         "default-secondary": "var(--background-default-secondary)",
+        "default-tertiaryHover": "var(--background-default-tertiaryHover)",
       },
     },
   },

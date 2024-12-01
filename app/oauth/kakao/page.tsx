@@ -1,15 +1,15 @@
 "use client";
 
 import { sendCode } from "@/api/social-login";
-import { atomSignUpForm } from "@/recoil/signUp/sign-up-step";
+import { atomSignUpForm } from "@/jotai/sign-up";
+import { useSetAtom } from "jotai";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
 
 export default function OAuthKakaoPage() {
   const [params] = useSearchParams();
   const router = useRouter();
-  const setSignUpForm = useSetRecoilState(atomSignUpForm);
+  const setSignUpForm = useSetAtom(atomSignUpForm);
 
   const init = async (code: string) => {
     const { data, status } = await sendCode(code);
@@ -18,7 +18,7 @@ export default function OAuthKakaoPage() {
     let path = "/";
 
     if (isSuccess && data) {
-      path = "/signUp/nickname";
+      path = "/signUp";
       setSignUpForm((prev) => {
         return {
           ...prev,

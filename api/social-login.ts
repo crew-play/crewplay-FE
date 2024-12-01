@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IResponse } from "@/interface/response";
 import { instance } from "./interceptor";
+import { AxiosError } from "axios";
 
 interface ISendCodeResponseData {
-  providerId: string;
-  nickname: string;
+  readonly providerId: string;
+  readonly nickname: string;
 }
 
 export const sendCode = async (
@@ -18,9 +18,15 @@ export const sendCode = async (
       status: "success",
     };
   } catch (error) {
+    if (error instanceof AxiosError) {
+      return {
+        status: "error",
+        error: error.message,
+      };
+    }
     return {
-      data: null,
       status: "error",
+      error: "알 수 없는 오류가 발생했습니다.",
     };
   }
 };

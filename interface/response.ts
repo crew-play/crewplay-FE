@@ -1,4 +1,5 @@
 export interface IResponse<T> {
-  data: T | null;
+  data?: T;
+  error?: string;
   status: "success" | "error";
 }

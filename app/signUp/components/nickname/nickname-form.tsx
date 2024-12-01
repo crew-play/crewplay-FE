@@ -1,19 +1,22 @@
 import { checkNickname } from "@/api/sign-up";
+import NextStepButton from "@/components/next-step-button";
+import { atomSignUpForm, atomSignUpStep } from "@/jotai/sign-up";
 import Refresh from "@/public/svg/refresh-input.svg";
-import { atomSignUpForm } from "@/recoil/signUp/sign-up-step";
 import { nicknameSchema } from "@/schema/sign-up-schema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/navigation";
+import { useAtom, useSetAtom } from "jotai";
 import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
 
 interface INicknameForm {
   readonly nickname: string;
 }
 
+const CLASS_NAME =
+  "mt-6 flex h-[52px] w-full cursor-pointer items-center justify-center rounded-lg bg-[#002A5C] text-[14px] font-semibold leading-[14px] text-neutral-onNeutral";
+
 export default function NicknameForm() {
-  const router = useRouter();
-  const setSignUpForm = useSetRecoilState(atomSignUpForm);
+  const setSignUpStep = useSetAtom(atomSignUpStep);
+  const [signUpForm, setSignUpForm] = useAtom(atomSignUpForm);
 
   const {
     register,
@@ -25,7 +28,7 @@ export default function NicknameForm() {
     formState: { errors },
   } = useForm<INicknameForm>({
     defaultValues: {
-      nickname: "",
+      nickname: signUpForm.nickname === "" ? signUpForm.nickname : "",
     },
     mode: "onChange",
     resolver: yupResolver(nicknameSchema),
@@ -40,8 +43,10 @@ export default function NicknameForm() {
 
     if (data) {
       clearErrors();
-      setSignUpForm((prev) => ({ ...prev, nickname }));
-      router.push("/signUp/club");
+      setSignUpForm((prev) => {
+        return { ...prev, nickname };
+      });
+      setSignUpStep("club");
     } else {
       setError("nickname", {
         message: "사용할 수 없는 닉네임입니다.",
@@ -74,17 +79,15 @@ export default function NicknameForm() {
         </button>
       </form>
       {errors.nickname && (
-        <p className="text-danger-secondary mt-1 leading-[19.6px]">
+        <p className="mt-1 leading-[19.6px] text-danger-secondary">
           {errors.nickname.message}
         </p>
       )}
-      <button
-        type="submit"
+      <NextStepButton
+        className={CLASS_NAME}
+        text="다음"
         onClick={handleCheckNicknameSubmit}
-        className="mt-6 flex h-[52px] w-full cursor-pointer items-center justify-center rounded-lg bg-[#002A5C] text-[14px] font-semibold leading-[14px] text-neutral-onNeutral"
-      >
-        다음
-      </button>
+      />
     </div>
   );
 }
