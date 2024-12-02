@@ -26,12 +26,12 @@ export const setRefreshToken = async (token: string) => {
     cookieOption.sameSite = "none";
   }
 
-  cookieStores.set("refreshToken", token, cookieOption);
+  cookieStores.set("refresh", token, cookieOption);
 };
 
 export const getRefreshToken = async () => {
   const cookieStores = await cookies();
-  const token = cookieStores.get("refreshToken");
+  const token = cookieStores.get("refresh");
   return token;
 };
 

@@ -1,6 +1,7 @@
 import { IResponse } from "@/interface/response";
+import { setRefreshToken } from "@/utils/token";
+import axios, { AxiosError } from "axios";
 import { instance } from "./interceptor";
-import { AxiosError } from "axios";
 
 interface ISendCodeResponseData {
   readonly providerId: string;
@@ -11,7 +12,20 @@ export const sendCode = async (
   code: string,
 ): Promise<IResponse<ISendCodeResponseData>> => {
   try {
-    const { data } = await instance.post("/api/v1/auth/kakao", { code: code });
+    const response = await axios.post("/api/v1/auth/kakao", { code: code });
+    const { data } = response;
+
+    const accessToken = response.headers["access"];
+    const refreshToken = response.headers["refresh"];
+
+    if (accessToken) {
+      instance.defaults.headers.common["Authorization"] =
+        `Bearer ${accessToken}`;
+    }
+
+    if (refreshToken) {
+      setRefreshToken(refreshToken);
+    }
 
     return {
       data: data.data,

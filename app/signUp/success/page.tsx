@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import useClubList from "../hooks/use-club-list";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function SignUpSuccessPage() {
   const router = useRouter();
@@ -30,7 +31,9 @@ export default function SignUpSuccessPage() {
 
   if (isError) return <div>Error 발생</div>;
 
-  const club = data.data.find((club) => club.clubName === signUpForm.clubName);
+  const club = data.data.find((club) => {
+    return club.clubName === signUpForm.clubName;
+  });
   const imageUrl = club ? club.emblemImg : "";
 
   return (
@@ -43,7 +46,10 @@ export default function SignUpSuccessPage() {
       <p className="mt-4 text-[19px] font-normal leading-[24px] text-brand-default">
         나의 첫번째 야구 커뮤니티, 크루플레이
       </p>
-      <div className="mt-[32px] flex h-[76px] cursor-pointer items-center justify-between rounded-[8px] border border-default-default bg-white px-[16px]">
+      <Link
+        href="/login"
+        className="mt-[32px] flex h-[76px] cursor-pointer items-center justify-between rounded-[8px] border border-default-default bg-white px-[16px]"
+      >
         <div className="flex">
           <Image
             src={imageUrl}
@@ -64,7 +70,7 @@ export default function SignUpSuccessPage() {
         <div className="flex size-[36px] items-center justify-center">
           <MovePage />
         </div>
-      </div>
+      </Link>
     </>
   );
 }

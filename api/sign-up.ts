@@ -56,6 +56,6 @@ export const getClubList = async (): Promise<IResponse<IClub[]>> => {
 };
 
 export const signUp = async (signUpForm: ISignUpForm) => {
-  const response = await instance.post("/api/v1/auth/signUp", signUpForm);
+  const response = await instance.post("/api/v1/auth/signup", signUpForm);
   return response;
 };
