@@ -5,15 +5,16 @@ let retryCount = 0;
 const MAX_RETRY_COUNT = 3;
 
 export const instance = axios.create({
-  baseURL: process.env.API_URL,
-  withCredentials: true,
+  baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
 });
 
 instance.interceptors.request.use(
   (config) => {
     const accessToken = instance.defaults.headers.common["Authorization"];
 
-    config.headers["Authorization"] = accessToken;
+    if (accessToken) {
+      config.headers["Authorization"] = accessToken;
+    }
     return config;
   },
   (error) => {
@@ -29,7 +30,7 @@ instance.interceptors.response.use(
     const { status } = error.response;
 
     switch (status) {
-      case 403: {
+      case 401: {
         try {
           const accessToken = await tokenRefresh();
           error.config.headers.Authorization = `Bearer ${accessToken}`;

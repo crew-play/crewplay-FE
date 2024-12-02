@@ -1,34 +1,52 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { atomSignUpForm, atomSignUpStep } from "@/jotai/sign-up";
+import { useAtom, useAtomValue } from "jotai";
 import NicknameDescription from "./components/nickname/nickname-description";
 import NicknameForm from "./components/nickname/nickname-form";
-import SelectTeamDescription from "./components/team/select-team-desciption";
-import SelectTeamList from "./components/team/select-team-list";
+import SelectClubDescription from "./components/club/select-club-description";
+import SelectClubList from "./components/club/select-club-list";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import GoBackButton from "./components/nickname/go-back-button";
+export default function SignUpPage() {
+  const [signUpStep, setSignUpStep] = useAtom(atomSignUpStep);
+  const signUpForm = useAtomValue(atomSignUpForm);
+  const router = useRouter();
 
-export default function SignUp() {
-  const [step] = useState<string>("team");
+  useEffect(() => {
+    if (signUpForm.providerId === "") {
+      router.push("/");
+    }
+  }, []);
 
-  const stepComponent: { [key: string]: ReactNode } = {
-    nickname: (
-      <>
-        <NicknameDescription />
-        <NicknameForm />
-      </>
-    ),
-    team: (
-      <>
-        <SelectTeamDescription />
-        <SelectTeamList />
-      </>
-    ),
+  const handleClickBackButton = () => {
+    setSignUpStep("nickname");
   };
 
-  return (
-    <div
-      className={`mx-auto flex h-[calc(100vh-164px)] min-h-[400px] ${step === "nickname" && "w-[382px]"} ${step === "team" && "w-[371px]"} flex-col justify-center overflow-auto`}
-    >
-      {stepComponent[step]}
-    </div>
-  );
+  const renderComponent = () => {
+    switch (signUpStep) {
+      case "nickname":
+        return (
+          <>
+            <NicknameDescription />
+            <NicknameForm />
+          </>
+        );
+      case "club":
+        return (
+          <>
+            <GoBackButton text="회원가입" onClick={handleClickBackButton} />
+            <SelectClubDescription />
+            <SelectClubList />
+          </>
+        );
+    }
+  };
+
+  switch (signUpStep) {
+    case "nickname":
+  }
+
+  return <>{renderComponent()}</>;
 }

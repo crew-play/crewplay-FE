@@ -5,7 +5,7 @@ import { PropsWithChildren } from "react";
 export default function HomeLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <Header />
+      <Header isOnlyUseLogo={false} />
       <main>{children}</main>
       <Footer />
     </>

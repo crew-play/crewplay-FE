@@ -14,13 +14,21 @@ export default {
         "brand-default": "var(--text-brand-default)",
         "brand-onBrand": "var(--text-brand-onBrand)",
         "neutral-onNeutral": "var(--text-neutral-onNeutral)",
+        "danger-secondary": "var(--text-danger-secondary)",
       },
       borderColor: {
         "default-default": "var(--border-default-default)",
+        "danger-secondary": "var(--text-danger-secondary)",
+        "default-tertiaryHover": "var(--border-default-tertiaryHover)",
       },
       backgroundColor: {
         "default-default": "var(--background-default-default)",
         "default-secondary": "var(--background-default-secondary)",
+        "default-tertiaryHover": "var(--background-default-tertiaryHover)",
+      },
+      fontFamily: {
+        pretendard: "var(--font-pretendard)",
+        sfPro: "var(--font-sf-pro)",
       },
     },
   },
