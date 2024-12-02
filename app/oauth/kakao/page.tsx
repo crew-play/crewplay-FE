@@ -3,11 +3,10 @@
 import { sendCode } from "@/api/social-login";
 import { atomSignUpForm } from "@/jotai/sign-up";
 import { useSetAtom } from "jotai";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function OAuthKakaoPage() {
-  const [params] = useSearchParams();
   const router = useRouter();
   const setSignUpForm = useSetAtom(atomSignUpForm);
 
@@ -33,12 +32,13 @@ export default function OAuthKakaoPage() {
   };
 
   useEffect(() => {
-    const code = params[1];
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
 
     if (code) {
       init(code);
     }
-  }, [params]);
+  }, []);
 
   return (
     <div className="flex h-screen flex-col items-center justify-center">
