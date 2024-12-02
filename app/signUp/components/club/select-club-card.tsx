@@ -1,7 +1,6 @@
 import { atomSignUpForm } from "@/jotai/sign-up";
 import { useAtom } from "jotai";
 import Image from "next/image";
-import { ReactNode } from "react";
 
 interface ISelectClubCardProps {
   readonly clubName: string;
