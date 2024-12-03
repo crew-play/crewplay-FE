@@ -23,7 +23,7 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="en" className={`${pretendard.variable} ${sfPro.variable}`}>
-      <body className="bg-default-secondary font-pretendard text-default-default antialiased">
+      <body className="font-pretendard text-default-default antialiased">
         <AppProvider>{children}</AppProvider>
       </body>
     </html>
