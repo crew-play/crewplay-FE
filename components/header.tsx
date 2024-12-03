@@ -7,7 +7,7 @@ interface IHeaderProps {
 
 export default function Header({ isOnlyUseLogo }: IHeaderProps) {
   return (
-    <header className="sticky top-0 flex h-20 w-full items-center justify-between border-b border-default-default bg-default-default px-[31px] text-[20px] font-medium leading-[24px] text-brand-default md:px-[80px] lg:px-[160px]">
+    <header className="border-white-005 bg-white-001 text-black-003 sticky top-0 flex h-20 w-full items-center justify-between border-b px-[31px] text-[20px] font-medium leading-[24px] md:px-[80px] lg:px-[160px]">
       <div className="flex h-6 items-center">
         <Link href="/" className="flex items-center">
           <Logo />

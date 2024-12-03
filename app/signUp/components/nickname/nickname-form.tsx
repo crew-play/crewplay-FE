@@ -12,7 +12,7 @@ interface INicknameForm {
 }
 
 const CLASS_NAME =
-  "mt-6 flex h-[52px] w-full cursor-pointer items-center justify-center rounded-lg bg-[#002A5C] text-[14px] font-semibold leading-[14px] text-neutral-onNeutral";
+  "mt-6 flex h-[52px] w-full cursor-pointer items-center justify-center rounded-lg bg-[#002A5C] text-[14px] font-semibold leading-[14px] text-white-002";
 
 export default function NicknameForm() {
   const setSignUpStep = useSetAtom(atomSignUpStep);
@@ -72,12 +72,12 @@ export default function NicknameForm() {
     <div className="mt-12">
       <form
         onSubmit={handleSubmit(handleCheckNicknameSubmit)}
-        className={`flex h-[52px] w-full items-center rounded-lg border bg-default-default ${errors.nickname ? "border-danger-secondary" : "border-default-default"}`}
+        className={`bg-white-001 flex h-[52px] w-full items-center rounded-lg border ${errors.nickname ? "border-red-001" : "border-white-005"}`}
       >
         <input
           maxLength={10}
           type="text"
-          className="w-full rounded-lg pl-[18px] leading-4 text-default-default focus:outline-none"
+          className="text-black-002 w-full rounded-lg pl-[18px] leading-4 focus:outline-none"
           placeholder="닉네임을 입력해주세요."
           {...register("nickname")}
         />
@@ -90,7 +90,7 @@ export default function NicknameForm() {
         </button>
       </form>
       {errors.nickname && (
-        <p className="mt-1 leading-[19.6px] text-danger-secondary">
+        <p className="text-red-001 mt-1 leading-[19.6px]">
           {errors.nickname.message}
         </p>
       )}

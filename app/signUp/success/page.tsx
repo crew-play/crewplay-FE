@@ -38,17 +38,17 @@ export default function SignUpSuccessPage() {
 
   return (
     <>
-      <p className="text-[32px] font-bold leading-[44.8px] text-brand-default">
+      <p className="text-black-003 text-[32px] font-bold leading-[44.8px]">
         회원가입이
         <br />
         완료되었습니다!
       </p>
-      <p className="mt-4 text-[19px] font-normal leading-[24px] text-brand-default">
+      <p className="text-black-003 mt-4 text-[19px] font-normal leading-[24px]">
         나의 첫번째 야구 커뮤니티, 크루플레이
       </p>
       <Link
         href="/login"
-        className="mt-[32px] flex h-[76px] cursor-pointer items-center justify-between rounded-[8px] border border-default-default bg-white px-[16px]"
+        className="border-white-005 bg-white-001 mt-[32px] flex h-[76px] cursor-pointer items-center justify-between rounded-[8px] border px-[16px]"
       >
         <div className="flex">
           <Image
@@ -59,7 +59,7 @@ export default function SignUpSuccessPage() {
             className="max-h-[38.51px] object-contain"
           />
           <div className="ml-[2.75px] text-left">
-            <p className="text-[16px] font-semibold leading-[22.4px] text-default-default">
+            <p className="text-black-002 text-[16px] font-semibold leading-[22.4px]">
               {signUpForm.clubName}
             </p>
             <p className="mt-[2px] text-[14px] font-normal leading-[19.6px]">

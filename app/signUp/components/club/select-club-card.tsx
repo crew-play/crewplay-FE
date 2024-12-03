@@ -22,7 +22,7 @@ export default function SelectClubCard({
 
   return (
     <div
-      className={`mb-[12px] flex h-[70.51px] cursor-pointer items-center rounded-[8px] border bg-white px-4 ${signUpForm.clubName === clubName ? "border-[#FF6F3C]" : "border-default-default"}`}
+      className={`mb-[12px] flex h-[70.51px] cursor-pointer items-center rounded-[8px] border bg-white px-4 ${signUpForm.clubName === clubName ? "border-orange-001" : "border-white-005"}`}
       onClick={handleClickClub}
     >
       <Image
@@ -32,7 +32,7 @@ export default function SelectClubCard({
         height={38.51}
         className="max-h-[38.51px] object-contain"
       />
-      <p className="ml-[10px] text-[16px] font-semibold leading-[22.4px] text-default-default">
+      <p className="text-black-002 ml-[10px] text-[16px] font-semibold leading-[22.4px]">
         {clubName}
       </p>
     </div>
