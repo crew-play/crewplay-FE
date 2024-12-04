@@ -8,8 +8,8 @@ export default function VotePage() {
   return (
     <>
       <div className="mx-auto w-[1200px]">
-        <h1 className="mt-[80px] w-full text-center text-[20px] leading-[20px]">
-          크루 플레이 다음 주 주제 선정
+        <h1 className="mt-[80px] w-full text-center text-[20px] font-medium leading-[20px]">
+          크루플레이 다음 주 주제 선정
         </h1>
         <DeadlineTimer />
         <div>
