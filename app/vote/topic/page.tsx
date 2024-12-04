@@ -4,7 +4,7 @@ import TopicList from "./components/topic-list";
 import RegisterVote from "@/components/register-vote";
 import Pagination from "@/components/pagination";
 
-export default function VotePage() {
+export default function VoteTopicPage() {
   return (
     <>
       <div className="mx-auto w-[1200px]">
