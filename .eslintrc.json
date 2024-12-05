@@ -14,8 +14,8 @@
     // console.log가 코드에 남아 있을 때 경고로 표시됩니다. 오류를 발생시키지 않음.
     "no-console": 1,
 
-    // 사용되지 않는 변수가 있을 경우 경고로 표시합니다. 오류를 발생시키지 않음.
-    "no-unused-vars": 1,
+    // 사용되지 않는 변수가 있을 경우 경고로 표시합니다. 오류를 발생시키지 않음. _는 무시
+    "no-unused-vars": [1, { "argsIgnorePattern": "^_" }],
 
     // TypeScript에서 사용되지 않는 변수가 있을 경우 경고로 표시합니다. 오류를 발생시키지 않음.
     "@typescript-eslint/no-unused-vars": 1,
