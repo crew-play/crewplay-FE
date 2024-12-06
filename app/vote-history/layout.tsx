@@ -6,7 +6,9 @@ export default function VoteHistoryLayout({ children }: PropsWithChildren) {
   return (
     <>
       <Header isOnlyUseLogo />
-      <main className="mx-auto lg:w-[880px]">{children}</main>
+      <main className="w-full px-[16px] lg:mx-auto lg:w-[880px] lg:px-0">
+        {children}
+      </main>
       <Footer />
     </>
   );

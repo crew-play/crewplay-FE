@@ -16,17 +16,19 @@ export default function CandidateItem({
   const percentageWidth = `${720 * Number((percentage / 100).toFixed(1))}px`;
 
   return (
-    <div className="relative mx-auto mb-[10px] h-[60px] w-[720px] overflow-hidden rounded-[8px]">
+    <div className="relative mx-auto mb-[8px] h-[60px] w-full overflow-hidden rounded-[8px] lg:mb-[10px] lg:w-[720px]">
       <div className="absolute z-[49] flex size-full items-center justify-between pl-[24px] pr-[30px]">
         <div className="flex items-center">
           {isFirst && <MediumFirst className="size-[24px]" />}
-          <span className="ml-[4px] font-medium text-black-001">
+          <span className="ml-[6px] font-medium text-black-001 lg:ml-[4px]">
             {candidate}
           </span>
         </div>
         <div className="flex items-center">
           <span className="font-bold text-black-001">{percentage}%</span>
-          <span className="ml-[17px] text-[12px] text-gray-004">{count}명</span>
+          <span className="ml-[10px] text-[12px] text-gray-004 lg:ml-[17px]">
+            {count}명
+          </span>
         </div>
       </div>
       <div
