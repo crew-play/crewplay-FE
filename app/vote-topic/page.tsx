@@ -4,6 +4,7 @@ import DeadlineTimer from "./components/deadline-timer";
 import TopicList from "./components/topic-list";
 import RegisterVote from "@/components/register-vote";
 
+
 export default function VoteTopicPage() {
   return (
     <>
