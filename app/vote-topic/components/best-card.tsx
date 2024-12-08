@@ -22,11 +22,11 @@ export default function BestCard({ ranking }: ITopicBestCardProps) {
 
   return (
     <div
-      className={`flex h-[100px] items-center ${isFirst ? "bg-white-004" : "border-b border-b-white-006"} ${ranking === 1}`}
+      className={`flex h-[60px] items-center lg:h-[100px] ${isFirst ? "bg-white-004" : "border-b border-b-white-006"} ${ranking === 1}`}
     >
       <div className="flex h-full w-[102px] items-center justify-center">
         {typeof RANKING[ranking] === "string" ? (
-          <span className="flex items-center justify-center text-[20px] font-semibold leading-[20px] text-gray-003">
+          <span className="flex items-center justify-center text-[14px] font-semibold leading-[14px] text-gray-003 lg:text-[20px] lg:leading-[20px]">
             {RANKING[ranking]}
           </span>
         ) : (
@@ -36,14 +36,14 @@ export default function BestCard({ ranking }: ITopicBestCardProps) {
         )}
       </div>
       <div className="flex h-full grow items-center">
-        <p className="truncate text-[22px] font-bold leading-[22px] text-black-001">
+        <p className="truncate text-[14px] font-bold leading-[19.6px] text-black-001 lg:text-[22px] lg:leading-[22px]">
           이번 시즌 가장 기대되는 선수는?
         </p>
       </div>
       <div className="flex h-full w-[100px] items-center justify-center">
         {ranking === 1 ? <FillHeart /> : <EmptyHeart />}
         <span
-          className={`ml-[6px] font-medium ${ranking === 1 ? "text-black-001" : "text-gray-004"}`}
+          className={`ml-[6px] font-medium ${ranking === 1 ? "text-black-001" : "text-gray-004"} text-[12px] leading-[16px] lg:text-[16px] lg:leading-[16px]`}
         >
           268
         </span>
