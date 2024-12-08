@@ -3,20 +3,30 @@
 @tailwind utilities;
 
 :root {
-  --background-default-default: #ffffff;
-  --background-default-secondary: #f7f8f8;
-  --background-default-tertiaryHover: #b3b3b3;
+  --white-001: #ffffff;
+  --white-002: #f3f3f3;
+  --white-003: #f5f5f5;
+  --white-004: #f7f8f8;
+  --white-005: #d9d9d9;
+  --white-006: #ececec;
 
-  --border-default-default: #d9d9d9;
-  --border-danger-secondary: #c00f0c;
-  --border-default-tertiaryHover: #b3b3b3;
+  --gray-001: #b3b3b3;
+  --gray-002: #757575;
+  --gray-003: #727272;
+  --gray-004: #c3c3c3;
+  --gray-005: #f7f7f7;
+  --gray-006: #9da3ae;
 
-  --text-default-default: #1e1e1e;
-  --text-default-secondary: #757575;
-  --text-brand-default: #2c2c2c;
-  --text-brand-onBrand: #f5f5f5;
-  --text-neutral-onNeutral: #f3f3f3;
-  --text-danger-secondary: #c00f0c;
+  --black-001: #111111;
+  --black-002: #1e1e1e;
+  --black-003: #2c2c2c;
+  --black-004: #1d222b;
+
+  --red-001: #c00f0c;
+
+  --yellow-001: #e2ff00;
+
+  --orange-001: #ff6f3c;
 }
 
 *::-webkit-scrollbar {

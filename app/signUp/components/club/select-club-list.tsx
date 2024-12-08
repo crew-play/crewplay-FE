@@ -7,7 +7,7 @@ import useSignUp from "../../hooks/use-sign-up";
 import SelectClubCard from "./select-club-card";
 
 const CLASS_NAME =
-  "mt-6 flex h-[52px] w-full items-center justify-center rounded-lg bg-[#002A5C] text-[14px] font-semibold leading-[14px] text-neutral-onNeutral disabled:bg-default-tertiaryHover";
+  "mt-6 flex h-[52px] w-full items-center justify-center rounded-lg bg-[#002A5C] text-[14px] font-semibold leading-[14px] text-white-002 disabled:bg-gray-001";
 
 export default function SelectClubList() {
   const signUpForm = useAtomValue(atomSignUpForm);

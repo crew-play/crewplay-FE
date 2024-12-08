@@ -6,7 +6,7 @@ export default function LoginLayout({ children }: PropsWithChildren) {
   return (
     <>
       <Header isOnlyUseLogo />
-      <main>{children}</main>
+      <main className="bg-white-004">{children}</main>
       <Footer />
     </>
   );

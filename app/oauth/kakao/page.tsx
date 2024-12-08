@@ -43,7 +43,7 @@ export default function OAuthKakaoPage() {
   return (
     <div className="flex h-screen flex-col items-center justify-center">
       <p className="mb-4 text-xl font-semibold">잠시만 기다려주세요.</p>
-      <div className="mx-auto size-20 animate-spin rounded-full border-8 border-black/10 border-t-default-default" />
+      <div className="border-t-white-001 mx-auto size-20 animate-spin rounded-full border-8 border-black/10" />
     </div>
   );
 }
