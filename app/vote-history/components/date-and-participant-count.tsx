@@ -3,7 +3,7 @@ import Participant from "@/public/svg/participant.svg";
 
 export default function DateAndParticipantCount() {
   return (
-    <div className="mt-[12px] flex flex-row-reverse items-center justify-center text-[14px] font-medium leading-[14px] text-gray-007 lg:mt-[20px] lg:flex-row lg:justify-normal lg:text-[16px] lg:leading-[16px]">
+    <div className="text-gray-007 mt-[12px] flex flex-row-reverse items-center justify-center text-[14px] font-medium leading-[14px] lg:mt-[20px] lg:flex-row lg:justify-normal lg:text-[16px] lg:leading-[16px]">
       <div className="flex items-center">
         <Calendar />
         <span className="ml-[6px] flex items-center">

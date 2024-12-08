@@ -1,9 +1,8 @@
 import Pagination from "@/components/pagination";
-import BestList from "./components/best-list";
-import DeadlineTimer from "./components/deadline-timer";
-import TopicList from "./components/topic-list";
 import RegisterVote from "@/components/register-vote";
-
+import DeadlineTimer from "../vote/topic/components/deadline-timer";
+import BestList from "../vote/topic/components/best-list";
+import TopicList from "../vote/topic/components/topic-list";
 
 export default function VoteTopicPage() {
   return (
