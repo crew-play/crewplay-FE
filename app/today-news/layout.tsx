@@ -6,7 +6,9 @@ export default function TodayNewsLayout({ children }: PropsWithChildren) {
   return (
     <>
       <Header isOnlyUseLogo />
-      <main className="mx-auto w-full lg:w-[1280px]">{children}</main>
+      <main className="w-full px-[16px] lg:mx-auto lg:w-[1280px]">
+        {children}
+      </main>
       <Footer />
     </>
   );
