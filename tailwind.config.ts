@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss";
 
+import plugin from "tailwindcss/plugin";
+
 export default {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -33,6 +35,7 @@ export default {
         "red-001": "var(--red-001)",
 
         "yellow-001": "var(--yellow-001)",
+        "yellow-002": "var(--yellow-002)",
 
         "orange-001": "var(--orange-001)",
       },
@@ -40,7 +43,47 @@ export default {
         pretendard: "var(--font-pretendard)",
         sfPro: "var(--font-sf-pro)",
       },
+      keyframes: {
+        marquee: {
+          "0%": {
+            transform: "translateX(0%)",
+          },
+          "100%": {
+            transform: "translateX(200%)",
+          },
+        },
+        "marquee-reverse": {
+          "0%": {
+            transform: "translateX(0%)",
+          },
+          "100%": {
+            transform: "translateX(-200%)",
+          },
+        },
+      },
+      animation: {
+        marquee: "marquee 10s linear infinite",
+        "marquee-reverse": "marquee-reverse 10s linear infinite",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addUtilities }) => {
+      addUtilities({
+        ".custom-style": {
+          borderImageSource:
+            "linear-gradient(135.71deg, rgba(255, 255, 255, 0.2) 34.19%, rgba(255, 255, 255, 0.03) 56.92%)",
+          boxShadow: `
+          -5px -5px 20px 0px rgba(255, 255, 255, 0.3) inset,
+          0px 4px 200px 0px rgba(74, 67, 135, 0.18) inset,
+          -50px 50px 200px 0px rgba(74, 67, 135, 0.15),
+          0px 10px 50px 0px rgba(255, 255, 255, 0.5) inset
+        `,
+          backdropFilter: "blur(20px)",
+          background:
+            "linear-gradient(223.54deg, rgba(248, 255, 190, 0.03) 1.21%, rgba(255, 255, 255, 0.1728) 49.51%, rgba(250, 255, 208, 0) 98.79%)",
+        },
+      });
+    }),
+  ],
 } satisfies Config;

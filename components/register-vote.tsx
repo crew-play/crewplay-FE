@@ -1,4 +1,11 @@
+import MainButton from "./main-button";
+
 export default function RegisterVote() {
+  const handleClickRegisterButton = () => {
+    // eslint-disable-next-line no-console
+    console.log("!!");
+  };
+
   return (
     <section className="mt-[40px] flex h-[368px] w-screen items-center justify-center bg-black-001 lg:mt-[140px] lg:h-[425px]">
       <div className="w-full px-[16px] lg:w-[660px] lg:px-0">
@@ -19,15 +26,7 @@ export default function RegisterVote() {
               className="mb-[12px] h-[52px] grow rounded-[8px] bg-white-001 px-[16px] text-center text-[16px] font-medium leading-[16px] placeholder:text-gray-004 focus:outline-none lg:mb-0 lg:h-auto lg:rounded-[120px] lg:text-start lg:text-[24px] lg:leading-[24px]"
               placeholder="로그인 후 이용해주세요."
             />
-            <button
-              type="submit"
-              className="hidden items-center justify-center rounded-[40px] border border-black-001 px-[32.5px] py-[17px] text-[16px] font-semibold leading-[19px] text-black-001 lg:flex"
-            >
-              등록하기
-            </button>
-            <button className="h-[52px] rounded-[8px] bg-yellow-001 text-[16px] font-bold leading-[19px] lg:hidden">
-              등록하기
-            </button>
+            <MainButton text="등록하기" onClick={handleClickRegisterButton} />
           </form>
         </div>
       </div>

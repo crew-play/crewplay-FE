@@ -1,8 +1,20 @@
+"use client";
+
+import RegisterVote from "@/components/register-vote";
+import BestRestaurantList from "./components/best-restaurant-list";
+import BestVoteSection from "./components/best-vote-section";
+import LatestVoteResultSection from "./components/latest-vote-result-section";
+import ThisWeekVoteSection from "./components/this-week-vote-section";
+
 const Home = () => {
   return (
-    <div>
-      <div>메인 페이지</div>
-    </div>
+    <>
+      <ThisWeekVoteSection />
+      <BestVoteSection />
+      <RegisterVote />
+      <LatestVoteResultSection />
+      <BestRestaurantList />
+    </>
   );
 };
 

@@ -4,7 +4,7 @@ import CandidateList from "@/components/candidate/candidate-list";
 import Divider from "@/components/divider";
 import DateAndParticipantCount from "./components/date-and-participant-count";
 import LastVoteResultList from "./components/latest-vote-result-list";
-import MainActionButton from "@/components/main-action-button";
+import MainButton from "@/components/main-button";
 import { useState } from "react";
 
 type TSort = "latest" | "popular";
@@ -61,7 +61,7 @@ export default function VoteHistoryPage() {
         <LastVoteResultList />
       </section>
       <div className="mb-[58px] mt-[20px] lg:mb-[77px] lg:mt-[40px]">
-        <MainActionButton text="더보기" onClick={handleClickMoreButton} />
+        <MainButton text="더보기" onClick={handleClickMoreButton} />
       </div>
     </>
   );
