@@ -1,5 +1,4 @@
-import CandidateList from "@/components/candidate/candidate-list";
-import ThisWeekVoteCandidateItem from "./this-week-vote-candidate-item";
+// import CandidateList from "@/components/candidate/candidate-list";
 import ThisWeekVoteCandidateList from "./this-week-vote-candidate-list";
 import MainButton from "@/components/main-button";
 
