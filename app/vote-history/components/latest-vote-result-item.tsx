@@ -25,8 +25,8 @@ export default function LastVoteResultItem() {
                 32주차
               </span>
               <div className="flex h-[12px] items-center justify-center lg:hidden">
-                <Participant />
-                <span className="text-gray-007 ml-[4px] text-[12px] font-medium leading-[12px]">
+                <Participant className="h-[12px] w-[12px]" />
+                <span className="ml-[4px] text-[12px] font-medium leading-[12px] text-gray-007">
                   24명
                 </span>
               </div>

@@ -25,32 +25,34 @@ export default function BestRestaurantList() {
   if (!data || !data.data) return <div>asd</div>;
 
   return (
-    <section className="w-full bg-black-001 px-[16px] py-[112px] pt-[120px] lg:w-screen">
+    <section className="w-full bg-black-001 px-[16px] pb-[54px] pt-[70px] lg:w-screen lg:py-[112px] lg:pt-[120px]">
       <div className="mx-auto w-full lg:max-w-screen-xl">
-        <h2 className="mb-[24px] text-[28px] leading-[39.2px] text-white-001">
+        <h2 className="mb-[14px] text-[14px] leading-[19.6px] text-white-001 lg:mb-[24px] lg:text-[28px] lg:leading-[39.2px]">
           야구팬들이 생각한 <br />
-          <span className="text-[48px] font-bold leading-[67.2px] text-yellow-001">
+          <span className="text-[24px] font-bold leading-[33.6px] text-yellow-001 lg:text-[48px] lg:leading-[67.2px]">
             구단 맛집리스트
           </span>
         </h2>
-        <Divider isBgBlack />
-        <div className="my-[24px] flex">
+        <div className="hidden lg:block">
+          <Divider isBgBlack />
+        </div>
+        <div className="mb-[20px] flex overflow-hidden lg:my-[24px]">
           {data.data.map((club) => {
             return (
               <div
-                className="mr-[12px] flex h-[46px] w-[80px] items-center justify-center rounded-[36px] border border-gray-003 text-[16px] leading-[19.09px] text-gray-003"
+                className="mr-[12px] flex h-[26px] w-[53px] shrink-0 items-center justify-center rounded-[36px] border border-gray-003 text-[14px] leading-[14px] text-gray-003 lg:h-[46px] lg:w-[80px] lg:text-[16px] lg:leading-[19.09px]"
                 key={club.clubName}
               >
-                {CLUBS[club.clubName]}
+                <span>{CLUBS[club.clubName]}</span>
               </div>
             );
           })}
         </div>
-        <div className="grid grid-cols-3 gap-x-[24px] rounded-[12px]">
+        <div className="flex w-full overflow-hidden rounded-[12px]">
           {ARR.map((_, index) => {
             return (
-              <div key={index} className="relative">
-                <div className="overflow-hidden rounded-[12px]">
+              <div key={index} className="relative shrink-0">
+                <div className="rounded-[12px]">
                   <span className="absolute left-0 top-0 ml-[10px] mt-[10px] flex size-[36px] items-center justify-center rounded-[6px] bg-yellow-001 text-[20px] font-bold leading-[23.87px] text-black">
                     {index + 1}
                   </span>

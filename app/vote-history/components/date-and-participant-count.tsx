@@ -3,15 +3,15 @@ import Participant from "@/public/svg/participant.svg";
 
 export default function DateAndParticipantCount() {
   return (
-    <div className="text-gray-007 mt-[12px] flex flex-row-reverse items-center justify-center text-[14px] font-medium leading-[14px] lg:mt-[20px] lg:flex-row lg:justify-normal lg:text-[16px] lg:leading-[16px]">
+    <div className="mt-[12px] flex flex-row-reverse items-center justify-center text-[14px] font-medium leading-[14px] text-gray-007 lg:mt-[20px] lg:flex-row lg:justify-normal lg:text-[16px] lg:leading-[16px]">
       <div className="flex items-center">
-        <Calendar />
+        <Calendar className="size-[14px] lg:size-[16px]" />
         <span className="ml-[6px] flex items-center">
           2024.11.25 - 2024.12.01
         </span>
       </div>
       <div className="mr-[16px] flex items-center lg:ml-[20px]">
-        <Participant />
+        <Participant className="h-[11px] w-[14px] lg:h-[13px] lg:w-[16px]" />
         <span className="ml-[6px] flex items-center">3,024명</span>
       </div>
     </div>

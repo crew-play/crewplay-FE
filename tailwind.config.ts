@@ -33,6 +33,7 @@ export default {
         "black-004": "var(--black-004)",
 
         "red-001": "var(--red-001)",
+        "red-002": "var(--red-002)",
 
         "yellow-001": "var(--yellow-001)",
         "yellow-002": "var(--yellow-002)",
@@ -46,10 +47,10 @@ export default {
       keyframes: {
         marquee: {
           "0%": {
-            transform: "translateX(0%)",
+            transform: "translateX(-200%)",
           },
           "100%": {
-            transform: "translateX(200%)",
+            transform: "translateX(0%)",
           },
         },
         "marquee-reverse": {
@@ -62,8 +63,8 @@ export default {
         },
       },
       animation: {
-        marquee: "marquee 10s linear infinite",
-        "marquee-reverse": "marquee-reverse 10s linear infinite",
+        marquee: "marquee 25s linear infinite",
+        "marquee-reverse": "marquee-reverse 25s linear infinite",
       },
     },
   },

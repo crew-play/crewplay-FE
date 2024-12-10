@@ -1,4 +1,4 @@
-import MediumFirst from "@/public/svg/topic/medium-first.svg";
+import First from "@/public/svg/first.svg";
 
 interface VoteResultBarProps {
   readonly candidate: string;
@@ -19,7 +19,7 @@ export default function CandidateItem({
     <div className="relative mx-auto mb-[8px] h-[60px] w-full overflow-hidden rounded-[8px] lg:mb-[10px] lg:w-[720px]">
       <div className="absolute z-[49] flex size-full items-center justify-between pl-[24px] pr-[30px]">
         <div className="flex items-center">
-          {isFirst && <MediumFirst className="size-[24px]" />}
+          {isFirst && <First className="size-[24px]" />}
           <span className="ml-[6px] font-medium text-black-001 lg:ml-[4px]">
             {candidate}
           </span>

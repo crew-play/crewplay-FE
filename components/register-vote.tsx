@@ -1,3 +1,5 @@
+"use client";
+
 import MainButton from "./main-button";
 
 export default function RegisterVote() {
@@ -7,7 +9,7 @@ export default function RegisterVote() {
   };
 
   return (
-    <section className="mt-[40px] flex h-[368px] w-screen items-center justify-center bg-black-001 lg:mt-[140px] lg:h-[425px]">
+    <section className="flex h-[368px] w-screen items-center justify-center bg-black-001 lg:h-[425px]">
       <div className="w-full px-[16px] lg:w-[660px] lg:px-0">
         <div className="flex flex-col text-center">
           <span className="mb-[10px] text-[14px] leading-[14px] text-white-001 lg:mb-[20px] lg:text-[24px] lg:leading-[24px]">
