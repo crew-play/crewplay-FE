@@ -19,7 +19,6 @@ export default function ThisWeekVoteCandidateList() {
             index={index + 1}
             isSelected={isSelected}
             setIsSelected={setIsSelected}
-            checkBoxRef={checkBoxRef}
           />
         );
       })}

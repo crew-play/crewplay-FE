@@ -1,36 +1,25 @@
 import { SetStateAction } from "jotai";
-import { Dispatch, RefObject } from "react";
+import { Dispatch, useRef } from "react";
 
 interface IThisWeekVoteCandidateItem {
   readonly index: number;
   readonly isSelected: number;
-  readonly checkBoxRef: RefObject<HTMLInputElement>;
   readonly setIsSelected: Dispatch<SetStateAction<number>>;
 }
 
 export default function ThisWeekVoteCandidateItem({
   index,
   isSelected,
-  checkBoxRef,
   setIsSelected,
 }: IThisWeekVoteCandidateItem) {
   const isChecked = isSelected === index;
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClickCandidateItem = (id: number) => {
-    if (checkBoxRef.current) {
-      const inputElements = checkBoxRef.current.querySelectorAll("input");
-
-      inputElements.forEach((element) => {
-        if (element.checked) {
-          element.checked = false;
-        }
-      });
-
-      if (isSelected === id) {
-        setIsSelected(-1);
-      } else {
-        setIsSelected(id);
-      }
+    if (isSelected === id) {
+      setIsSelected(-1);
+    } else {
+      setIsSelected(id);
     }
   };
 
@@ -39,6 +28,7 @@ export default function ThisWeekVoteCandidateItem({
       className={`flex h-[52px] w-full items-center rounded-[6px] px-[24px] lg:h-[60px] ${isChecked ? "bg-yellow-001" : "bg-gray-005 hover:bg-white-006"} cursor-pointer text-[16px] font-medium leading-[16px]`}
     >
       <input
+        ref={inputRef}
         type="checkbox"
         name={String(index)}
         id={String(index)}
@@ -46,6 +36,8 @@ export default function ThisWeekVoteCandidateItem({
         onClick={() => {
           return handleClickCandidateItem(index);
         }}
+        checked={isSelected === index}
+        readOnly
       />
 
       <label
