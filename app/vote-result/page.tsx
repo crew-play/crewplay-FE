@@ -2,8 +2,8 @@
 
 import CandidateList from "@/components/candidate/candidate-list";
 import Divider from "@/components/divider";
-import DateAndParticipantCount from "../vote-history/components/date-and-participant-count";
-import LastVoteResultList from "../vote-history/components/latest-vote-result-list";
+import DateAndParticipantCount from "./components/date-and-participant-count";
+import LastVoteResultList from "./components/latest-vote-result-list";
 import MainButton from "@/components/main-button";
 import { useState } from "react";
 
