@@ -1,30 +1,22 @@
 import { getDeadline } from "@/utils/getDeadline";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 export default function DeadlineTimer() {
-  const [remainingTime, setRemainingTime] = useState(getDeadline());
+  const [remainingTime, setRemainingTime] = useState<{
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  }>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    // 첫 번째 타이머 상태 설정
     setRemainingTime(getDeadline());
 
-    // setInterval로 1초마다 남은 시간 업데이트
     const intervalId = setInterval(() => {
       const time = getDeadline();
       setRemainingTime(time);
-
-      // 타이머 종료 조건: 남은 시간이 모두 0일 때
-      if (
-        time.days === 0 &&
-        time.hours === 0 &&
-        time.minutes === 0 &&
-        time.seconds === 0
-      ) {
-        clearInterval(intervalId); // 타이머 종료
-      }
     }, 1000);
 
-    // 클린업 함수: 컴포넌트 언마운트 시 타이머 정리
     return () => clearInterval(intervalId);
   }, []);
 

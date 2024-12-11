@@ -1,11 +1,29 @@
 "use client";
 
+import { registerTopicSchema } from "@/schema/register-topic";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import MainButton from "./main-button";
+import useRegisterVoteTopic from "@/app/vote-topic/hooks/use-register-vote-topic";
+
+interface IRegisterTopicForm {
+  readonly topic: string;
+}
 
 export default function RegisterVote() {
+  const { mutate } = useRegisterVoteTopic();
+
+  const { register, handleSubmit, getValues } = useForm<IRegisterTopicForm>({
+    defaultValues: {
+      topic: "",
+    },
+    mode: "onChange",
+    resolver: yupResolver(registerTopicSchema),
+  });
+
   const handleClickRegisterButton = () => {
-    // eslint-disable-next-line no-console
-    console.log("!!");
+    const topic = getValues("topic");
+    mutate(topic);
   };
 
   return (
@@ -20,13 +38,16 @@ export default function RegisterVote() {
           </span>
         </div>
         <div>
-          <form className="flex flex-col rounded-[8px] px-[14px] py-[9px] lg:flex-row lg:justify-between lg:rounded-[120px] lg:bg-white-001">
+          <form
+            onSubmit={handleSubmit(handleClickRegisterButton)}
+            className="flex flex-col rounded-[8px] px-[14px] py-[9px] lg:flex-row lg:justify-between lg:rounded-[120px] lg:bg-white-001"
+          >
             <input
               type="text"
-              name="vote-topic"
-              id="vote-topic"
+              id="topic"
               className="mb-[12px] h-[52px] grow rounded-[8px] bg-white-001 px-[16px] text-center text-[16px] font-medium leading-[16px] placeholder:text-gray-004 focus:outline-none lg:mb-0 lg:h-auto lg:rounded-[120px] lg:text-start lg:text-[24px] lg:leading-[24px]"
               placeholder="로그인 후 이용해주세요."
+              {...register("topic")}
             />
             <MainButton text="등록하기" onClick={handleClickRegisterButton} />
           </form>

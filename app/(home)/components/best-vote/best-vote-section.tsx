@@ -1,10 +1,12 @@
 import BestList from "@/app/vote-topic/components/best-list";
 import MainButton from "@/components/main-button";
+import { useRouter } from "next/navigation";
 
 export default function BestVoteSection() {
+  const router = useRouter();
+
   const handleClickButton = () => {
-    // eslint-disable-next-line no-console
-    console.log("asd");
+    router.push("/vote-topic");
   };
 
   return (

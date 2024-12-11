@@ -6,6 +6,8 @@ import { ReactNode } from "react";
 
 interface ITopicBestCardProps {
   readonly ranking: number;
+  readonly topic: string;
+  readonly voteCount: number;
 }
 
 const RANKING: { [key: number]: ReactNode | string } = {
@@ -16,7 +18,11 @@ const RANKING: { [key: number]: ReactNode | string } = {
   5: "5",
 };
 
-export default function BestCard({ ranking }: ITopicBestCardProps) {
+export default function BestCard({
+  ranking,
+  topic,
+  voteCount = 0,
+}: ITopicBestCardProps) {
   return (
     <div className="group flex h-[60px] cursor-pointer items-center border-b border-b-white-006 hover:bg-white-004 lg:h-[100px]">
       <div className="flex h-full w-[102px] items-center justify-center">
@@ -32,13 +38,13 @@ export default function BestCard({ ranking }: ITopicBestCardProps) {
       </div>
       <div className="flex h-full grow items-center">
         <p className="truncate text-[14px] font-bold leading-[19.6px] text-black-001 lg:text-[22px] lg:leading-[22px]">
-          이번 시즌 가장 기대되는 선수는?
+          {topic}
         </p>
       </div>
       <div className="flex h-full w-[100px] items-center justify-center">
-        <Heart className="group-hover:fill-red-002 h-[10px] w-[12px] fill-gray-004 lg:h-[16px] lg:w-[20px]" />
+        <Heart className="h-[10px] w-[12px] fill-gray-004 group-hover:fill-red-002 lg:h-[16px] lg:w-[20px]" />
         <span className="ml-[6px] text-[12px] font-medium leading-[16px] text-gray-004 group-hover:text-black-001 lg:text-[16px] lg:leading-[16px]">
-          268
+          {voteCount}
         </span>
       </div>
     </div>

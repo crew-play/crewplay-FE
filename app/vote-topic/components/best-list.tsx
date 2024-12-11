@@ -1,13 +1,37 @@
+import useGetBestVoteTopic from "../hooks/use-get-best-vote-topic";
 import BestCard from "./best-card";
 
 const DATA = ["1", "2", "3", "4", "5"];
 
 export default function BestList() {
+  const { data, isLoading, isError } = useGetBestVoteTopic();
+
+  if (isLoading) return <div>로딩중</div>;
+
+  if (isError) return <div>에러 발생</div>;
+
+  if (!data || !data.data) return <div>데이터 없음</div>;
+
+  const isNull = data.data.length === 0;
+
   return (
     <div className="mt-[14px] w-full border-t-2 border-b-gray-003 border-t-black-001 lg:mt-[24px]">
-      {DATA.map((data, index) => {
-        return <BestCard key={index + 1} ranking={index + 1} />;
-      })}
+      {isNull ? (
+        <div>데이터 없음</div>
+      ) : (
+        <>
+          {data.data.map((bestTopic, index) => {
+            return (
+              <BestCard
+                key={bestTopic.topic + String(index + 1)}
+                ranking={index + 1}
+                topic={bestTopic.topic}
+                voteCount={bestTopic.voteCount}
+              />
+            );
+          })}
+        </>
+      )}
     </div>
   );
 }

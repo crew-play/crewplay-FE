@@ -1,9 +1,22 @@
-import Participant from "@/public/svg/participant.svg";
-import { useState } from "react";
-import RightArrow from "@/public/svg/right-arrow.svg";
+import { ICandidate } from "@/interface/vote-result";
 import First from "@/public/svg/first.svg";
+import Participant from "@/public/svg/participant.svg";
+import RightArrow from "@/public/svg/right-arrow.svg";
+import { useState } from "react";
 
-export default function LatestVoteItem() {
+interface ILatestVoteItemProps {
+  readonly startDate: string;
+  readonly topic: string;
+  readonly voteCount: number;
+  readonly bestCandidate: ICandidate;
+}
+
+export default function LatestVoteItem({
+  startDate,
+  topic,
+  voteCount,
+  bestCandidate,
+}: ILatestVoteItemProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleClickLatestVoteItem = () => {
@@ -23,13 +36,13 @@ export default function LatestVoteItem() {
             2주차
           </span>
           <p className="line-clamp-1 text-[16px] font-semibold leading-[22.4px] lg:ml-[12px] lg:text-[20px] lg:font-bold lg:leading-[28px]">
-            2024년 KBO에서 활약한 최고의 타자
+            {topic}
           </p>
         </div>
         <div className="flex h-[12px] items-center lg:h-auto">
           <Participant className="h-[10px] w-[12px] lg:h-[14px] lg:w-[16px]" />
           <span className="ml-[4px] text-[12px] font-medium leading-[12px] text-gray-007 lg:ml-[6px] lg:text-[16px] lg:leading-[16px]">
-            24명
+            {voteCount}
           </span>
         </div>
       </div>
@@ -38,10 +51,10 @@ export default function LatestVoteItem() {
           <div className="flex items-center">
             <First className="size-[24px]" />
             <span className="ml-[8px] text-[16px] font-bold leading-[22.4px] lg:ml-[12px] lg:text-[20px] lg:leading-[28px]">
-              김태지 선수
+              {bestCandidate.example}
             </span>
             <span className="ml-[8px] text-[14px] font-medium leading-[14px] text-gray-007 lg:ml-[12px] lg:text-[16px] lg:leading-[16px]">
-              1,024표 획득
+              {bestCandidate.voteCount}표 획득
             </span>
           </div>
           <div className="flex items-center">
