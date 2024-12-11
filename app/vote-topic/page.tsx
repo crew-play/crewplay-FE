@@ -1,7 +1,9 @@
+"use client";
+
 import Pagination from "@/components/pagination";
 import RegisterVote from "@/components/register-vote";
-import DeadlineTimer from "./components/deadline-timer";
 import BestList from "./components/best-list";
+import DeadlineTimer from "./components/deadline-timer";
 import TopicList from "./components/topic-list";
 
 export default function VoteTopicPage() {
