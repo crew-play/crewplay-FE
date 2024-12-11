@@ -3,8 +3,19 @@ import Participant from "@/public/mobile/participant.svg";
 import BottomArrow from "@/public/svg/bottom-arrow.svg";
 import { useState } from "react";
 import DateAndParticipantCount from "./date-and-participant-count";
+import { ICandidate, IVote } from "@/interface/vote-result";
 
-export default function LastVoteResultItem() {
+interface ILastVoteResultItemProps {
+  readonly startDate: string;
+  readonly topic: string;
+  readonly candidateList: ICandidate[];
+}
+
+export default function LastVoteResultItem({
+  startDate,
+  topic,
+  candidateList,
+}: ILastVoteResultItemProps) {
   const [isOpenDetail, setIsOpenDetail] = useState<boolean>(false);
 
   const handleClickOpenHistory = () => {
@@ -25,14 +36,14 @@ export default function LastVoteResultItem() {
                 32주차
               </span>
               <div className="flex h-[12px] items-center justify-center lg:hidden">
-                <Participant className="h-[12px] w-[12px]" />
+                <Participant className="size-[12px]" />
                 <span className="ml-[4px] text-[12px] font-medium leading-[12px] text-gray-007">
                   24명
                 </span>
               </div>
             </div>
             <p className="mt-[6px] flex items-center text-[16px] leading-[22.4px] lg:ml-[10px] lg:mt-0 lg:text-[24px] lg:leading-[24px]">
-              야구장에서 가장 짜릿했던 응원곡은?
+              {topic}
             </p>
           </div>
           <button
@@ -46,8 +57,11 @@ export default function LastVoteResultItem() {
       </div>
       {isOpenDetail && (
         <div className="rounded-b-[12px] border-x border-b px-[16px] py-[24px] lg:px-[50px] lg:pb-[50px] lg:pt-[40px]">
-          <CandidateList />
-          <DateAndParticipantCount />
+          <CandidateList candidateList={candidateList} />
+          <DateAndParticipantCount
+            totalParticipantCount={0}
+            voteDate={startDate}
+          />
         </div>
       )}
     </div>

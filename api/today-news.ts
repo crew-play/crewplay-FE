@@ -1,4 +1,5 @@
 import { TSelectedMenu } from "@/app/today-news/page";
+import { IPagination } from "@/interface/pagination";
 import { IResponse } from "@/interface/response";
 import axios, { isAxiosError } from "axios";
 
@@ -7,12 +8,6 @@ export interface INews {
   readonly headline: string;
   readonly newsLink: string;
   readonly thumbnail: string;
-}
-
-interface IPagination {
-  readonly pageNumber: number; // 현재 페이지 수
-  readonly totalPage: number; // 전체 페이지 수
-  readonly totalData: number; // 전체 데이터
 }
 
 export const getTodayIssue = async (
