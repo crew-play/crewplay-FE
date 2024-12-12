@@ -1,7 +1,7 @@
 "use client";
 
 import Footer from "@/components/footer";
-import Header from "@/components/header";
+import Header from "@/components/header/header";
 import AppProvider from "@/provider/app-provider";
 import localFont from "next/font/local";
 import { usePathname } from "next/navigation";
