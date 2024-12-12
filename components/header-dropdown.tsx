@@ -1,7 +1,7 @@
 "use client";
 
 import { SetStateAction } from "jotai";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Dispatch } from "react";
 
 const THIS_WEEK_VOTE_LINKS = [
@@ -18,7 +18,7 @@ const THIS_WEEK_VOTE_LINKS = [
   {
     title: "다음 주 주제 살펴보기",
     description: "크루 플레이 유저들이 만드는 주제",
-    url: "vote-topic",
+    url: "/vote-topic",
   },
 ];
 
@@ -28,8 +28,7 @@ interface IHeaderDropdownProps {
 
 export default function HeaderDropdown({ setIsHover }: IHeaderDropdownProps) {
   const router = useRouter();
-
-  const { pathname } = window.location;
+  const pathname = usePathname();
 
   const handleClickMenu = (url: string) => {
     setIsHover(false);
