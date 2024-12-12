@@ -1,6 +1,11 @@
+"use client";
+
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 import AppProvider from "@/provider/app-provider";
-import "./globals.css";
 import localFont from "next/font/local";
+import { usePathname } from "next/navigation";
+import "./globals.css";
 
 const pretendard = localFont({
   src: "../public/fonts/PretendardVariable.woff2",
@@ -21,10 +26,20 @@ const RootLayout = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
+  const pathname = usePathname();
+  const isOnlyUseLogo =
+    pathname === "/login" ||
+    pathname === "/signUp" ||
+    pathname === "/signUp/success";
+
   return (
     <html lang="en" className={`${pretendard.variable} ${sfPro.variable}`}>
       <body className="font-pretendard text-black-002 antialiased">
-        <AppProvider>{children}</AppProvider>
+        <AppProvider>
+          <Header isOnlyUseLogo={isOnlyUseLogo} />
+          {children}
+          <Footer />
+        </AppProvider>
       </body>
     </html>
   );
