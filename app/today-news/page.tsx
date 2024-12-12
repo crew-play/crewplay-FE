@@ -1,15 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodayNewsDescription from "./components/today-news-description";
 import TodayNewsList from "./components/today-news-list";
 import TodayNewsMenu from "./components/today-news-menu";
 import useGetTodayIssue from "./hooks/use-get-today-issue";
+import { useAtom } from "jotai";
+import { atomIsOpenMobileMenu } from "@/jotai/mobile-menu-open";
 
 export type TSelectedMenu = "news" | "video";
 
 export default function TodayNewsPage() {
   const [selectedMenu, setSelectedMenu] = useState<TSelectedMenu>("news");
+  const [isOpenMobileMenu, setIsOpenMobileMenu] = useAtom(atomIsOpenMobileMenu);
+
+  useEffect(() => {
+    if (isOpenMobileMenu) {
+      setIsOpenMobileMenu(false);
+    }
+  }, []);
 
   const { data, isLoading, isError } = useGetTodayIssue(selectedMenu);
 

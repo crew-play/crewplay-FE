@@ -5,8 +5,19 @@ import RegisterVote from "@/components/register-vote";
 import BestList from "./components/best-list";
 import DeadlineTimer from "./components/deadline-timer";
 import TopicList from "./components/topic-list";
+import { atomIsOpenMobileMenu } from "@/jotai/mobile-menu-open";
+import { useAtom } from "jotai";
+import { useEffect } from "react";
 
 export default function VoteTopicPage() {
+  const [isOpenMobileMenu, setIsOpenMobileMenu] = useAtom(atomIsOpenMobileMenu);
+
+  useEffect(() => {
+    if (isOpenMobileMenu) {
+      setIsOpenMobileMenu(false);
+    }
+  }, []);
+
   return (
     <>
       <div className="w-full px-[16px] lg:mx-auto lg:max-w-[1200px]">

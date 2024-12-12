@@ -5,17 +5,26 @@ import Divider from "@/components/divider";
 import DateAndParticipantCount from "./components/date-and-participant-count";
 import LatestVoteResultList from "./components/latest-vote-result-list";
 import MainButton from "@/components/main-button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useGetVoteResults from "./hooks/use-get-vote-results";
 import { TSort } from "@/interface/vote-result";
 import LatestVoteResultSort from "./components/latest-vote-result-sort";
+import { atomIsOpenMobileMenu } from "@/jotai/mobile-menu-open";
+import { useAtom } from "jotai";
 
 export default function VoteHistoryPage() {
   const [sort, setSort] = useState<TSort>("latest");
+  const [isOpenMobileMenu, setIsOpenMobileMenu] = useAtom(atomIsOpenMobileMenu);
 
   const voteResults = useGetVoteResults();
   const thisWeekVoteResult = voteResults[0];
   const latestVoteResults = voteResults[1];
+
+  useEffect(() => {
+    if (isOpenMobileMenu) {
+      setIsOpenMobileMenu(false);
+    }
+  }, []);
 
   const handleClickSort = (type: TSort) => {
     setSort(type);
