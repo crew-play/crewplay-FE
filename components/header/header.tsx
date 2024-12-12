@@ -4,8 +4,12 @@ import Logo from "@/public/svg/logo.svg";
 import Link from "next/link";
 
 import { useEffect, useState } from "react";
-import HeaderDropdown from "./header-dropdown";
 import { usePathname } from "next/navigation";
+import HeaderDropdown from "./header-dropdown";
+import Hamburger from "@/public/svg/hamburger.svg";
+import MobileMenu from "../mobile-menu/mobile-menu";
+import { useAtom } from "jotai";
+import { atomIsOpenMobileMenu } from "@/jotai/mobile-menu-open";
 
 interface IHeaderProps {
   readonly isOnlyUseLogo: boolean;
@@ -16,6 +20,8 @@ export default function Header({ isOnlyUseLogo }: IHeaderProps) {
 
   const [selectedMenu, setSelectedMenu] = useState<string>(pathname);
   const [isHover, setIsHover] = useState<boolean>(false);
+  const [isOpenMobileOpenMobileMenu, setIsOpenMobilMenu] =
+    useAtom(atomIsOpenMobileMenu);
 
   const isThisWeekMenu =
     selectedMenu === "/" ||
@@ -30,19 +36,31 @@ export default function Header({ isOnlyUseLogo }: IHeaderProps) {
     setIsHover(false);
   };
 
+  const handleClickMobileMenu = () => {
+    setIsOpenMobilMenu(true);
+  };
+
   useEffect(() => {
     setSelectedMenu(pathname);
   }, [pathname]);
 
+  useEffect(() => {
+    if (isOpenMobileOpenMobileMenu) {
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpenMobileOpenMobileMenu]);
+
   return (
-    <header className="sticky top-0 z-[999] mx-auto flex h-20 w-full items-center justify-around border-b border-white-005 bg-white-001">
-      <div>
-        <Link href="/" className="flex items-center">
-          <Logo />
-        </Link>
-      </div>
+    <header className="sticky top-0 z-[999] mx-auto flex h-20 w-full items-center justify-between border-b border-white-005 bg-white-001 px-[16px] lg:justify-around lg:px-0">
+      <Link href="/" className="flex items-center">
+        <Logo />
+      </Link>
       <div
-        className={`${isOnlyUseLogo ? "hidden" : "flex"} text-[20px] font-medium leading-[28px]`}
+        className={`${isOnlyUseLogo ? "hidden" : "hidden lg:flex"} text-[20px] font-medium leading-[28px]`}
       >
         <div
           className={`${isThisWeekMenu ? "border-b-[3px] border-b-black-001 font-bold" : "text-gray-009 hover:text-gray-010"} relative flex items-center`}
@@ -71,14 +89,19 @@ export default function Header({ isOnlyUseLogo }: IHeaderProps) {
           이벤트
         </Link>
       </div>
-      <div>
-        <Link
-          href="/login"
-          className={`${isOnlyUseLogo && "hidden"} rounded-[8px] border border-black-001 px-[16px] py-[16.5px] text-[16px] font-medium leading-[19.09px] text-black-001 hover:bg-white-003`}
-        >
-          로그인/회원가입
-        </Link>
+      <Link
+        href="/login"
+        className={`${isOnlyUseLogo ? "hidden" : "hidden lg:block"} rounded-[8px] border border-black-001 px-[16px] py-[16.5px] text-[16px] font-medium leading-[19.09px] text-black-001 hover:bg-white-003`}
+      >
+        로그인/회원가입
+      </Link>
+      <div
+        className={`${isOnlyUseLogo ? "hidden" : "flex items-center justify-center lg:hidden"} size-[35px]`}
+        onClick={handleClickMobileMenu}
+      >
+        <Hamburger />
       </div>
+      {isOpenMobileOpenMobileMenu && <MobileMenu />}
     </header>
   );
 }

@@ -28,6 +28,7 @@ export default {
         "gray-008": "var(--gray-008)",
         "gray-009": "var(--gray-009)",
         "gray-010": "var(--gray-010)",
+        "gray-011": "var(--gray-011)",
 
         "black-001": "var(--black-001)",
         "black-002": "var(--black-002)",
