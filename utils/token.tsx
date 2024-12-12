@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 
-type TToken = "accessToken" | "refreshToken";
+type TToken = "access" | "refresh";
 
 interface ICookieOption {
   readonly maxAge: number;
@@ -11,13 +11,13 @@ interface ICookieOption {
   readonly secure: boolean;
 }
 
-export const setRefreshToken = async (token: string) => {
+export const setToken = async (token: string, type: TToken) => {
   const cookieStores = await cookies();
 
   const isProduction = process.env.NODE_ENV === "production";
 
   const cookieOption: ICookieOption = {
-    maxAge: 60 * 60 * 24,
+    maxAge: type === "refresh" ? 60 * 60 * 24 : 60 * 10,
     httpOnly: true,
     secure: isProduction,
   };
@@ -26,12 +26,12 @@ export const setRefreshToken = async (token: string) => {
     cookieOption.sameSite = "none";
   }
 
-  cookieStores.set("refresh", token, cookieOption);
+  cookieStores.set(type, token, cookieOption);
 };
 
-export const getRefreshToken = async () => {
+export const getToken = async (type: TToken) => {
   const cookieStores = await cookies();
-  const token = cookieStores.get("refresh");
+  const token = cookieStores.get(type);
   return token;
 };
 
