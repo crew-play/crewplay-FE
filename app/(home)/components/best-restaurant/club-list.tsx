@@ -3,18 +3,19 @@ import { CLUBS } from "../../constant/club-list";
 import { Dispatch } from "react";
 import { SetStateAction } from "jotai";
 import useDrag from "@/hooks/useDrag";
+import useClubList from "@/app/signUp/hooks/use-club-list";
 
 interface IClubListProps {
-  readonly clubList: IClub[];
   readonly isSelectedClub: string;
   readonly setIsSelectedClub: Dispatch<SetStateAction<string>>;
 }
 
 export default function ClubList({
-  clubList,
   isSelectedClub,
   setIsSelectedClub,
 }: IClubListProps) {
+  const { data, isLoading } = useClubList();
+
   const {
     sliderRef,
     trackRef,
@@ -27,6 +28,10 @@ export default function ClubList({
     setIsSelectedClub(CLUBS[club]);
   };
 
+  if (isLoading) return <div>로딩중</div>;
+
+  if (!data || !data.data) return <div>asd</div>;
+
   return (
     <div
       ref={sliderRef}
@@ -37,7 +42,7 @@ export default function ClubList({
       onMouseLeave={handleMouseUp}
     >
       <div ref={trackRef} className="flex">
-        {clubList.map((club) => {
+        {data.data.map((club) => {
           return (
             <div
               key={club.clubName}

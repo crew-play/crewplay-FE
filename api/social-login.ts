@@ -1,7 +1,6 @@
 import { IResponse } from "@/interface/response";
 import { setToken } from "@/utils/token";
 import axios, { AxiosError } from "axios";
-import { instance } from "./interceptor";
 
 interface ISendCodeResponseData {
   readonly providerId: string;

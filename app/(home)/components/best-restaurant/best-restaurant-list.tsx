@@ -6,14 +6,9 @@ import ClubList from "./club-list";
 import RestaurantList from "./restaurant-list";
 
 export default function BestRestaurantList() {
-  const { data, isLoading } = useClubList();
   const [isSelectedClub, setIsSelectedClub] = useState<string>(
     CLUBS["기아 타이거즈"],
   );
-
-  if (isLoading) return <div>로딩중</div>;
-
-  if (!data || !data.data) return <div>asd</div>;
 
   return (
     <section className="w-full bg-black-001 px-[16px] pb-[54px] pt-[70px] lg:w-screen lg:py-[112px] lg:pt-[120px]">
@@ -28,7 +23,6 @@ export default function BestRestaurantList() {
           <Divider isBgBlack />
         </div>
         <ClubList
-          clubList={data.data}
           isSelectedClub={isSelectedClub}
           setIsSelectedClub={setIsSelectedClub}
         />

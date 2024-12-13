@@ -2,6 +2,9 @@
 
 import { sendCode } from "@/api/social-login";
 import { atomSignUpForm } from "@/jotai/sign-up";
+import { atomUserAuth } from "@/jotai/user-auth";
+import { decodeToken } from "@/utils/decodeToken";
+import { getToken } from "@/utils/token";
 import { useSetAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -9,6 +12,7 @@ import { useEffect } from "react";
 export default function OAuthKakaoPage() {
   const router = useRouter();
   const setSignUpForm = useSetAtom(atomSignUpForm);
+  const setUserInformation = useSetAtom(atomUserAuth);
 
   const init = async (code: string) => {
     const { data, status } = await sendCode(code);
@@ -27,6 +31,13 @@ export default function OAuthKakaoPage() {
       });
       router.push(path);
     } else {
+      const accessToken = await getToken("access");
+
+      if (accessToken) {
+        const { nickname, role } = decodeToken(accessToken.value);
+        setUserInformation({ nickname, role });
+      }
+
       router.push(path);
     }
   };

@@ -3,13 +3,18 @@
 import Logo from "@/public/svg/logo.svg";
 import Link from "next/link";
 
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import HeaderDropdown from "./header-dropdown";
-import Hamburger from "@/public/svg/hamburger.svg";
-import MobileMenu from "../mobile-menu/mobile-menu";
-import { useAtom } from "jotai";
+import { reissueToken } from "@/api/reissue-token";
 import { atomIsOpenMobileMenu } from "@/jotai/mobile-menu-open";
+import { atomUserAuth } from "@/jotai/user-auth";
+import Hamburger from "@/public/svg/hamburger.svg";
+import { decodeToken } from "@/utils/decodeToken";
+import { getToken, setToken } from "@/utils/token";
+import { useAtom } from "jotai";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import MobileMenu from "../mobile-menu/mobile-menu";
+import HeaderDropdown from "./header-dropdown";
+import HeaderProfile from "./header-profile";
 
 interface IHeaderProps {
   readonly isOnlyUseLogo: boolean;
@@ -22,6 +27,28 @@ export default function Header({ isOnlyUseLogo }: IHeaderProps) {
   const [isHover, setIsHover] = useState<boolean>(false);
   const [isOpenMobileOpenMobileMenu, setIsOpenMobilMenu] =
     useAtom(atomIsOpenMobileMenu);
+  const [userAuth, setUserAuth] = useAtom(atomUserAuth);
+
+  const isLogin = userAuth.role !== "ANONYMOUS";
+
+  const init = async () => {
+    const accessToken = await getToken("access");
+
+    if (accessToken) {
+      const { nickname, role } = decodeToken(accessToken.value);
+      setUserAuth({ nickname, role });
+      return;
+    }
+
+    const refreshToken = await getToken("refresh");
+    if (!accessToken && refreshToken) {
+      const newAccessToken = await reissueToken();
+      await setToken(newAccessToken, "access");
+
+      const { nickname, role } = decodeToken(newAccessToken);
+      setUserAuth({ nickname, role });
+    }
+  };
 
   const isThisWeekMenu =
     selectedMenu === "/" ||
@@ -41,6 +68,10 @@ export default function Header({ isOnlyUseLogo }: IHeaderProps) {
   };
 
   useEffect(() => {
+    init();
+  }, []);
+
+  useEffect(() => {
     setSelectedMenu(pathname);
   }, [pathname]);
 
@@ -55,7 +86,9 @@ export default function Header({ isOnlyUseLogo }: IHeaderProps) {
   }, [isOpenMobileOpenMobileMenu]);
 
   return (
-    <header className="sticky top-0 z-[999] mx-auto flex h-20 w-full items-center justify-between border-b border-white-005 bg-white-001 px-[16px] lg:justify-around lg:px-0">
+    <header
+      className={`sticky top-0 z-[999] mx-auto flex h-20 w-full items-center ${isOnlyUseLogo ? "justify-start lg:px-[160px]" : "justify-between lg:justify-around lg:px-0"} border-b border-white-005 bg-white-001 px-[16px]`}
+    >
       <Link href="/" className="flex items-center">
         <Logo />
       </Link>
@@ -89,13 +122,20 @@ export default function Header({ isOnlyUseLogo }: IHeaderProps) {
           이벤트
         </Link>
       </div>
-      <Link
-        href="/login"
-        className={`${isOnlyUseLogo ? "hidden" : "hidden lg:block"} rounded-[8px] border border-black-001 px-[16px] py-[16.5px] text-[16px] font-medium leading-[19.09px] text-black-001 hover:bg-white-003`}
-      >
-        로그인/회원가입
-      </Link>
+      <div className="hidden lg:block">
+        {isLogin ? (
+          <HeaderProfile />
+        ) : (
+          <Link
+            href="/login"
+            className={`${isOnlyUseLogo ? "hidden" : "hidden lg:block"} rounded-[8px] border border-black-001 px-[16px] py-[16.5px] text-[16px] font-medium leading-[19.09px] text-black-001 hover:bg-white-003`}
+          >
+            로그인/회원가입
+          </Link>
+        )}
+      </div>
       <div
+        aria-description="mobile-menu"
         className={`${isOnlyUseLogo ? "hidden" : "flex items-center justify-center lg:hidden"} size-[35px]`}
         onClick={handleClickMobileMenu}
       >
