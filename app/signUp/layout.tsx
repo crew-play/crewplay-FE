@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react";
 export default function SignUpLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <main className="mx-auto flex h-[calc(100vh-164px)] min-h-[683px] w-full max-w-[358px] flex-col justify-center overflow-auto bg-white-004 px-4 md:w-[341px]">
+      <main className="flex h-[calc(100vh-164px)] min-h-[683px] items-center justify-center overflow-auto bg-white-004 px-[16px] lg:px-0">
         {children}
       </main>
     </>

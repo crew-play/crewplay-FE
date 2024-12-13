@@ -8,14 +8,14 @@ export default function SocialLoginButton() {
     <div className="flex w-full flex-col">
       <Link
         href={KAKAO_LOGIN_URL}
-        className="text-black-003 flex h-[52px] w-full items-center justify-center rounded-md bg-[#FBE44D] text-sm font-bold leading-[14px]"
+        className="flex h-[52px] w-full items-center justify-center rounded-md bg-[#FBE44D] text-[14px] font-bold leading-[14px] text-black-003"
       >
         <Kakao />
         <span className="ml-2">카카오로 로그인</span>
       </Link>
       <Link
         href={NAVER_LOGIN_URL}
-        className="text-white-003 mt-4 flex h-[52px] w-full items-center justify-center rounded-md bg-[#5AC367] text-sm font-bold leading-[14px]"
+        className="mt-4 flex h-[52px] w-full items-center justify-center rounded-md bg-[#5AC367] text-[14px] font-bold leading-[14px] text-white-003"
       >
         <Naver />
         <span className="ml-2">네이버로 로그인</span>

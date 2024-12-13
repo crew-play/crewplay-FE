@@ -7,7 +7,7 @@ interface IGoBackButtonProps {
 
 export default function GoBackButton({ text, onClick }: IGoBackButtonProps) {
   return (
-    <div className="mb-[38px] flex w-full items-center md:mb-[48px]">
+    <div className="mb-[38px] flex w-full items-center lg:mb-[48px]">
       <button
         type="button"
         onClick={onClick}

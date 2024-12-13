@@ -55,5 +55,5 @@ export default function SignUpPage() {
     case "nickname":
   }
 
-  return <>{renderComponent()}</>;
+  return <div className="w-full lg:w-[382px]">{renderComponent()}</div>;
 }
