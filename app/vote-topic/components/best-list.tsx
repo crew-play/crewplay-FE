@@ -1,7 +1,6 @@
+import NotExist from "@/components/not-exist";
 import useGetBestVoteTopic from "../hooks/use-get-best-vote-topic";
 import BestCard from "./best-card";
-
-const DATA = ["1", "2", "3", "4", "5"];
 
 export default function BestList() {
   const { data, isLoading, isError } = useGetBestVoteTopic();
@@ -10,15 +9,13 @@ export default function BestList() {
 
   if (isError) return <div>에러 발생</div>;
 
-  if (!data || !data.data) return <div>데이터 없음</div>;
+  if (!data || !data.data) return <NotExist text="진행된 투표가 없습니다." />;
 
-  const isNull = data.data.length === 0;
+  const isExist = data.data.length === 0;
 
   return (
     <div className="mt-[14px] w-full border-t-2 border-b-gray-003 border-t-black-001 lg:mt-[24px]">
-      {isNull ? (
-        <div>데이터 없음</div>
-      ) : (
+      {isExist ? (
         <>
           {data.data.map((bestTopic, index) => {
             return (
@@ -31,6 +28,8 @@ export default function BestList() {
             );
           })}
         </>
+      ) : (
+        <NotExist text="진행된 투표가 없습니다." />
       )}
     </div>
   );

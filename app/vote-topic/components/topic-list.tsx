@@ -1,3 +1,4 @@
+import NotExist from "@/components/not-exist";
 import useGetVoteTopic from "../hooks/use-get-vote-topics";
 import TopicCard from "./topic-card";
 
@@ -8,7 +9,10 @@ export default function TopicList() {
 
   if (isError) return <div>에러 방생</div>;
 
-  if (!data || !data.data) return <div>데이터 없음</div>;
+  if (!data || !data.data)
+    return <NotExist text="등록된 투표 주제가 없습니다." />;
+
+  const isExist = data.data.dataList.length === 0;
 
   return (
     <div className="mb-[40px] mt-[24px] w-full">
@@ -23,14 +27,20 @@ export default function TopicList() {
           좋아요
         </span>
       </div>
-      {data.data.dataList.map((topic, index) => (
-        <TopicCard
-          key={index}
-          createdAt={topic.createdAt}
-          topic={topic.topic}
-          recommendCount={topic.recommendCount}
-        />
-      ))}
+      {isExist ? (
+        <>
+          {data.data.dataList.map((topic, index) => (
+            <TopicCard
+              key={index}
+              createdAt={topic.createdAt}
+              topic={topic.topic}
+              recommendCount={topic.recommendCount}
+            />
+          ))}
+        </>
+      ) : (
+        <NotExist text="등록된 투표 주제가 없습니다." />
+      )}
     </div>
   );
 }

@@ -18,7 +18,7 @@ export const sendCode = async (
     const refreshToken = response.headers["refresh"];
 
     if (accessToken) {
-      setToken(accessToken, "access");
+      localStorage.setItem("access", accessToken);
     }
 
     if (refreshToken) {

@@ -1,0 +1,152 @@
+import { IPagination } from "@/interface/pagination";
+import { IResponse } from "@/interface/response";
+import {
+  IHasUserVoted,
+  ILatestVoteResult,
+  IThisWeekVote,
+  IThisWeekVoteResult,
+  IVoteRequestData,
+} from "@/interface/vote";
+import axios, { isAxiosError } from "axios";
+import { instance } from "./interceptor";
+
+export const getLatestVoteResults = async (): Promise<
+  IResponse<IPagination & { dataList: ILatestVoteResult[] }>
+> => {
+  try {
+    const { data } = await axios.get("/api/v1/vote/result/prev");
+
+    return {
+      status: "success",
+      data: data.data,
+    };
+  } catch (error) {
+    if (isAxiosError(error)) {
+      return {
+        status: "error",
+        error: error.message,
+      };
+    }
+
+    return {
+      status: "error",
+      error: "알 수 없는 오류가 발생하였습니다.",
+    };
+  }
+};
+
+export const getLatestBestVoteResult = async (): Promise<
+  IResponse<IPagination & { dataList: ILatestVoteResult[] }>
+> => {
+  try {
+    const { data } = await axios.get(
+      "/api/v1/vote/result/prev?sortType=PARTICIPANT&page=0&size=5",
+    );
+
+    return {
+      status: "success",
+      data: data.data,
+    };
+  } catch (error) {
+    if (isAxiosError(error)) {
+      return {
+        status: "error",
+        error: error.message,
+      };
+    }
+
+    return {
+      status: "error",
+      error: "알 수 없는 오류가 발생하였습니다.",
+    };
+  }
+};
+
+export const hasUserVoted = async (): Promise<IResponse<IHasUserVoted>> => {
+  try {
+    const { data } = await instance.get("/api/v1/vote/user");
+
+    return {
+      status: "success",
+      data: data.data,
+    };
+  } catch (error) {
+    if (isAxiosError(error)) {
+      return {
+        status: "error",
+        error: error.message,
+      };
+    }
+
+    return {
+      status: "error",
+      error: "알 수 없는 오류가 발생하였습니다.",
+    };
+  }
+};
+
+export const getThisWeekVoteResult = async (): Promise<
+  IResponse<IThisWeekVoteResult>
+> => {
+  try {
+    const { data } = await instance.get("/api/v1/vote/result");
+
+    return {
+      status: "success",
+      data: data.data,
+    };
+  } catch (error) {
+    if (isAxiosError(error)) {
+      return {
+        status: "error",
+        error: error.message,
+      };
+    }
+
+    return {
+      status: "error",
+      error: "알 수 없는 오류가 발생하였습니다.",
+    };
+  }
+};
+
+export const getThisWeekVoteCandidates = async (
+  isLogin: boolean,
+): Promise<IResponse<IThisWeekVoteResult>> => {
+  try {
+    if (isLogin) {
+      const { data } = await instance.get("/api/v1/vote");
+      return {
+        status: "success",
+        data: data.data,
+      };
+    } else {
+      const { data } = await axios.get("/api/v1/vote");
+      return {
+        status: "success",
+        data: data.data,
+      };
+    }
+  } catch (error) {
+    if (isAxiosError(error)) {
+      return {
+        status: "error",
+        error: error.message,
+      };
+    }
+    return {
+      status: "error",
+      error: "알 수 없는 오류가 발생하였습니다.",
+    };
+  }
+};
+
+export const thisWeekVote = async ({
+  voteId,
+  candidateId,
+}: IVoteRequestData) => {
+  const response = await instance.post(
+    `/api/v1/vote/${voteId}/candidate/${candidateId}`,
+  );
+  return response;
+};

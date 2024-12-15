@@ -1,4 +1,4 @@
-import { getThisWeekVoteResult } from "@/api/vote-result";
+import { getThisWeekVoteResult } from "@/api/vote";
 import { useQuery } from "@tanstack/react-query";
 
 export default function useGetThisWeekVoteResult() {

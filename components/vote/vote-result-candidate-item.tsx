@@ -1,16 +1,18 @@
+"use client";
+
 import First from "@/public/svg/first.svg";
 
 interface VoteResultBarProps {
   readonly candidate: string;
   readonly percentage: number;
-  readonly count: number;
+  readonly voteCount: number;
   readonly isFirst: boolean;
 }
 
-export default function CandidateItem({
+export default function VoteResultCandidateItem({
   candidate,
   percentage,
-  count,
+  voteCount,
   isFirst,
 }: VoteResultBarProps) {
   const percentageWidth = `${720 * Number((percentage / 100).toFixed(1))}px`;
@@ -27,7 +29,7 @@ export default function CandidateItem({
         <div className="flex items-center">
           <span className="font-bold text-black-001">{percentage}%</span>
           <span className="ml-[10px] text-[12px] text-gray-004 lg:ml-[17px]">
-            {count}명
+            {voteCount}명
           </span>
         </div>
       </div>

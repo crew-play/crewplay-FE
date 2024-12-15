@@ -5,6 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import MainButton from "./main-button";
 import useRegisterVoteTopic from "@/app/vote-topic/hooks/use-register-vote-topic";
+import { useAtomValue } from "jotai";
+import { atomUserAuth } from "@/jotai/user-auth";
 
 interface IRegisterTopicForm {
   readonly topic: string;
@@ -12,6 +14,9 @@ interface IRegisterTopicForm {
 
 export default function RegisterVote() {
   const { mutate } = useRegisterVoteTopic();
+  const userAuth = useAtomValue(atomUserAuth);
+
+  const isLogin = userAuth.role !== "ANONYMOUS";
 
   const { register, handleSubmit, getValues } = useForm<IRegisterTopicForm>({
     defaultValues: {
@@ -23,6 +28,12 @@ export default function RegisterVote() {
 
   const handleClickRegisterButton = () => {
     const topic = getValues("topic");
+
+    if (topic.length === 0) {
+      alert("주제를 입력해주세요");
+      return;
+    }
+
     mutate(topic);
   };
 
@@ -46,10 +57,18 @@ export default function RegisterVote() {
               type="text"
               id="topic"
               className="mb-[12px] h-[52px] grow rounded-[8px] bg-white-001 px-[16px] text-center text-[16px] font-medium leading-[16px] placeholder:text-gray-004 focus:outline-none lg:mb-0 lg:h-auto lg:rounded-[120px] lg:text-start lg:text-[24px] lg:leading-[24px]"
-              placeholder="로그인 후 이용해주세요."
+              placeholder={
+                isLogin
+                  ? "새로운 주제를 등록해보세요!"
+                  : "로그인 후 이용해주세요."
+              }
               {...register("topic")}
             />
-            <MainButton text="등록하기" onClick={handleClickRegisterButton} />
+            <MainButton
+              text="등록하기"
+              onClick={handleClickRegisterButton}
+              isDisabled={!isLogin}
+            />
           </form>
         </div>
       </div>

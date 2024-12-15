@@ -11,18 +11,34 @@ export interface IVote {
   readonly vote: ICandidate[];
 }
 
-export interface IThisWeekVoteResult {
+export interface ILatestVoteResult {
   readonly voteId: string;
   readonly startDate: string;
   readonly topic: string;
   readonly vote: ICandidate[];
 }
 
-export interface ILatestVoteResult {
+export interface IThisWeekVote {
   readonly voteId: string;
   readonly startDate: string;
   readonly topic: string;
   readonly vote: ICandidate[];
+}
+
+export interface IThisWeekVoteResult extends IThisWeekVote {
+  readonly resultType: "VOTE" | "RESULT";
+  readonly endDate: string;
+  readonly totalVote: number;
+  readonly myVote: number;
+}
+
+export interface IHasUserVoted {
+  readonly voted: boolean;
+}
+
+export interface IVoteRequestData {
+  readonly voteId: string;
+  readonly candidateId: number;
 }
 
 export type TSort = "latest" | "popular";

@@ -44,7 +44,6 @@ export default function VoteTopicPage() {
           </div>
           <TopicList />
         </div>
-        <Pagination />
       </div>
       <RegisterVote />
     </>

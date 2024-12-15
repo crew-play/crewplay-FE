@@ -1,4 +1,4 @@
-import { ICandidate } from "@/interface/vote-result";
+import { ICandidate } from "@/interface/vote";
 import First from "@/public/svg/first.svg";
 import Participant from "@/public/svg/participant.svg";
 import RightArrow from "@/public/svg/right-arrow.svg";

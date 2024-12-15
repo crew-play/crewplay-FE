@@ -1,24 +1,27 @@
-import { useRef, useState } from "react";
+import { ICandidate } from "@/interface/vote";
+import { useRef } from "react";
 import ThisWeekVoteCandidateItem from "./this-week-vote-candidate-item";
 
-const Arr = ["1", "2", "3", "4", "5"];
+interface IThisWeekVoteCandidateListProps {
+  readonly candidates: ICandidate[];
+}
 
-export default function ThisWeekVoteCandidateList() {
+export default function ThisWeekVoteCandidateList({
+  candidates,
+}: IThisWeekVoteCandidateListProps) {
   const checkBoxRef = useRef<HTMLInputElement>(null);
-  const [isSelected, setIsSelected] = useState<number>(-1);
 
   return (
     <div
       ref={checkBoxRef}
       className="mx-auto grid w-full grid-cols-1 gap-y-[10px] lg:w-[720px]"
     >
-      {Arr.map((data, index) => {
+      {candidates.map((candidate) => {
         return (
           <ThisWeekVoteCandidateItem
-            key={index}
-            index={index + 1}
-            isSelected={isSelected}
-            setIsSelected={setIsSelected}
+            key={candidate.candidateId}
+            candidateExample={candidate.example}
+            candidateId={candidate.candidateId}
           />
         );
       })}

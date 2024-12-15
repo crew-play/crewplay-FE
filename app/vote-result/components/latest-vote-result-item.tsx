@@ -1,20 +1,21 @@
-import CandidateList from "@/components/candidate/candidate-list";
+import CandidateList from "@/components/vote/vote-result-candidate-list";
 import Participant from "@/public/mobile/participant.svg";
 import BottomArrow from "@/public/svg/bottom-arrow.svg";
 import { useState } from "react";
 import DateAndParticipantCount from "./date-and-participant-count";
-import { ICandidate, IVote } from "@/interface/vote-result";
+import { ICandidate, IVote } from "@/interface/vote";
+import VoteResultCandidateList from "@/components/vote/vote-result-candidate-list";
 
 interface ILastVoteResultItemProps {
   readonly startDate: string;
   readonly topic: string;
-  readonly candidateList: ICandidate[];
+  readonly latestVoteResultCandidates: ICandidate[];
 }
 
-export default function LastVoteResultItem({
+export default function LatestVoteResultItem({
   startDate,
   topic,
-  candidateList,
+  latestVoteResultCandidates,
 }: ILastVoteResultItemProps) {
   const [isOpenDetail, setIsOpenDetail] = useState<boolean>(false);
 
@@ -57,7 +58,7 @@ export default function LastVoteResultItem({
       </div>
       {isOpenDetail && (
         <div className="rounded-b-[12px] border-x border-b px-[16px] py-[24px] lg:px-[50px] lg:pb-[50px] lg:pt-[40px]">
-          <CandidateList candidateList={candidateList} />
+          <VoteResultCandidateList candidates={latestVoteResultCandidates} />
           <DateAndParticipantCount
             totalParticipantCount={0}
             voteDate={startDate}

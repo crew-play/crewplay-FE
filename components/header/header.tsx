@@ -8,7 +8,7 @@ import { atomIsOpenMobileMenu } from "@/jotai/mobile-menu-open";
 import { atomUserAuth } from "@/jotai/user-auth";
 import Hamburger from "@/public/svg/hamburger.svg";
 import { decodeToken } from "@/utils/decodeToken";
-import { getToken, setToken } from "@/utils/token";
+import { getToken } from "@/utils/token";
 import { useAtom } from "jotai";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -31,29 +31,30 @@ export default function Header({ isOnlyUseLogo }: IHeaderProps) {
 
   const isLogin = userAuth.role !== "ANONYMOUS";
 
+  const isThisWeekMenu =
+    selectedMenu === "/" ||
+    selectedMenu === "/vote-result" ||
+    selectedMenu === "/vote-topic";
+
   const init = async () => {
-    const accessToken = await getToken("access");
+    const accessToken = localStorage.getItem("access");
 
     if (accessToken) {
-      const { nickname, role } = decodeToken(accessToken.value);
+      const { nickname, role } = decodeToken(accessToken);
       setUserAuth({ nickname, role });
       return;
     }
 
     const refreshToken = await getToken("refresh");
+
     if (!accessToken && refreshToken) {
       const newAccessToken = await reissueToken();
-      await setToken(newAccessToken, "access");
+      localStorage.setItem("access", newAccessToken);
 
       const { nickname, role } = decodeToken(newAccessToken);
       setUserAuth({ nickname, role });
     }
   };
-
-  const isThisWeekMenu =
-    selectedMenu === "/" ||
-    selectedMenu === "/vote-result" ||
-    selectedMenu === "/vote-topic";
 
   const handleMouseEnter = () => {
     setIsHover(true);
