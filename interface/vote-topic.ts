@@ -1,9 +1,10 @@
 export interface IBestTopic {
-  readonly userTopicId: number;
   readonly topic: string;
+  readonly topicId: number;
   readonly createdAt: string;
-  readonly voteCount: number;
+  readonly isRecommended: boolean;
   readonly isAuthor: boolean;
+  readonly recommendCount: number;
 }
 
 export interface ITopic {

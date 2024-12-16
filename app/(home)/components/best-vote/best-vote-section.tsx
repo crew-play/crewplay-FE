@@ -1,4 +1,4 @@
-import BestList from "@/app/vote-topic/components/best-list";
+import BestList from "@/components/topic/best-list";
 import MainButton from "@/components/main-button";
 import { useRouter } from "next/navigation";
 

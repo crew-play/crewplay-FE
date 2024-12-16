@@ -4,7 +4,7 @@ import RegisterVote from "@/components/register-vote";
 import { atomIsOpenMobileMenu } from "@/jotai/mobile-menu-open";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
-import BestList from "./components/best-list";
+import BestList from "../../components/topic/best-list";
 import DeadlineTimer from "./components/deadline-timer";
 import TopicList from "./components/topic-list";
 

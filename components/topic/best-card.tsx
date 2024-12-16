@@ -3,11 +3,14 @@ import Second from "@/public/svg/second.svg";
 import Third from "@/public/svg/third.svg";
 import Heart from "@/public/svg/heart.svg";
 import { ReactNode } from "react";
+import useLikeVoteTopic from "@/app/vote-topic/hooks/use-like-vote-topic";
 
 interface ITopicBestCardProps {
   readonly ranking: number;
   readonly topic: string;
-  readonly voteCount: number;
+  readonly topicId: number;
+  readonly recommendCount: number;
+  readonly isRecommended: boolean;
 }
 
 const RANKING: { [key: number]: ReactNode | string } = {
@@ -21,8 +24,16 @@ const RANKING: { [key: number]: ReactNode | string } = {
 export default function BestCard({
   ranking,
   topic,
-  voteCount = 0,
+  topicId,
+  recommendCount = 0,
+  isRecommended,
 }: ITopicBestCardProps) {
+  const { mutate } = useLikeVoteTopic();
+
+  const handleClickRecommendButton = () => {
+    mutate(topicId);
+  };
+
   return (
     <div className="group flex h-[60px] cursor-pointer items-center border-b border-b-white-006 hover:bg-white-004 lg:h-[100px]">
       <div className="flex h-full w-[102px] items-center justify-center">
@@ -42,9 +53,16 @@ export default function BestCard({
         </p>
       </div>
       <div className="flex h-full w-[100px] items-center justify-center">
-        <Heart className="h-[10px] w-[12px] fill-gray-004 group-hover:fill-red-002 lg:h-[16px] lg:w-[20px]" />
+        <button
+          className="flex h-[10px] w-[12px] items-center justify-center lg:h-[16px] lg:w-[20px]"
+          onClick={handleClickRecommendButton}
+        >
+          <Heart
+            className={`${isRecommended ? "fill-red-002" : "fill-gray-004"}`}
+          />
+        </button>
         <span className="ml-[6px] text-[12px] font-medium leading-[16px] text-gray-004 group-hover:text-black-001 lg:text-[16px] lg:leading-[16px]">
-          {voteCount}
+          {recommendCount}
         </span>
       </div>
     </div>

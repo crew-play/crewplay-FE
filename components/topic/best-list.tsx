@@ -1,5 +1,5 @@
 import NotExist from "@/components/not-exist";
-import useGetBestVoteTopic from "../hooks/use-get-best-vote-topic";
+import useGetBestVoteTopic from "../../app/vote-topic/hooks/use-get-best-vote-topic";
 import BestCard from "./best-card";
 import Spinner from "@/components/spinner";
 
@@ -23,9 +23,11 @@ export default function BestList() {
             return (
               <BestCard
                 key={bestTopic.topic + String(index + 1)}
+                topicId={bestTopic.topicId}
                 ranking={index + 1}
                 topic={bestTopic.topic}
-                voteCount={bestTopic.voteCount}
+                recommendCount={bestTopic.recommendCount}
+                isRecommended={bestTopic.isRecommended}
               />
             );
           })}
