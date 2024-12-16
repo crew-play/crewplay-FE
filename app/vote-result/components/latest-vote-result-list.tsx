@@ -1,44 +1,34 @@
 import useGetLatestBestVoteResult from "@/app/(home)/hooks/use-get-latest-best-vote-results";
 import MainButton from "@/components/main-button";
+import NotExist from "@/components/not-exist";
 import { TSort } from "@/interface/vote";
 import LatestVoteResultItem from "./latest-vote-result-item";
-import NotExist from "@/components/not-exist";
-import { Dispatch, useEffect } from "react";
-import { SetStateAction } from "jotai";
 
 interface ILatestVoteResultListProps {
   readonly sort: TSort;
-  readonly setIsExist: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function LatestVoteResultList({
   sort,
-  setIsExist,
 }: ILatestVoteResultListProps) {
-  const { data, isLoading, isError } = useGetLatestBestVoteResult();
+  const { data, isLoading, isError, hasNextPage, fetchNextPage } =
+    useGetLatestBestVoteResult(sort);
 
   const handleClickMoreButton = () => {
-    // eslint-disable-next-line no-console
-    console.log("click");
+    fetchNextPage();
   };
-
-  useEffect(() => {
-    if (data && data.data) {
-      if (latestVoteResults.length !== 0) {
-        setIsExist(true);
-      } else {
-        setIsExist(false);
-      }
-    }
-  }, [data]);
 
   if (isLoading) return <div>로딩중</div>;
 
   if (isError) return <div>에러 발생</div>;
 
-  if (!data || !data.data) return <NotExist text="지난 투표가 없습니다." />;
+  if (!data || !data.pages) return <NotExist text="지난 투표가 없습니다." />;
 
-  const { dataList: latestVoteResults } = data.data;
+  const latestVoteResults = data.pages.flatMap((page) => {
+    if (!page.data) return [];
+    return page.data.dataList;
+  });
+
   const isExist = latestVoteResults.length !== 0;
 
   return (
@@ -61,9 +51,11 @@ export default function LatestVoteResultList({
               );
             })}
           </div>
-          <div className="mb-[58px] mt-[20px] lg:mb-[77px] lg:mt-[40px]">
-            <MainButton text="더보기" onClick={handleClickMoreButton} />
-          </div>
+          {hasNextPage && (
+            <div className="mb-[58px] mt-[20px] lg:mb-[77px] lg:mt-[40px]">
+              <MainButton text="더보기" onClick={handleClickMoreButton} />
+            </div>
+          )}
         </>
       ) : (
         <NotExist text="지난 투표가 없습니다." />
