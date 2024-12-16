@@ -1,11 +1,11 @@
 export const getDeadline = () => {
   const now = new Date(); // 현재 시간
   const currentDay = now.getDay(); // 요일 (0: 일요일, 1: 월요일, ...)
-  const daysUntilMonday = (8 - currentDay) % 7; // 다음 월요일까지 남은 일수
+  const daysUntilNextMonday = currentDay === 1 ? 7 : (8 - currentDay) % 7;
   const nextMonday = new Date(
     now.getFullYear(),
     now.getMonth(),
-    now.getDate() + daysUntilMonday,
+    now.getDate() + daysUntilNextMonday,
     0,
     0,
     0,
