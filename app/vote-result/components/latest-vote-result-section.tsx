@@ -1,8 +1,7 @@
+import { TSort } from "@/interface/vote";
 import { useState } from "react";
 import LatestVoteResultList from "./latest-vote-result-list";
 import LatestVoteResultSort from "./latest-vote-result-sort";
-import { TSort } from "@/interface/vote";
-import MainButton from "@/components/main-button";
 
 export default function LatestVoteResultSection() {
   const [sort, setSort] = useState<TSort>("latest");

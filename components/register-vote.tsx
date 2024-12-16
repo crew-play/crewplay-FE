@@ -18,13 +18,14 @@ export default function RegisterVote() {
 
   const isLogin = userAuth.role !== "ANONYMOUS";
 
-  const { register, handleSubmit, getValues } = useForm<IRegisterTopicForm>({
-    defaultValues: {
-      topic: "",
-    },
-    mode: "onChange",
-    resolver: yupResolver(registerTopicSchema),
-  });
+  const { register, handleSubmit, getValues, setValue } =
+    useForm<IRegisterTopicForm>({
+      defaultValues: {
+        topic: "",
+      },
+      mode: "onChange",
+      resolver: yupResolver(registerTopicSchema),
+    });
 
   const handleClickRegisterButton = () => {
     const topic = getValues("topic");
@@ -35,6 +36,7 @@ export default function RegisterVote() {
     }
 
     mutate(topic);
+    setValue("topic", "");
   };
 
   return (
@@ -56,6 +58,7 @@ export default function RegisterVote() {
             <input
               type="text"
               id="topic"
+              disabled={!isLogin}
               className="mb-[12px] h-[52px] grow rounded-[8px] bg-white-001 px-[16px] text-center text-[16px] font-medium leading-[16px] placeholder:text-gray-004 focus:outline-none lg:mb-0 lg:h-auto lg:rounded-[120px] lg:text-start lg:text-[24px] lg:leading-[24px]"
               placeholder={
                 isLogin

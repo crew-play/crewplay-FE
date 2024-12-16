@@ -1,5 +1,6 @@
 import Calendar from "@/public/svg/calendar.svg";
 import Participant from "@/public/svg/participant.svg";
+import { replaceNumberFormat } from "@/utils/format-value";
 
 interface IDateAndParticipantCountProps {
   readonly voteDate: string;
@@ -19,7 +20,7 @@ export default function DateAndParticipantCount({
       <div className="mr-[16px] flex items-center lg:ml-[20px]">
         <Participant className="h-[11px] w-[14px] lg:h-[13px] lg:w-[16px]" />
         <span className="ml-[6px] flex items-center">
-          {totalParticipantCount}
+          {replaceNumberFormat(totalParticipantCount)}명
         </span>
       </div>
     </div>

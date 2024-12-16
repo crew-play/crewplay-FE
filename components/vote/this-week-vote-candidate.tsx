@@ -9,6 +9,7 @@ import useThisWeekVote from "../../app/(home)/hooks/use-this-week-vote";
 import DateAndParticipantCount from "@/app/vote-result/components/date-and-participant-count";
 import { usePathname } from "next/navigation";
 import NotExist from "../not-exist";
+import { formattingDateTime } from "@/utils/format-value";
 
 export default function ThisWeekVoteCandidate() {
   const pathname = usePathname();
@@ -31,11 +32,22 @@ export default function ThisWeekVoteCandidate() {
 
   if (!data || !data.data) return <NotExist text="등록된 투표가 없습니다." />;
 
-  const { voteId, resultType, vote, topic, startDate, endDate, totalVote } =
-    data.data;
+  const {
+    voteId,
+    resultType,
+    vote,
+    topic,
+    startDate,
+    endDate,
+    totalVote,
+    myVote,
+  } = data.data;
 
   const hasVoted = resultType === "VOTE";
   const isDisabled = selectedCandidateId === -1;
+  const isBestCandidate = vote.reduce((max, current) => {
+    return current.voteCount > max.voteCount ? current : max;
+  });
 
   return (
     <>
@@ -44,21 +56,27 @@ export default function ThisWeekVoteCandidate() {
       </h2>
       <div>
         {hasVoted ? (
-          <ThisWeekVoteCandidateList candidates={vote} />
+          <>
+            <ThisWeekVoteCandidateList candidates={vote} />
+            <div className="mt-[20px] lg:mt-[30px]">
+              <MainButton
+                text="투표하기"
+                onClick={handleClickVoteButton}
+                isDisabled={isDisabled}
+              />
+            </div>
+          </>
         ) : (
-          <CandidateList candidates={vote} />
-        )}
-        <div className="mt-[20px] lg:mt-[30px]">
-          <MainButton
-            text="투표하기"
-            onClick={handleClickVoteButton}
-            isDisabled={isDisabled}
+          <CandidateList
+            candidates={vote}
+            myVote={myVote}
+            isBestCandidateId={isBestCandidate.candidateId}
           />
-        </div>
+        )}
       </div>
       {isUseDateAndParticipantCount && (
         <DateAndParticipantCount
-          voteDate={`${startDate} - ${endDate}`}
+          voteDate={`${formattingDateTime(startDate)} - ${formattingDateTime(endDate)}`}
           totalParticipantCount={totalVote || 0}
         />
       )}

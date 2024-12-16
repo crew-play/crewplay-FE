@@ -16,6 +16,9 @@ export interface ILatestVoteResult {
   readonly startDate: string;
   readonly topic: string;
   readonly vote: ICandidate[];
+  readonly endDate: string;
+  readonly myVote: number;
+  readonly totalVote: number;
 }
 
 export interface IThisWeekVote {

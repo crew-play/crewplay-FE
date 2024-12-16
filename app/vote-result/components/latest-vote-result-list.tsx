@@ -24,7 +24,11 @@ export default function LatestVoteResultList({
 
   useEffect(() => {
     if (data && data.data) {
-      latestVoteResults.length !== 0 ? setIsExist(true) : setIsExist(false);
+      if (latestVoteResults.length !== 0) {
+        setIsExist(true);
+      } else {
+        setIsExist(false);
+      }
     }
   }, [data]);
 
@@ -49,6 +53,10 @@ export default function LatestVoteResultList({
                   latestVoteResultCandidates={latestVote.vote}
                   startDate={latestVote.startDate}
                   topic={latestVote.topic}
+                  myVote={latestVote.myVote}
+                  candidate={latestVote.vote}
+                  endDate={latestVote.endDate}
+                  totalCount={latestVote.totalVote}
                 />
               );
             })}

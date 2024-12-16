@@ -1,5 +1,5 @@
 import Heart from "@/public/svg/heart.svg";
-import { formattingDateTime } from "@/utils/formatDateTime";
+import { formattingDateTime } from "@/utils/format-value";
 
 interface ITopicCardProps {
   readonly createdAt: string;
@@ -22,7 +22,7 @@ export default function TopicCard({
           {topic}
         </p>
         <div className="flex h-full w-[240px] items-center justify-center">
-          <Heart className="h-[10px] fill-gray-004 group-hover:fill-red-002 lg:h-[16px] lg:w-[12px] lg:w-[20px]" />
+          <Heart className="h-[10px] w-[12px] fill-gray-004 group-hover:fill-red-002 lg:h-[16px] lg:w-[20px]" />
           <span
             className={`ml-[6px] font-medium text-gray-004 group-hover:text-black-001`}
           >
@@ -36,7 +36,7 @@ export default function TopicCard({
             {formattingDateTime(createdAt)}
           </span>
           <div className="flex h-full items-center">
-            <Heart className="h-[10px] fill-gray-004 lg:h-[16px] lg:w-[12px] lg:w-[20px]" />
+            <Heart className="h-[10px] w-[12px] fill-gray-004 lg:h-[16px] lg:w-[20px]" />
             <span
               className={`ml-[6px] text-[12px] font-medium leading-[12px] text-gray-004`}
             >

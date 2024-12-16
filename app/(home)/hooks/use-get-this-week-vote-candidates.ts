@@ -12,7 +12,7 @@ export default function useGetThisWeekVoteCandidates(isLogin: boolean) {
   return useQuery({
     queryKey: ["thisWeekVoteCandidate"],
     queryFn: () => {
-      return getThisWeekVoteCandidates(isLogin);
+      return getThisWeekVoteCandidates();
     },
   });
 }

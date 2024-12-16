@@ -5,21 +5,27 @@ import VoteResultCandidateItem from "./vote-result-candidate-item";
 
 interface ICandidateListProps {
   readonly candidates: ICandidate[];
+  readonly myVote: number;
+  readonly isBestCandidateId: number;
 }
 
 export default function VoteResultCandidateList({
   candidates,
+  myVote,
+  isBestCandidateId,
 }: ICandidateListProps) {
   return (
     <div>
-      {candidates.map((candidate, index) => {
+      {candidates.map((candidate) => {
         return (
           <VoteResultCandidateItem
-            isFirst={index === 0}
             key={candidate.candidateId}
             candidate={candidate.example}
             percentage={50}
             voteCount={candidate.voteCount}
+            myVote={myVote}
+            candidateId={candidate.candidateId}
+            isBestCandidateId={isBestCandidateId}
           />
         );
       })}

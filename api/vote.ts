@@ -3,7 +3,6 @@ import { IResponse } from "@/interface/response";
 import {
   IHasUserVoted,
   ILatestVoteResult,
-  IThisWeekVote,
   IThisWeekVoteResult,
   IVoteRequestData,
 } from "@/interface/vote";
@@ -110,9 +109,11 @@ export const getThisWeekVoteResult = async (): Promise<
   }
 };
 
-export const getThisWeekVoteCandidates = async (
-  isLogin: boolean,
-): Promise<IResponse<IThisWeekVoteResult>> => {
+export const getThisWeekVoteCandidates = async (): Promise<
+  IResponse<IThisWeekVoteResult>
+> => {
+  const isLogin = localStorage.getItem("access");
+
   try {
     if (isLogin) {
       const { data } = await instance.get("/api/v1/vote");

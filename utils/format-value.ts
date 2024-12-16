@@ -3,3 +3,7 @@ export const formattingDateTime = (dateString: string) => {
   const formattedDate = date.replace(/-/g, ".");
   return formattedDate;
 };
+
+export const replaceNumberFormat = (value: number) => {
+  return value.toLocaleString();
+};

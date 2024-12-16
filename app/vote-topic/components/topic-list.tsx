@@ -29,14 +29,16 @@ export default function TopicList() {
       </div>
       {isExist ? (
         <>
-          {data.data.dataList.map((topic, index) => (
-            <TopicCard
-              key={index}
-              createdAt={topic.createdAt}
-              topic={topic.topic}
-              recommendCount={topic.recommendCount}
-            />
-          ))}
+          {data.data.dataList.map((topic, index) => {
+            return (
+              <TopicCard
+                key={index}
+                createdAt={topic.createdAt}
+                topic={topic.topic}
+                recommendCount={topic.recommendCount}
+              />
+            );
+          })}
         </>
       ) : (
         <NotExist text="등록된 투표 주제가 없습니다." />

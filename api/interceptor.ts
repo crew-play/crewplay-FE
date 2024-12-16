@@ -1,6 +1,6 @@
+import { removeToken } from "@/utils/token";
 import axios from "axios";
 import { reissueToken } from "./reissue-token";
-import { getToken, removeToken } from "@/utils/token";
 
 let retryCount = 0;
 const MAX_RETRY_COUNT = 3;
@@ -11,8 +11,7 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    config.headers["access"] = localStorage.getItem("access");
-    console.log(config);
+    config.headers["access"] = `Bearer ${localStorage.getItem("access")}`;
     return config;
   },
   (error) => {

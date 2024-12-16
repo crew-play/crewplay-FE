@@ -1,13 +1,12 @@
 "use client";
 
-import Pagination from "@/components/pagination";
 import RegisterVote from "@/components/register-vote";
-import BestList from "./components/best-list";
-import DeadlineTimer from "./components/deadline-timer";
-import TopicList from "./components/topic-list";
 import { atomIsOpenMobileMenu } from "@/jotai/mobile-menu-open";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
+import BestList from "./components/best-list";
+import DeadlineTimer from "./components/deadline-timer";
+import TopicList from "./components/topic-list";
 
 export default function VoteTopicPage() {
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useAtom(atomIsOpenMobileMenu);

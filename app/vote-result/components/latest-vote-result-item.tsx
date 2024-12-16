@@ -1,21 +1,28 @@
-import CandidateList from "@/components/vote/vote-result-candidate-list";
+import VoteResultCandidateList from "@/components/vote/vote-result-candidate-list";
+import { ICandidate } from "@/interface/vote";
 import Participant from "@/public/mobile/participant.svg";
 import BottomArrow from "@/public/svg/bottom-arrow.svg";
 import { useState } from "react";
 import DateAndParticipantCount from "./date-and-participant-count";
-import { ICandidate, IVote } from "@/interface/vote";
-import VoteResultCandidateList from "@/components/vote/vote-result-candidate-list";
 
 interface ILastVoteResultItemProps {
   readonly startDate: string;
+  readonly endDate: string;
   readonly topic: string;
   readonly latestVoteResultCandidates: ICandidate[];
+  readonly myVote: number;
+  readonly candidate: ICandidate[];
+  readonly totalCount: number;
 }
 
 export default function LatestVoteResultItem({
   startDate,
+  endDate,
   topic,
   latestVoteResultCandidates,
+  myVote,
+  totalCount,
+  candidate,
 }: ILastVoteResultItemProps) {
   const [isOpenDetail, setIsOpenDetail] = useState<boolean>(false);
 
@@ -24,6 +31,10 @@ export default function LatestVoteResultItem({
       return !prev;
     });
   };
+
+  const isBestCandidate = candidate.reduce((max, current) => {
+    return current.voteCount > max.voteCount ? current : max;
+  });
 
   return (
     <div className="w-full">
@@ -39,7 +50,7 @@ export default function LatestVoteResultItem({
               <div className="flex h-[12px] items-center justify-center lg:hidden">
                 <Participant className="size-[12px]" />
                 <span className="ml-[4px] text-[12px] font-medium leading-[12px] text-gray-007">
-                  24명
+                  {totalCount}
                 </span>
               </div>
             </div>
@@ -58,10 +69,14 @@ export default function LatestVoteResultItem({
       </div>
       {isOpenDetail && (
         <div className="rounded-b-[12px] border-x border-b px-[16px] py-[24px] lg:px-[50px] lg:pb-[50px] lg:pt-[40px]">
-          <VoteResultCandidateList candidates={latestVoteResultCandidates} />
+          <VoteResultCandidateList
+            candidates={latestVoteResultCandidates}
+            myVote={myVote}
+            isBestCandidateId={isBestCandidate.candidateId}
+          />
           <DateAndParticipantCount
             totalParticipantCount={0}
-            voteDate={startDate}
+            voteDate={`${startDate} - ${endDate}`}
           />
         </div>
       )}
