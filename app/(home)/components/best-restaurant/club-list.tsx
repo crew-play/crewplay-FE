@@ -2,7 +2,7 @@ import { IClub } from "@/api/sign-up";
 import { CLUBS } from "../../constant/club-list";
 import { Dispatch } from "react";
 import { SetStateAction } from "jotai";
-import useDrag from "@/hooks/useDrag";
+import useDrag from "@/hooks/use-drag";
 import useClubList from "@/app/signUp/hooks/use-club-list";
 
 interface IClubListProps {

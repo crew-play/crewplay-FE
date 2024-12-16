@@ -1,4 +1,4 @@
-import useDrag from "@/hooks/useDrag";
+import useDrag from "@/hooks/use-drag";
 import Image from "next/image";
 
 const ARR = ["1", "2", "3"];
