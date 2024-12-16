@@ -24,13 +24,15 @@ export default function AppProvider({ children }: PropsWithChildren) {
     pathname === "/signUp" ||
     pathname === "/signUp/success";
 
+  const isUseHeaderAndFooter = pathname !== "/oauth/kakao";
+
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <Provider>
-        <Header isOnlyUseLogo={isOnlyUseLogo} />
+        {isUseHeaderAndFooter && <Header isOnlyUseLogo={isOnlyUseLogo} />}
         {children}
-        <Footer />
+        {isUseHeaderAndFooter && <Footer />}
       </Provider>
     </QueryClientProvider>
   );
