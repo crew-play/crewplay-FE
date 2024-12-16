@@ -32,14 +32,17 @@ export default function LatestVoteResultItem({
     });
   };
 
-  const isBestCandidate = candidate.reduce((max, current) => {
-    return current.voteCount > max.voteCount ? current : max;
-  });
+  const isBestCandidate =
+    candidate.length === 0
+      ? { candidateId: -1 }
+      : candidate.reduce((max, current) => {
+          return current.voteCount > max.voteCount ? current : max;
+        });
 
   return (
-    <div className="w-full">
+    <div className="w-full cursor-pointer" onClick={handleClickOpenHistory}>
       <div
-        className={`flex h-[89px] items-center border lg:h-[100px] ${isOpenDetail ? "rounded-t-[12px] border-black-001" : "rounded-[12px] border-white-005"} bg-white-001 px-[18px] font-bold lg:pl-[30px] lg:pr-[40px]`}
+        className={`flex items-center border lg:h-[100px] ${isOpenDetail ? "rounded-t-[12px] border-black-001" : "rounded-[12px] border-white-005"} bg-white-001 p-[18px] font-bold lg:pl-[30px] lg:pr-[40px]`}
       >
         <div className="flex w-full justify-between lg:h-[36px]">
           <div className="flex size-full flex-col lg:w-auto lg:flex-row">
@@ -58,13 +61,11 @@ export default function LatestVoteResultItem({
               {topic}
             </p>
           </div>
-          <button
-            type="button"
-            onClick={handleClickOpenHistory}
+          <div
             className={`hidden size-[24px] h-full lg:flex lg:items-center lg:justify-center ${isOpenDetail ? "rotate-180" : "rotate-[360deg]"}`}
           >
-            <BottomArrow />
-          </button>
+            <BottomArrow className="lg:h-[8px] lg:w-[16px]" stroke="#C3C3C3" />
+          </div>
         </div>
       </div>
       {isOpenDetail && (
@@ -72,10 +73,11 @@ export default function LatestVoteResultItem({
           <VoteResultCandidateList
             candidates={latestVoteResultCandidates}
             myVote={myVote}
-            isBestCandidateId={isBestCandidate.candidateId}
+            isBestCandidateId={isBestCandidate.candidateId || -1}
+            totalVote={totalCount}
           />
           <DateAndParticipantCount
-            totalParticipantCount={0}
+            totalParticipantCount={totalCount}
             voteDate={`${startDate} - ${endDate}`}
           />
         </div>

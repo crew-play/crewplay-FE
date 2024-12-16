@@ -10,6 +10,7 @@ import DateAndParticipantCount from "@/app/vote-result/components/date-and-parti
 import { usePathname } from "next/navigation";
 import NotExist from "../not-exist";
 import { formattingDateTime } from "@/utils/format-value";
+import Spinner from "../spinner";
 
 export default function ThisWeekVoteCandidate() {
   const pathname = usePathname();
@@ -26,9 +27,10 @@ export default function ThisWeekVoteCandidate() {
     mutate({ voteId: voteId, candidateId: selectedCandidateId });
   };
 
-  if (isLoading) return <div>로딩 중</div>;
+  if (isLoading) return <Spinner />;
 
-  if (isError) return <div>에러 발생</div>;
+  if (isError)
+    return <NotExist text="에러가 발생하였습니다. 다시 조회해주세요." />;
 
   if (!data || !data.data) return <NotExist text="등록된 투표가 없습니다." />;
 
@@ -71,6 +73,7 @@ export default function ThisWeekVoteCandidate() {
             candidates={vote}
             myVote={myVote}
             isBestCandidateId={isBestCandidate.candidateId}
+            totalVote={totalVote}
           />
         )}
       </div>

@@ -7,25 +7,29 @@ interface ICandidateListProps {
   readonly candidates: ICandidate[];
   readonly myVote: number;
   readonly isBestCandidateId: number;
+  readonly totalVote: number;
 }
 
 export default function VoteResultCandidateList({
   candidates,
   myVote,
   isBestCandidateId,
+  totalVote,
 }: ICandidateListProps) {
   return (
     <div>
       {candidates.map((candidate) => {
         return (
           <VoteResultCandidateItem
-            key={candidate.candidateId}
+            key={
+              candidate.candidateId + candidate.example + candidate.voteCount
+            }
             candidate={candidate.example}
-            percentage={50}
             voteCount={candidate.voteCount}
             myVote={myVote}
             candidateId={candidate.candidateId}
             isBestCandidateId={isBestCandidateId}
+            totalVote={totalVote}
           />
         );
       })}

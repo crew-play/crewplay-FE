@@ -4,7 +4,7 @@ import LatestVoteResultList from "./latest-vote-result-list";
 import LatestVoteResultSort from "./latest-vote-result-sort";
 
 export default function LatestVoteResultSection() {
-  const [sort, setSort] = useState<TSort>("latest");
+  const [sort, setSort] = useState<TSort>("UP_TO_DATE");
 
   const handleClickSort = (type: TSort) => {
     setSort(type);

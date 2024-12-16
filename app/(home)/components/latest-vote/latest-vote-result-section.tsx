@@ -1,10 +1,12 @@
 import MainButton from "@/components/main-button";
 import LatestVoteList from "./latest-vote-list";
+import { useRouter } from "next/navigation";
 
 export default function LatestVoteResultSection() {
+  const router = useRouter();
+
   const handleClickButton = () => {
-    // eslint-disable-next-line no-console
-    console.log("asd");
+    router.push("/vote-result");
   };
 
   return (

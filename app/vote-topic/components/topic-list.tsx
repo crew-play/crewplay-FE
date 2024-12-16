@@ -1,13 +1,15 @@
 import NotExist from "@/components/not-exist";
 import useGetVoteTopic from "../hooks/use-get-vote-topics";
 import TopicCard from "./topic-card";
+import Spinner from "@/components/spinner";
 
 export default function TopicList() {
   const { data, isLoading, isError } = useGetVoteTopic();
 
-  if (isLoading) return <div>로딩중</div>;
+  if (isLoading) return <Spinner />;
 
-  if (isError) return <div>에러 방생</div>;
+  if (isError)
+    return <NotExist text="에러가 발생하였습니다. 다시 조회해주세요." />;
 
   if (!data || !data.data)
     return <NotExist text="등록된 투표 주제가 없습니다." />;

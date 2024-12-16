@@ -44,4 +44,4 @@ export interface IVoteRequestData {
   readonly candidateId: number;
 }
 
-export type TSort = "latest" | "popular";
+export type TSort = "UP_TO_DATE" | "PARTICIPANT";

@@ -2,30 +2,55 @@
 
 import First from "@/public/svg/first.svg";
 import { replaceNumberFormat } from "@/utils/format-value";
+import { useEffect, useRef, useState } from "react";
 
 interface VoteResultBarProps {
   readonly candidate: string;
-  readonly percentage: number;
   readonly voteCount: number;
   readonly myVote: number;
   readonly candidateId: number;
   readonly isBestCandidateId: number;
+  readonly totalVote: number;
 }
 
 export default function VoteResultCandidateItem({
   candidate,
-  percentage,
   voteCount,
   myVote,
   candidateId,
   isBestCandidateId,
+  totalVote,
 }: VoteResultBarProps) {
-  const percentageWidth = `${720 * Number((percentage / 100).toFixed(1))}px`;
+  const [width, setWidth] = useState<number>(0);
+  const candidatePercentageRef = useRef<HTMLDivElement>(null);
+
+  const percentage = totalVote === 0 ? 0 : (voteCount / totalVote) * 100;
+
+  const percentageWidth = `${width * Number((percentage / 100).toFixed(1))}px`;
   const isMyVote = myVote === candidateId;
   const isBest = candidateId === isBestCandidateId;
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (candidatePercentageRef.current) {
+        setWidth(candidatePercentageRef.current.clientWidth);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <div className="relative mx-auto mb-[8px] h-[60px] w-full overflow-hidden rounded-[8px] lg:mb-[10px] lg:w-[720px]">
+    <div
+      ref={candidatePercentageRef}
+      className="relative mx-auto mb-[8px] h-[60px] w-full overflow-hidden rounded-[8px] lg:mb-[10px] lg:w-[720px]"
+    >
       <div className="absolute z-[49] flex size-full items-center justify-between pl-[24px] pr-[30px]">
         <div className="flex items-center">
           {isBest && <First className="size-[24px]" />}

@@ -16,17 +16,17 @@ export default function LatestVoteResultSort({
       </h2>
       <div className="flex cursor-pointer items-center text-[14px] leading-[14px]">
         <span
-          className={`${sort === "latest" ? "bg-yellow-001 font-bold text-black-001" : "bg-white-001 text-gray-003"} flex h-[28px] w-[66px] items-center justify-center rounded-[40px] hover:bg-yellow-001`}
+          className={`${sort === "UP_TO_DATE" ? "bg-yellow-001 font-bold text-black-001" : "bg-white-001 text-gray-003"} flex h-[28px] w-[66px] items-center justify-center rounded-[40px] hover:bg-yellow-001`}
           onClick={() => {
-            return onClick("latest");
+            return onClick("UP_TO_DATE");
           }}
         >
           최신순
         </span>
         <span
-          className={`${sort === "popular" ? "bg-yellow-001 font-bold text-black-001" : "bg-white-001 text-gray-003"} flex h-[28px] w-[66px] items-center justify-center rounded-[40px] hover:bg-yellow-001`}
+          className={`${sort === "PARTICIPANT" ? "bg-yellow-001 font-bold text-black-001" : "bg-white-001 text-gray-003"} flex h-[28px] w-[66px] items-center justify-center rounded-[40px] hover:bg-yellow-001`}
           onClick={() => {
-            return onClick("popular");
+            return onClick("PARTICIPANT");
           }}
         >
           인기순

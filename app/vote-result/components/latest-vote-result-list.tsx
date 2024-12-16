@@ -1,8 +1,9 @@
-import useGetLatestBestVoteResult from "@/app/(home)/hooks/use-get-latest-best-vote-results";
 import MainButton from "@/components/main-button";
 import NotExist from "@/components/not-exist";
 import { TSort } from "@/interface/vote";
+import useGetLatestVoteResults from "../hooks/use-get-latest-vote-results";
 import LatestVoteResultItem from "./latest-vote-result-item";
+import Spinner from "@/components/spinner";
 
 interface ILatestVoteResultListProps {
   readonly sort: TSort;
@@ -11,16 +12,17 @@ interface ILatestVoteResultListProps {
 export default function LatestVoteResultList({
   sort,
 }: ILatestVoteResultListProps) {
-  const { data, isLoading, isError, hasNextPage, fetchNextPage } =
-    useGetLatestBestVoteResult(sort);
+  const { data, isLoading, isError, fetchNextPage, hasNextPage } =
+    useGetLatestVoteResults(sort);
 
   const handleClickMoreButton = () => {
     fetchNextPage();
   };
 
-  if (isLoading) return <div>로딩중</div>;
+  if (isLoading) return <Spinner />;
 
-  if (isError) return <div>에러 발생</div>;
+  if (isError)
+    return <NotExist text="에러가 발생하였습니다. 다시 조회해주세요." />;
 
   if (!data || !data.pages) return <NotExist text="지난 투표가 없습니다." />;
 
@@ -28,14 +30,13 @@ export default function LatestVoteResultList({
     if (!page.data) return [];
     return page.data.dataList;
   });
-
   const isExist = latestVoteResults.length !== 0;
 
   return (
     <>
       {isExist ? (
         <>
-          <div className="grid w-full grid-cols-1 justify-items-center gap-y-[20px]">
+          <div className="mb-[20px] grid w-full grid-cols-1 justify-items-center gap-y-[20px] lg:mb-[40px]">
             {latestVoteResults.map((latestVote) => {
               return (
                 <LatestVoteResultItem
@@ -52,7 +53,7 @@ export default function LatestVoteResultList({
             })}
           </div>
           {hasNextPage && (
-            <div className="mb-[58px] mt-[20px] lg:mb-[77px] lg:mt-[40px]">
+            <div className="mb-[58px] lg:mb-[77px]">
               <MainButton text="더보기" onClick={handleClickMoreButton} />
             </div>
           )}
