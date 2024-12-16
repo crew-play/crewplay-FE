@@ -64,7 +64,7 @@ export default function ThisWeekVoteCandidate() {
               <MainButton
                 text="투표하기"
                 onClick={handleClickVoteButton}
-                isDisabled={isDisabled}
+                isDisabled={isDisabled || !isLogin}
               />
             </div>
           </>

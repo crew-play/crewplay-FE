@@ -1,5 +1,6 @@
+import { atomUserAuth } from "@/jotai/user-auth";
 import { atomSelectedCandidate } from "@/jotai/vote";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { useEffect, useRef } from "react";
 
 interface IThisWeekVoteCandidateItem {
@@ -14,9 +15,12 @@ export default function ThisWeekVoteCandidateItem({
   const [selectedCandidateId, setSelectedCandidateId] = useAtom(
     atomSelectedCandidate,
   );
+  const userAuth = useAtomValue(atomUserAuth);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const isChecked = selectedCandidateId === candidateId;
-  const inputRef = useRef<HTMLInputElement>(null);
+
+  const isLogin = userAuth.role !== "ANONYMOUS";
 
   useEffect(() => {
     return () => {
@@ -46,6 +50,7 @@ export default function ThisWeekVoteCandidateItem({
           return handleClickCandidateItem(candidateId);
         }}
         checked={selectedCandidateId === candidateId}
+        disabled={!isLogin}
         readOnly
       />
 

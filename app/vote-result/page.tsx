@@ -2,13 +2,15 @@
 
 import Divider from "@/components/divider";
 import { atomIsOpenMobileMenu } from "@/jotai/mobile-menu-open";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { useEffect } from "react";
 import LatestVoteResultSection from "./components/latest-vote-result-section";
 import ThisWeekVoteSection from "./components/this-week-vote-section";
+import { atomUserAuth } from "@/jotai/user-auth";
 
 export default function VoteResultPage() {
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useAtom(atomIsOpenMobileMenu);
+  const userAuth = useAtomValue(atomUserAuth);
 
   useEffect(() => {
     if (isOpenMobileMenu) {
@@ -16,9 +18,11 @@ export default function VoteResultPage() {
     }
   }, []);
 
+  const isLogin = userAuth.role !== "ANONYMOUS";
+
   return (
     <>
-      <ThisWeekVoteSection />
+      {isLogin && <ThisWeekVoteSection />}
       <Divider />
       <LatestVoteResultSection />
     </>
