@@ -13,7 +13,7 @@ export default function BestList() {
 
   if (!data || !data.data) return <NotExist text="진행된 투표가 없습니다." />;
 
-  const isExist = data.data.length === 0;
+  const isExist = data.data.length !== 0;
 
   return (
     <div className="mt-[14px] w-full border-t-2 border-b-gray-003 border-t-black-001 lg:mt-[24px]">

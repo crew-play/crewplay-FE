@@ -26,11 +26,13 @@ export const getBestVoteTopic = async (): Promise<IResponse<IBestTopic[]>> => {
   }
 };
 
-export const getTopics = async (): Promise<
-  IResponse<{ dataList: ITopic[] & IPagination }>
-> => {
+export const getTopics = async (
+  pageParam: number,
+): Promise<IResponse<IPagination & { dataList: ITopic[] }>> => {
   try {
-    const { data } = await axios.get("/api/v1/topic");
+    const { data } = await axios.get(
+      `/api/v1/topic?page=${pageParam}&size=${10}`,
+    );
 
     return {
       status: "success",
@@ -56,5 +58,10 @@ export const registerTopic = async (topic: string) => {
     topic,
   });
 
+  return response;
+};
+
+export const likeTopic = async (topicId: number) => {
+  const response = await instance.post(`/api/v1/topic/${topicId}/recommend`);
   return response;
 };

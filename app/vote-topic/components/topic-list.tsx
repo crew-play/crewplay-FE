@@ -2,19 +2,29 @@ import NotExist from "@/components/not-exist";
 import useGetVoteTopic from "../hooks/use-get-vote-topics";
 import TopicCard from "./topic-card";
 import Spinner from "@/components/spinner";
+import MainButton from "@/components/main-button";
 
 export default function TopicList() {
-  const { data, isLoading, isError } = useGetVoteTopic();
+  const { data, isLoading, isError, hasNextPage, fetchNextPage } =
+    useGetVoteTopic();
 
   if (isLoading) return <Spinner />;
 
   if (isError)
     return <NotExist text="에러가 발생하였습니다. 다시 조회해주세요." />;
 
-  if (!data || !data.data)
+  if (!data || !data.pages)
     return <NotExist text="등록된 투표 주제가 없습니다." />;
 
-  const isExist = data.data.dataList.length === 0;
+  const topics = data.pages.flatMap((page) => {
+    if (!page.data) return [];
+    return page.data.dataList;
+  });
+  const isExist = topics.length !== 0;
+
+  const handleClickMoreButton = () => {
+    fetchNextPage();
+  };
 
   return (
     <div className="mb-[40px] mt-[24px] w-full">
@@ -31,16 +41,23 @@ export default function TopicList() {
       </div>
       {isExist ? (
         <>
-          {data.data.dataList.map((topic, index) => {
-            return (
-              <TopicCard
-                key={index}
-                createdAt={topic.createdAt}
-                topic={topic.topic}
-                recommendCount={topic.recommendCount}
-              />
-            );
-          })}
+          <div className="mb-[20px] lg:mb-[40px]">
+            {topics.map((topic, index) => {
+              return (
+                <TopicCard
+                  key={index}
+                  createdAt={topic.createdAt}
+                  topic={topic.topic}
+                  recommendCount={topic.recommendCount}
+                />
+              );
+            })}
+          </div>
+          {hasNextPage && (
+            <div className="mb-[58px] lg:mb-[77px]">
+              <MainButton text="더보기" onClick={handleClickMoreButton} />
+            </div>
+          )}
         </>
       ) : (
         <NotExist text="등록된 투표 주제가 없습니다." />
