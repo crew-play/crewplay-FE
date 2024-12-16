@@ -4,6 +4,7 @@ import Participant from "@/public/mobile/participant.svg";
 import BottomArrow from "@/public/svg/bottom-arrow.svg";
 import { useState } from "react";
 import DateAndParticipantCount from "./date-and-participant-count";
+import { formatWeekNumber } from "@/utils/format-value";
 
 interface ILastVoteResultItemProps {
   readonly startDate: string;
@@ -48,7 +49,7 @@ export default function LatestVoteResultItem({
           <div className="flex size-full flex-col lg:w-auto lg:flex-row">
             <div className="flex items-center justify-between">
               <span className="flex w-[49px] items-center justify-center rounded-[6px] bg-yellow-001 px-[8px] py-[4px] text-[11px] leading-[16.71px] lg:w-[66px] lg:px-[8px] lg:py-[8.5px] lg:text-[16px] lg:leading-[19.09px]">
-                32주차
+                {`${formatWeekNumber(startDate)}주차`}
               </span>
               <div className="flex h-[12px] items-center justify-center lg:hidden">
                 <Participant className="size-[12px]" />

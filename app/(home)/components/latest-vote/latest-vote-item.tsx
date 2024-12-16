@@ -2,6 +2,7 @@ import { ICandidate } from "@/interface/vote";
 import First from "@/public/svg/first.svg";
 import Participant from "@/public/svg/participant.svg";
 import RightArrow from "@/public/svg/right-arrow.svg";
+import { formatWeekNumber } from "@/utils/format-value";
 import { useState } from "react";
 
 interface ILatestVoteItemProps {
@@ -33,7 +34,7 @@ export default function LatestVoteItem({
       >
         <div className="flex flex-col items-center text-black-001 lg:flex-row">
           <span className="mb-[6px] mr-auto rounded-[6px] bg-yellow-001 px-[8px] py-[4px] text-[14px] font-bold leading-[16.71px] lg:mb-0 lg:px-[8px] lg:py-[7.5px] lg:text-[18px] lg:leading-[21.48px]">
-            2주차
+            {`${formatWeekNumber(startDate)}주차`}
           </span>
           <p className="line-clamp-1 text-[16px] font-semibold leading-[22.4px] lg:ml-[12px] lg:text-[20px] lg:font-bold lg:leading-[28px]">
             {topic}
