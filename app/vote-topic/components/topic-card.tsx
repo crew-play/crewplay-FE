@@ -1,7 +1,7 @@
 import Heart from "@/public/svg/heart.svg";
 import { formattingDateTime } from "@/utils/format-value";
 import { useMutation } from "@tanstack/react-query";
-import useLikeVoteTopic from "../hooks/use-like-vote-topic";
+import useLikeVoteTopic from "../hooks/use-recommend-vote-topic";
 
 interface ITopicCardProps {
   readonly createdAt: string;

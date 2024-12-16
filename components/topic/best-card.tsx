@@ -3,7 +3,7 @@ import Second from "@/public/svg/second.svg";
 import Third from "@/public/svg/third.svg";
 import Heart from "@/public/svg/heart.svg";
 import { ReactNode } from "react";
-import useLikeVoteTopic from "@/app/vote-topic/hooks/use-like-vote-topic";
+import useLikeVoteTopic from "@/app/vote-topic/hooks/use-recommend-vote-topic";
 
 interface ITopicBestCardProps {
   readonly ranking: number;

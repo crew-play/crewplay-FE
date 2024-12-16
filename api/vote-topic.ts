@@ -61,7 +61,7 @@ export const registerTopic = async (topic: string) => {
   return response;
 };
 
-export const likeTopic = async (topicId: number) => {
+export const recommendTopic = async (topicId: number) => {
   const response = await instance.post(`/api/v1/topic/${topicId}/recommend`);
   return response;
 };
