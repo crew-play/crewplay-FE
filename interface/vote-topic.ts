@@ -12,4 +12,5 @@ export interface ITopic {
   readonly createdAt: string;
   readonly recommendCount: number;
   readonly isAuthor: boolean;
+  readonly isRecommended: boolean;
 }

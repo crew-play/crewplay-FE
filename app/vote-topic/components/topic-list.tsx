@@ -47,8 +47,10 @@ export default function TopicList() {
                 <TopicCard
                   key={index}
                   createdAt={topic.createdAt}
+                  topicId={topic.topicId}
                   topic={topic.topic}
                   recommendCount={topic.recommendCount}
+                  isRecommended={topic.isRecommended}
                 />
               );
             })}

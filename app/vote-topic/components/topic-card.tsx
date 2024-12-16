@@ -1,17 +1,29 @@
 import Heart from "@/public/svg/heart.svg";
 import { formattingDateTime } from "@/utils/format-value";
+import { useMutation } from "@tanstack/react-query";
+import useLikeVoteTopic from "../hooks/use-like-vote-topic";
 
 interface ITopicCardProps {
   readonly createdAt: string;
   readonly topic: string;
+  readonly topicId: number;
   readonly recommendCount: number;
+  readonly isRecommended: boolean;
 }
 
 export default function TopicCard({
   createdAt,
   topic,
+  topicId,
   recommendCount,
+  isRecommended,
 }: ITopicCardProps) {
+  const { mutate } = useLikeVoteTopic();
+
+  const handleClickLikeButton = () => {
+    mutate(topicId);
+  };
+
   return (
     <>
       <div className="group hidden h-[100px] cursor-pointer border-b border-white-006 lg:flex lg:hover:bg-gray-005">
@@ -22,7 +34,15 @@ export default function TopicCard({
           {topic}
         </p>
         <div className="flex h-full w-[240px] items-center justify-center">
-          <Heart className="h-[10px] w-[12px] fill-gray-004 group-hover:fill-red-002 lg:h-[16px] lg:w-[20px]" />
+          <button
+            type="button"
+            className="flex h-[10px] w-[12px] items-center justify-center lg:h-[16px] lg:w-[20px]"
+            onClick={handleClickLikeButton}
+          >
+            <Heart
+              className={`${isRecommended ? "fill-red-002" : "fill-gray-004"}`}
+            />
+          </button>
           <span
             className={`ml-[6px] font-medium text-gray-004 group-hover:text-black-001`}
           >
@@ -36,7 +56,15 @@ export default function TopicCard({
             {formattingDateTime(createdAt)}
           </span>
           <div className="flex h-full items-center">
-            <Heart className="h-[10px] w-[12px] fill-gray-004 lg:h-[16px] lg:w-[20px]" />
+            <button
+              type="button"
+              className="h-[10px] w-[12px] lg:h-[16px] lg:w-[20px]"
+              onClick={handleClickLikeButton}
+            >
+              <Heart
+                className={`${isRecommended ? "fill-red-002" : "fill-gray-004"}`}
+              />
+            </button>
             <span
               className={`ml-[6px] text-[12px] font-medium leading-[12px] text-gray-004`}
             >
