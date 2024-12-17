@@ -38,8 +38,10 @@ export default function SelectClubList() {
   if (isLoading) return <Spinner />;
 
   if (isError) {
-    alert("구단리스트 조회 오류");
-    router.push("/");
+    alert(
+      "구단리스트 조회 오류가 되지 않습니다. 로그인 화면으로 다시 이동합니다.",
+    );
+    router.push("/login");
   }
 
   if (!data || !data.data)
