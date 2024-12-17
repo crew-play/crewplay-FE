@@ -1,27 +1,42 @@
-import CandidateList from "@/components/vote/vote-result-candidate-list";
+import DateAndParticipantCount from "@/app/vote-result/components/date-and-participant-count";
 import MainButton from "@/components/main-button";
+import CandidateList from "@/components/vote/vote-result-candidate-list";
 import { atomUserAuth } from "@/jotai/user-auth";
 import { atomSelectedCandidate } from "@/jotai/vote";
-import { useAtomValue } from "jotai";
-import useGetThisWeekVoteCandidates from "../../app/(home)/hooks/use-get-this-week-vote-candidates";
-import ThisWeekVoteCandidateList from "../../app/(home)/components/this-week-vote/this-week-vote-candidate-list";
-import useThisWeekVote from "../../app/(home)/hooks/use-this-week-vote";
-import DateAndParticipantCount from "@/app/vote-result/components/date-and-participant-count";
-import { usePathname } from "next/navigation";
-import NotExist from "../not-exist";
 import { formattingDateTime } from "@/utils/format-value";
+import { useAtomValue, useSetAtom } from "jotai";
+import { usePathname } from "next/navigation";
+import ThisWeekVoteCandidateList from "../../app/(home)/components/this-week-vote/this-week-vote-candidate-list";
+import useGetThisWeekVoteCandidates from "../../app/(home)/hooks/use-get-this-week-vote-candidates";
+import useThisWeekVote from "../../app/(home)/hooks/use-this-week-vote";
+import NotExist from "../not-exist";
 import Spinner from "../spinner";
+import { useEffect } from "react";
+import { atomIsPending } from "@/jotai/pending";
 
 export default function ThisWeekVoteCandidate() {
   const pathname = usePathname();
   const userAuth = useAtomValue(atomUserAuth);
   const selectedCandidateId = useAtomValue(atomSelectedCandidate);
+  const setIsPending = useSetAtom(atomIsPending);
 
   const isLogin = userAuth.role !== "ANONYMOUS";
   const isUseDateAndParticipantCount = pathname === "/vote-result";
 
   const { data, isLoading, isError } = useGetThisWeekVoteCandidates(isLogin);
-  const { mutate } = useThisWeekVote();
+  const { mutate, isPending } = useThisWeekVote();
+
+  useEffect(() => {
+    if (isPending) {
+      setIsPending(true);
+    } else {
+      setIsPending(false);
+    }
+
+    return () => {
+      setIsPending(false);
+    };
+  }, [isPending]);
 
   const handleClickVoteButton = () => {
     mutate({ voteId: voteId, candidateId: selectedCandidateId });
