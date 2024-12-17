@@ -1,7 +1,9 @@
 import Heart from "@/public/svg/heart.svg";
 import { formattingDateTime } from "@/utils/format-value";
-import { useMutation } from "@tanstack/react-query";
 import useLikeVoteTopic from "../hooks/use-recommend-vote-topic";
+import { atomUserAuth } from "@/jotai/user-auth";
+import { useAtomValue } from "jotai";
+import { useRouter } from "next/navigation";
 
 interface ITopicCardProps {
   readonly createdAt: string;
@@ -18,10 +20,24 @@ export default function TopicCard({
   recommendCount,
   isRecommended,
 }: ITopicCardProps) {
+  const userAuth = useAtomValue(atomUserAuth);
+  const router = useRouter();
+
   const { mutate } = useLikeVoteTopic();
 
+  const isLogin = userAuth.role !== "ANONYMOUS";
+
   const handleClickLikeButton = () => {
-    mutate(topicId);
+    if (!isLogin) {
+      const result = confirm(
+        "로그인 시 추천이 가능합니다. 로그인 하시겠습니까?",
+      );
+
+      if (!result) return;
+      router.push("/login");
+    } else {
+      mutate(topicId);
+    }
   };
 
   return (

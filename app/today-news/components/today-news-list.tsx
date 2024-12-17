@@ -8,6 +8,7 @@ interface ITodayNewsListProps {
 
 export default function TodayNewsList({ todayIssueList }: ITodayNewsListProps) {
   const handleClickMoreButton = () => {
+    // eslint-disable-next-line no-console
     console.log("!!");
   };
 

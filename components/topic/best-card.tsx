@@ -1,9 +1,12 @@
+import useLikeVoteTopic from "@/app/vote-topic/hooks/use-recommend-vote-topic";
+import { atomUserAuth } from "@/jotai/user-auth";
 import First from "@/public/svg/first.svg";
+import Heart from "@/public/svg/heart.svg";
 import Second from "@/public/svg/second.svg";
 import Third from "@/public/svg/third.svg";
-import Heart from "@/public/svg/heart.svg";
+import { useAtomValue } from "jotai";
+import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
-import useLikeVoteTopic from "@/app/vote-topic/hooks/use-recommend-vote-topic";
 
 interface ITopicBestCardProps {
   readonly ranking: number;
@@ -14,9 +17,9 @@ interface ITopicBestCardProps {
 }
 
 const RANKING: { [key: number]: ReactNode | string } = {
-  1: <First className="h-[24px] w-[24px] lg:h-[32px] lg:w-[32px]" />,
-  2: <Second className="h-[24px] w-[24px] lg:h-[32px] lg:w-[32px]" />,
-  3: <Third className="h-[24px] w-[24px] lg:h-[32px] lg:w-[32px]" />,
+  1: <First className="size-[24px] lg:size-[32px]" />,
+  2: <Second className="size-[24px] lg:size-[32px]" />,
+  3: <Third className="size-[24px] lg:size-[32px]" />,
   4: "4",
   5: "5",
 };
@@ -28,9 +31,23 @@ export default function BestCard({
   recommendCount = 0,
   isRecommended,
 }: ITopicBestCardProps) {
+  const userAuth = useAtomValue(atomUserAuth);
+  const router = useRouter();
+
   const { mutate } = useLikeVoteTopic();
 
+  const isLogin = userAuth.role !== "ANONYMOUS";
+
   const handleClickRecommendButton = () => {
+    if (!isLogin) {
+      const result = confirm(
+        "로그인 시 추천이 가능합니다. 로그인 하시겠습니까?",
+      );
+
+      if (!result) return;
+      router.push("/login");
+    }
+
     mutate(topicId);
   };
 
