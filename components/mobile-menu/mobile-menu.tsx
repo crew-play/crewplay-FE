@@ -1,12 +1,11 @@
-import { THIS_WEEK_VOTE_LINKS } from "@/constants/this-week-vote-links";
+import { atomIsOpenMobileMenu } from "@/jotai/mobile-menu-open";
 import BottomArrow from "@/public/svg/bottom-arrow.svg";
 import Exit from "@/public/svg/exit.svg";
 import Logo from "@/public/svg/logo.svg";
-import { SetStateAction, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { useRouter } from "next/navigation";
-import { Dispatch, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MobileWeeklyMenu from "./mobile-weekly-menu";
-import { atomIsOpenMobileMenu } from "@/jotai/mobile-menu-open";
 
 export default function MobileMenu() {
   const router = useRouter();
@@ -15,7 +14,9 @@ export default function MobileMenu() {
   const setIsOpenMobileMenu = useSetAtom(atomIsOpenMobileMenu);
 
   const handleClickOpenWeeklyMenu = () => {
-    setIsOpenWeekly((prev) => !prev);
+    setIsOpenWeekly((prev) => {
+      return !prev;
+    });
   };
 
   const handleClickCloseMenu = () => {
@@ -61,7 +62,9 @@ export default function MobileMenu() {
       </div>
       <div
         className="mb-[10px] flex items-center justify-center rounded-[8px] border border-black-001 bg-white-001 py-[16.5px] text-[16px] font-medium leading-[19.09px]"
-        onClick={() => handleClickMenu("/login")}
+        onClick={() => {
+          return handleClickMenu("/login");
+        }}
       >
         <span>로그인/회원가입</span>
       </div>
@@ -78,14 +81,16 @@ export default function MobileMenu() {
               width={12}
               height={6}
               stroke="#666666"
-              className={isOpenWeekly ? "rotate-180" : "rotate[360deg]"}
+              className={isOpenWeekly ? "rotate-180" : "rotate-[360deg]"}
             />
           </div>
         </div>
         {isOpenWeekly && <MobileWeeklyMenu onClick={handleClickMenu} />}
         <div
           className="mb-[10px] flex cursor-pointer justify-between border-b border-b-gray-003 bg-white-001 px-[24px] pb-[26px] pt-[16px]"
-          onClick={() => handleClickMenu("/today-news")}
+          onClick={() => {
+            return handleClickMenu("/today-news");
+          }}
         >
           <span className="text-[16px] font-bold leading-[22.4px] text-black-001">
             오늘의 소식

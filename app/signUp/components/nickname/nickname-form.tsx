@@ -72,12 +72,12 @@ export default function NicknameForm() {
     <div className="mt-12">
       <form
         onSubmit={handleSubmit(handleCheckNicknameSubmit)}
-        className={`bg-white-001 flex h-[52px] w-full items-center rounded-lg border ${errors.nickname ? "border-red-001" : "border-white-005"}`}
+        className={`flex h-[52px] w-full items-center rounded-lg border bg-white-001 ${errors.nickname ? "border-red-001" : "border-white-005"}`}
       >
         <input
           maxLength={10}
           type="text"
-          className="text-black-002 w-full rounded-lg pl-[18px] leading-4 focus:outline-none"
+          className="w-full rounded-lg pl-[18px] leading-4 text-black-002 focus:outline-none"
           placeholder="닉네임을 입력해주세요."
           {...register("nickname")}
         />
@@ -90,7 +90,7 @@ export default function NicknameForm() {
         </button>
       </form>
       {errors.nickname && (
-        <p className="text-red-001 mt-1 leading-[19.6px]">
+        <p className="mt-1 leading-[19.6px] text-red-001">
           {errors.nickname.message}
         </p>
       )}

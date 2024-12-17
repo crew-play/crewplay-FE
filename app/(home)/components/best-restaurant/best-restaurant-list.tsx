@@ -1,4 +1,3 @@
-import useClubList from "@/app/signUp/hooks/use-club-list";
 import Divider from "@/components/divider";
 import { useState } from "react";
 import { CLUBS } from "../../constant/club-list";

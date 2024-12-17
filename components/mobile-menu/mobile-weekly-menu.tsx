@@ -13,7 +13,9 @@ export default function MobileWeeklyMenu({ onClick }: IMobileWeeklyMenu) {
             <li
               key={thisWeekVoteLink.url}
               className="cursor-pointer bg-white-001 px-[36px] py-[16px] text-[16px] font-bold leading-[22.4px] hover:bg-gray-005"
-              onClick={() => onClick(thisWeekVoteLink.url)}
+              onClick={() => {
+                return onClick(thisWeekVoteLink.url);
+              }}
             >
               {thisWeekVoteLink.title}
             </li>

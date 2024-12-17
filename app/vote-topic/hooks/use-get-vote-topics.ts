@@ -1,10 +1,12 @@
 import { getTopics } from "@/api/vote-topic";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 export default function useGetVoteTopic() {
   return useInfiniteQuery({
     queryKey: ["topics"],
-    queryFn: ({ pageParam }) => getTopics(pageParam),
+    queryFn: ({ pageParam }) => {
+      return getTopics(pageParam);
+    },
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       const { totalPage, pageNumber } = lastPage.data as {

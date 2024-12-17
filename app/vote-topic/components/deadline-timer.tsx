@@ -1,5 +1,5 @@
 import { getDeadline } from "@/utils/getDeadline";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function DeadlineTimer() {
   const [remainingTime, setRemainingTime] = useState<{
@@ -17,7 +17,9 @@ export default function DeadlineTimer() {
       setRemainingTime(time);
     }, 1000);
 
-    return () => clearInterval(intervalId);
+    return () => {
+      return clearInterval(intervalId);
+    };
   }, []);
 
   return (
