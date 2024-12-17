@@ -1,8 +1,6 @@
 import ThisWeekVoteCandidate from "@/components/vote/this-week-vote-candidate";
+import { dateString } from "@/constants/date";
 import { formatWeekNumber } from "@/utils/format-value";
-
-const date = new Date();
-const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 
 export default function ThisWeekVoteSection() {
   return (
