@@ -32,7 +32,7 @@ export default function SelectClubCard({
         height={38.51}
         className="max-h-[38.51px] object-contain"
       />
-      <p className="text-black-002 ml-[10px] text-[16px] font-semibold leading-[22.4px]">
+      <p className="ml-[10px] text-[16px] font-semibold leading-[22.4px] text-black-002">
         {clubName}
       </p>
     </div>

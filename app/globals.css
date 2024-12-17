@@ -18,6 +18,9 @@
   --gray-006: #e3e3e3;
   --gray-007: #898989;
   --gray-008: #9da3ae;
+  --gray-009: #cccccc;
+  --gray-010: #727272;
+  --gray-011: #666666;
 
   --black-001: #111111;
   --black-002: #1e1e1e;
@@ -25,8 +28,10 @@
   --black-004: #1d222b;
 
   --red-001: #c00f0c;
+  --red-002: #f9595f;
 
   --yellow-001: #e2ff00;
+  --yellow-002: #faffd1;
 
   --orange-001: #ff6f3c;
 }

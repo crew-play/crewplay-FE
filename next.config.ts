@@ -18,6 +18,9 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  images: {
+    domains: ["image.imnews.imbc.com"],
+  },
 };
 
 export default nextConfig;

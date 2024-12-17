@@ -1,11 +1,12 @@
 "use client";
 
-import { tokenRefresh } from "@/api/token-refresh";
-import { getRefreshToken } from "@/utils/token";
+import Footer from "@/components/footer";
+import Header from "@/components/header/header";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Provider } from "jotai";
-import { PropsWithChildren, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { PropsWithChildren } from "react";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,22 +17,23 @@ const queryClient = new QueryClient({
 });
 
 export default function AppProvider({ children }: PropsWithChildren) {
-  const init = async () => {
-    const refreshToken = await getRefreshToken();
+  const pathname = usePathname();
 
-    if (refreshToken) {
-      tokenRefresh();
-    }
-  };
+  const isOnlyUseLogo =
+    pathname === "/login" ||
+    pathname === "/signUp" ||
+    pathname === "/signUp/success";
 
-  useEffect(() => {
-    init();
-  }, []);
+  const isUseHeaderAndFooter = pathname !== "/oauth/kakao";
 
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <Provider>{children}</Provider>
+      <Provider>
+        {isUseHeaderAndFooter && <Header isOnlyUseLogo={isOnlyUseLogo} />}
+        {children}
+        {isUseHeaderAndFooter && <Footer />}
+      </Provider>
     </QueryClientProvider>
   );
 }

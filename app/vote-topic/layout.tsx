@@ -1,13 +1,9 @@
-import Footer from "@/components/footer";
-import Header from "@/components/header";
 import { PropsWithChildren } from "react";
 
 export default function VoteLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <Header isOnlyUseLogo />
-      <main>{children}</main>
-      <Footer />
+      <main className="min-h-[calc(100vh-164px)]">{children}</main>
     </>
   );
 }

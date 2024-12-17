@@ -1,10 +1,22 @@
-import Pagination from "@/components/pagination";
+"use client";
+
 import RegisterVote from "@/components/register-vote";
-import DeadlineTimer from "../vote/topic/components/deadline-timer";
-import BestList from "../vote/topic/components/best-list";
-import TopicList from "../vote/topic/components/topic-list";
+import { atomIsOpenMobileMenu } from "@/jotai/mobile-menu-open";
+import { useAtom } from "jotai";
+import { useEffect } from "react";
+import BestList from "../../components/topic/best-list";
+import DeadlineTimer from "./components/deadline-timer";
+import TopicList from "./components/topic-list";
 
 export default function VoteTopicPage() {
+  const [isOpenMobileMenu, setIsOpenMobileMenu] = useAtom(atomIsOpenMobileMenu);
+
+  useEffect(() => {
+    if (isOpenMobileMenu) {
+      setIsOpenMobileMenu(false);
+    }
+  }, []);
+
   return (
     <>
       <div className="w-full px-[16px] lg:mx-auto lg:max-w-[1200px]">
@@ -31,7 +43,6 @@ export default function VoteTopicPage() {
           </div>
           <TopicList />
         </div>
-        <Pagination />
       </div>
       <RegisterVote />
     </>

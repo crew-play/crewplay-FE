@@ -37,18 +37,20 @@ export default function SignUpSuccessPage() {
   const imageUrl = club ? club.emblemImg : "";
 
   return (
-    <>
-      <p className="text-black-003 text-[32px] font-bold leading-[44.8px]">
-        회원가입이
-        <br />
-        완료되었습니다!
-      </p>
-      <p className="text-black-003 mt-4 text-[19px] font-normal leading-[24px]">
-        나의 첫번째 야구 커뮤니티, 크루플레이
-      </p>
+    <div className="w-full lg:w-[341px]">
+      <div className="text-center">
+        <p className="text-[28px] font-bold leading-[39.2px] text-black-003 lg:text-[32px] lg:leading-[44.8px]">
+          회원가입이
+          <br />
+          완료되었습니다!
+        </p>
+        <p className="mt-4 text-[20px] font-normal leading-[24px] text-black-003">
+          나의 첫번째 야구 커뮤니티, 크루플레이
+        </p>
+      </div>
       <Link
         href="/login"
-        className="border-white-005 bg-white-001 mt-[32px] flex h-[76px] cursor-pointer items-center justify-between rounded-[8px] border px-[16px]"
+        className="mt-[32px] flex h-[76px] cursor-pointer items-center justify-between rounded-[8px] border border-white-005 bg-white-001 px-[16px]"
       >
         <div className="flex">
           <Image
@@ -58,8 +60,8 @@ export default function SignUpSuccessPage() {
             height={38.51}
             className="max-h-[38.51px] object-contain"
           />
-          <div className="ml-[2.75px] text-left">
-            <p className="text-black-002 text-[16px] font-semibold leading-[22.4px]">
+          <div className="ml-[10px] text-left">
+            <p className="text-[16px] font-semibold leading-[22.4px] text-black-002">
               {signUpForm.clubName}
             </p>
             <p className="mt-[2px] text-[14px] font-normal leading-[19.6px]">
@@ -71,6 +73,6 @@ export default function SignUpSuccessPage() {
           <MovePage />
         </div>
       </Link>
-    </>
+    </div>
   );
 }

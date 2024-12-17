@@ -1,7 +1,6 @@
 import { IResponse } from "@/interface/response";
-import { setRefreshToken } from "@/utils/token";
+import { setToken } from "@/utils/token";
 import axios, { AxiosError } from "axios";
-import { instance } from "./interceptor";
 
 interface ISendCodeResponseData {
   readonly providerId: string;
@@ -19,12 +18,11 @@ export const sendCode = async (
     const refreshToken = response.headers["refresh"];
 
     if (accessToken) {
-      instance.defaults.headers.common["Authorization"] =
-        `Bearer ${accessToken}`;
+      localStorage.setItem("access", accessToken);
     }
 
     if (refreshToken) {
-      setRefreshToken(refreshToken);
+      setToken(refreshToken, "refresh");
     }
 
     return {
