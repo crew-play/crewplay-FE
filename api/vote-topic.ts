@@ -1,12 +1,12 @@
 import { IPagination } from "@/interface/pagination";
 import { IResponse } from "@/interface/response";
 import { IBestTopic, ITopic } from "@/interface/vote-topic";
-import axios, { isAxiosError } from "axios";
+import { isAxiosError } from "axios";
 import { instance } from "./interceptor";
 
 export const getBestVoteTopic = async (): Promise<IResponse<IBestTopic[]>> => {
   try {
-    const { data } = await axios.get("/api/v1/topic/top5");
+    const { data } = await instance.get("/api/v1/topic/top5");
 
     return {
       status: "success",
@@ -30,7 +30,7 @@ export const getTopics = async (
   pageParam: number,
 ): Promise<IResponse<IPagination & { dataList: ITopic[] }>> => {
   try {
-    const { data } = await axios.get(
+    const { data } = await instance.get(
       `/api/v1/topic?page=${pageParam}&size=${10}`,
     );
 

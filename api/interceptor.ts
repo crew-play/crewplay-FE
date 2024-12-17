@@ -11,7 +11,10 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    config.headers["access"] = `Bearer ${localStorage.getItem("access")}`;
+    const accessToken = localStorage.getItem("access");
+    if (accessToken) {
+      config.headers["access"] = `Bearer ${localStorage.getItem("access")}`;
+    }
     return config;
   },
   (error) => {

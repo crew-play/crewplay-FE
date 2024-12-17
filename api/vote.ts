@@ -7,14 +7,14 @@ import {
   IVoteRequestData,
   TSort,
 } from "@/interface/vote";
-import axios, { isAxiosError } from "axios";
+import { isAxiosError } from "axios";
 import { instance } from "./interceptor";
 
 export const getLatestBestVoteResult = async (): Promise<
   IResponse<IPagination & { dataList: ILatestVoteResult[] }>
 > => {
   try {
-    const { data } = await axios.get(
+    const { data } = await instance.get(
       "/api/v1/vote/result/prev?sortType=PARTICIPANT&page=0&size=5",
     );
 
@@ -42,7 +42,7 @@ export const getLatestVoteResults = async (
   sort: TSort,
 ): Promise<IResponse<IPagination & { dataList: ILatestVoteResult[] }>> => {
   try {
-    const { data } = await axios.get(
+    const { data } = await instance.get(
       `/api/v1/vote/result/prev?sortType=${sort}&page=${pageParam}&size=6`,
     );
     return {
@@ -114,22 +114,12 @@ export const getThisWeekVoteResult = async (): Promise<
 export const getThisWeekVoteCandidates = async (): Promise<
   IResponse<IThisWeekVoteResult>
 > => {
-  const isLogin = localStorage.getItem("access");
-
   try {
-    if (isLogin) {
-      const { data } = await instance.get("/api/v1/vote");
-      return {
-        status: "success",
-        data: data.data,
-      };
-    } else {
-      const { data } = await axios.get("/api/v1/vote");
-      return {
-        status: "success",
-        data: data.data,
-      };
-    }
+    const { data } = await instance.get("/api/v1/vote");
+    return {
+      status: "success",
+      data: data.data,
+    };
   } catch (error) {
     if (isAxiosError(error)) {
       return {
