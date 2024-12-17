@@ -24,7 +24,8 @@ export default function VoteResultCandidateItem({
   const [width, setWidth] = useState<number>(0);
   const candidatePercentageRef = useRef<HTMLDivElement>(null);
 
-  const percentage = totalVote === 0 ? 0 : (voteCount / totalVote) * 100;
+  const percentage =
+    totalVote === 0 ? 0 : Math.floor((voteCount / totalVote) * 100);
 
   const percentageWidth = `${width * Number((percentage / 100).toFixed(1))}px`;
   const isMyVote = myVote === candidateId;
