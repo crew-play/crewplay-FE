@@ -7,7 +7,7 @@ import Delete from "@/public/svg/exit.svg";
 import RightArrow from "@/public/svg/right-arrow.svg";
 import { nicknameSchema } from "@/schema/sign-up-schema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -15,13 +15,23 @@ import useDeleteFavoriteClub from "../hooks/use-delete-favorite-club";
 import useGetUserProfile from "../hooks/use-get-user-profile";
 import useUpdateUserNickname from "../hooks/use-update-user-nickname";
 import ClubListModal from "./club-list-modal/club-list-modal";
-
-interface INicknameForm {
-  readonly nickname: string;
-}
+import { atomUserAuth } from "@/jotai/user-auth";
+import { INicknameForm } from "@/interface/form";
 
 export default function MyPageProfile() {
+  const {
+    register,
+    getValues,
+    clearErrors,
+    formState: { errors },
+  } = useForm<INicknameForm>({
+    mode: "onChange",
+    resolver: yupResolver(nicknameSchema),
+  });
+
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
+  const selectedClub = useAtomValue(atomSelectedClub);
+
   const [
     isOpenUpdateNicknameConfirmModal,
     setIsOpenUpdateNicknameConfirmModal,
@@ -32,26 +42,16 @@ export default function MyPageProfile() {
   ] = useState<boolean>(false);
   const [isOpenSelectClubModal, setIsOpenSelectClubModal] =
     useState<boolean>(false);
-  const selectedClub = useAtomValue(atomSelectedClub);
 
   const { data, isLoading, isError } = useGetUserProfile();
 
   const { mutate: nickNameMutate } = useUpdateUserNickname({
     setIsOpenUpdateNicknameConfirmModal,
     setIsEditMode,
+    getValues,
   });
   const { mutate: deleteFavoriteMutate } = useDeleteFavoriteClub({
     setIsOpenDeleteFavoriteClubConfirmModal,
-  });
-
-  const {
-    register,
-    getValues,
-    clearErrors,
-    formState: { errors },
-  } = useForm<INicknameForm>({
-    mode: "onChange",
-    resolver: yupResolver(nicknameSchema),
   });
 
   if (isLoading) return <Spinner />;
