@@ -14,6 +14,9 @@ export default function OAuthKakaoPage() {
   const setSignUpForm = useSetAtom(atomSignUpForm);
   const setUserInformation = useSetAtom(atomUserAuth);
 
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get("code");
+
   const init = async (code: string) => {
     const { data, status } = await sendCode(code);
     const isSuccess = status === "success";
@@ -43,13 +46,10 @@ export default function OAuthKakaoPage() {
   };
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get("code");
-
     if (code) {
       init(code);
     }
-  }, []);
+  }, [code]);
 
   return (
     <div className="flex h-screen flex-col items-center justify-center">
