@@ -47,8 +47,6 @@ export default function MyPageProfile() {
   const {
     register,
     getValues,
-    setError,
-    setValue,
     clearErrors,
     formState: { errors },
   } = useForm<INicknameForm>({
@@ -84,6 +82,7 @@ export default function MyPageProfile() {
       }
 
       setIsEditMode(false);
+      clearErrors();
       return;
     }
 
