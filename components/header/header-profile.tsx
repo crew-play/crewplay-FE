@@ -14,9 +14,6 @@ export default function HeaderProfile() {
       <span className="ml-[10px] text-[16px] font-medium leading-[22.4px]">
         {userAuth.nickname}
       </span>
-      <div className="ml-[4px] flex size-[16px] items-center justify-center">
-        <BottomArrow width={8} height={4} stroke="#666666" />
-      </div>
     </div>
   );
 }
