@@ -54,16 +54,25 @@ export default function MyPageProfile() {
     setIsOpenDeleteFavoriteClubConfirmModal,
   });
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return (
+      <div className="mt-[51px] lg:ml-[217px] lg:w-[725px]">
+        <Spinner />
+      </div>
+    );
 
   if (isError)
     return (
-      <NotExist text="내 정보 조회에 실패하였습니다. 다시 조회 해주세요." />
+      <div className="mt-[51px] lg:ml-[217px] lg:w-[725px]">
+        <NotExist text="내 정보 조회에 실패하였습니다. 다시 조회 해주세요." />
+      </div>
     );
 
   if (!data || !data.data)
     return (
-      <NotExist text="내 정보 조회에 실패하였습니다. 다시 조회 해주세요." />
+      <div className="mt-[51px] lg:ml-[217px] lg:w-[725px]">
+        <NotExist text="내 정보 조회에 실패하였습니다. 다시 조회 해주세요." />
+      </div>
     );
 
   const { clubName, email, emblemImg, nickname } = data.data;
