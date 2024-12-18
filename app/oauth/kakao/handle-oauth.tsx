@@ -47,9 +47,8 @@ export default function HandleOAuth() {
   };
 
   useEffect(() => {
-    if (code) {
-      init(code);
-    }
+    if (!code) return;
+    init(code);
   }, [code]);
 
   return (
