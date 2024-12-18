@@ -12,7 +12,7 @@ interface INicknameForm {
 }
 
 const CLASS_NAME =
-  "mt-6 flex h-[52px] w-full cursor-pointer items-center justify-center rounded-lg bg-[#002A5C] text-[14px] font-semibold leading-[14px] text-white-002";
+  "mt-6 flex h-[52px] w-full cursor-pointer items-center justify-center rounded-lg bg-[#002A5C] text-[14px] font-semibold leading-[14px] text-white-002 disabled:bg-gray-001";
 
 export default function NicknameForm() {
   const setSignUpStep = useSetAtom(atomSignUpStep);
@@ -25,6 +25,7 @@ export default function NicknameForm() {
     setError,
     setValue,
     clearErrors,
+    watch,
     formState: { errors },
   } = useForm<INicknameForm>({
     defaultValues: {
@@ -33,6 +34,8 @@ export default function NicknameForm() {
     mode: "onChange",
     resolver: yupResolver(nicknameSchema),
   });
+
+  const isDisabled = watch().nickname.length === 0;
 
   const handleClearNickname = () => {
     setSignUpForm((prev) => {
@@ -97,6 +100,7 @@ export default function NicknameForm() {
       <NextStepButton
         className={CLASS_NAME}
         text="다음"
+        disabled={isDisabled}
         onClick={handleCheckNicknameSubmit}
       />
     </div>

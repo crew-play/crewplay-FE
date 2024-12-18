@@ -21,17 +21,22 @@
   --gray-009: #cccccc;
   --gray-010: #727272;
   --gray-011: #666666;
+  --gray-012: #e2e5e5;
+  --gray-013: #cdcdcd;
 
   --black-001: #111111;
   --black-002: #1e1e1e;
   --black-003: #2c2c2c;
   --black-004: #1d222b;
 
+  --black-001-opacity: #00000080;
+
   --red-001: #c00f0c;
   --red-002: #f9595f;
 
   --yellow-001: #e2ff00;
   --yellow-002: #faffd1;
+  --yellow-003: #cbe500;
 
   --orange-001: #ff6f3c;
 }

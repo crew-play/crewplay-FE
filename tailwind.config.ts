@@ -29,17 +29,22 @@ export default {
         "gray-009": "var(--gray-009)",
         "gray-010": "var(--gray-010)",
         "gray-011": "var(--gray-011)",
+        "gray-012": "var(--gray-012)",
+        "gray-013": "var(--gray-013)",
 
         "black-001": "var(--black-001)",
         "black-002": "var(--black-002)",
         "black-003": "var(--black-003)",
         "black-004": "var(--black-004)",
 
+        "black-001-opacity": "var(--black-001-opacity)",
+
         "red-001": "var(--red-001)",
         "red-002": "var(--red-002)",
 
         "yellow-001": "var(--yellow-001)",
         "yellow-002": "var(--yellow-002)",
+        "yellow-003": "var(--yellow-003)",
 
         "orange-001": "var(--orange-001)",
       },
