@@ -1,13 +1,12 @@
 import ConfirmModal from "@/components/confirm-modal";
 import NotExist from "@/components/not-exist";
 import Spinner from "@/components/spinner";
-import { atomSelectedClub } from "@/jotai/my-page";
+import { INicknameForm } from "@/interface/form";
 import Edit from "@/public/svg/edit.svg";
 import Delete from "@/public/svg/exit.svg";
 import RightArrow from "@/public/svg/right-arrow.svg";
 import { nicknameSchema } from "@/schema/sign-up-schema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAtomValue, useSetAtom } from "jotai";
 import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -15,8 +14,6 @@ import useDeleteFavoriteClub from "../hooks/use-delete-favorite-club";
 import useGetUserProfile from "../hooks/use-get-user-profile";
 import useUpdateUserNickname from "../hooks/use-update-user-nickname";
 import ClubListModal from "./club-list-modal/club-list-modal";
-import { atomUserAuth } from "@/jotai/user-auth";
-import { INicknameForm } from "@/interface/form";
 
 export default function MyPageProfile() {
   const {
@@ -30,7 +27,6 @@ export default function MyPageProfile() {
   });
 
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
-  const selectedClub = useAtomValue(atomSelectedClub);
 
   const [
     isOpenUpdateNicknameConfirmModal,
@@ -77,6 +73,8 @@ export default function MyPageProfile() {
 
   const { clubName, email, emblemImg, nickname } = data.data;
 
+  const hasFavoriteClub = clubName;
+
   const checkNickname = (value: string) => {
     return value.length === 0;
   };
@@ -108,7 +106,7 @@ export default function MyPageProfile() {
   };
 
   const handleClickConfirmDeleteFavoriteClub = () => {
-    deleteFavoriteMutate(selectedClub);
+    deleteFavoriteMutate(clubName);
   };
 
   const handleClickCancelDeleteFavoriteClub = () => {
@@ -190,20 +188,35 @@ export default function MyPageProfile() {
               <RightArrow className="h-[16px] w-[9px]" stroke="#8B8B8B" />
             </button>
           </div>
-          <div className="flex items-center rounded-[12px] border border-gray-012 bg-white-001 px-[20px] py-[16px]">
-            <div className="flex h-[68px] items-center">
-              <Image src={emblemImg} alt="club-emblem" width={55} height={35} />
-            </div>
-            <span className="mx-[16px] grow text-[20px] font-bold leading-[28px] text-black">
-              {clubName}
-            </span>
-            <button
-              type="button"
-              className="flex size-[24px] items-center justify-center"
-              onClick={handleClickOpenDeleteFavoriteClubModal}
-            >
-              <Delete width={12} height={12} stroke="#E2E5E5" />
-            </button>
+          <div
+            className={`flex items-center rounded-[12px] border border-gray-012 bg-white-001 ${hasFavoriteClub ? "px-[20px] py-[16px]" : "py-[36px]"}`}
+          >
+            {hasFavoriteClub ? (
+              <>
+                <div className="flex h-[68px] items-center">
+                  <Image
+                    src={emblemImg}
+                    alt="club-emblem"
+                    width={55}
+                    height={35}
+                  />
+                </div>
+                <span className="mx-[16px] grow text-[20px] font-bold leading-[28px] text-black">
+                  {clubName}
+                </span>
+                <button
+                  type="button"
+                  className="flex size-[24px] items-center justify-center"
+                  onClick={handleClickOpenDeleteFavoriteClubModal}
+                >
+                  <Delete width={12} height={12} stroke="#E2E5E5" />
+                </button>
+              </>
+            ) : (
+              <p className="w-full text-center text-[20px] font-medium leading-[28px] text-gray-009">
+                아직 등록한 구단이 없어요.
+              </p>
+            )}
           </div>
         </div>
         <button

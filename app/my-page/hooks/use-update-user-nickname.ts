@@ -1,7 +1,7 @@
 import { updateUserNickname } from "@/api/user-profile";
 import { INicknameForm } from "@/interface/form";
 import { atomUserAuth } from "@/jotai/user-auth";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSetAtom } from "jotai";
 import { Dispatch, SetStateAction } from "react";
 import { UseFormGetValues } from "react-hook-form";
@@ -20,6 +20,7 @@ export default function useUpdateUserNickname({
   getValues,
 }: IUseUpdateUserNicknameProps) {
   const setUserAuth = useSetAtom(atomUserAuth);
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ["updateUserNickname"],
@@ -34,6 +35,7 @@ export default function useUpdateUserNickname({
           nickname: newNickname,
         };
       });
+      queryClient.invalidateQueries({ queryKey: ["userProfile"] });
       setIsOpenUpdateNicknameConfirmModal(false);
       setIsEditMode(false);
     },
