@@ -4,6 +4,7 @@ import Logo from "@/public/svg/logo.svg";
 import Link from "next/link";
 
 import { reissueToken } from "@/api/reissue-token";
+import { getUserProfile } from "@/api/user-profile";
 import { atomIsOpenMobileMenu } from "@/jotai/mobile-menu-open";
 import { atomUserAuth } from "@/jotai/user-auth";
 import Hamburger from "@/public/svg/hamburger.svg";
@@ -40,8 +41,14 @@ export default function Header({ isOnlyUseLogo }: IHeaderProps) {
     const accessToken = localStorage.getItem("access");
 
     if (accessToken) {
-      const { nickname, role } = decodeToken(accessToken);
-      setUserAuth({ nickname, role });
+      const { data } = await getUserProfile();
+      const { role } = decodeToken(accessToken);
+
+      if (!data) return;
+
+      const { nickname, clubName: favoriteClub } = data;
+      setUserAuth({ nickname, role, favoriteClub });
+
       return;
     }
 
@@ -51,21 +58,15 @@ export default function Header({ isOnlyUseLogo }: IHeaderProps) {
       const newAccessToken = await reissueToken();
       localStorage.setItem("access", newAccessToken);
 
-      const { nickname, role } = decodeToken(newAccessToken);
-      setUserAuth({ nickname, role });
+      const { data } = await getUserProfile();
+      const { role } = decodeToken(newAccessToken);
+
+      if (!data) return;
+
+      const { nickname, clubName: favoriteClub } = data;
+
+      setUserAuth({ nickname, role, favoriteClub });
     }
-  };
-
-  const handleMouseEnter = () => {
-    setIsHover(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHover(false);
-  };
-
-  const handleClickMobileMenu = () => {
-    setIsOpenMobilMenu(true);
   };
 
   useEffect(() => {
@@ -98,8 +99,12 @@ export default function Header({ isOnlyUseLogo }: IHeaderProps) {
       >
         <div
           className={`${isThisWeekMenu ? "border-b-[3px] border-b-black-001 font-bold" : "text-gray-009 hover:text-gray-010"} relative flex items-center`}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onMouseEnter={() => {
+            return setIsHover(true);
+          }}
+          onMouseLeave={() => {
+            return setIsHover(false);
+          }}
         >
           <span className="size-full px-[24px] py-[26px]">주간 투표</span>
           {isHover && <HeaderDropdown setIsHover={setIsHover} />}
@@ -148,7 +153,9 @@ export default function Header({ isOnlyUseLogo }: IHeaderProps) {
       <div
         aria-description="mobile-menu"
         className={`${isOnlyUseLogo ? "hidden" : "flex items-center justify-center lg:hidden"} size-[35px]`}
-        onClick={handleClickMobileMenu}
+        onClick={() => {
+          return setIsOpenMobilMenu(true);
+        }}
       >
         <Hamburger />
       </div>

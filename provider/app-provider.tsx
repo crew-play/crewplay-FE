@@ -24,15 +24,17 @@ export default function AppProvider({ children }: PropsWithChildren) {
     pathname === "/signUp" ||
     pathname === "/signUp/success";
 
-  const isUseHeaderAndFooter = pathname !== "/oauth/kakao";
+  const isNotUseHeader = pathname !== "/oauth/kakao";
+  const isNotUseFooter =
+    pathname !== "/oauth/kakao" && pathname !== "/game-schedule";
 
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <Provider>
-        {isUseHeaderAndFooter && <Header isOnlyUseLogo={isOnlyUseLogo} />}
+        {isNotUseHeader && <Header isOnlyUseLogo={isOnlyUseLogo} />}
         {children}
-        {isUseHeaderAndFooter && <Footer />}
+        {isNotUseFooter && <Footer />}
       </Provider>
     </QueryClientProvider>
   );
