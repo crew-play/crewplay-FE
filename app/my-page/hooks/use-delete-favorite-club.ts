@@ -1,5 +1,5 @@
 import { deleteFavoriteClub } from "@/api/user-profile";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Dispatch, SetStateAction } from "react";
 
 interface IUseDeleteFavoriteClubProps {
@@ -11,11 +11,14 @@ interface IUseDeleteFavoriteClubProps {
 export default function useDeleteFavoriteClub({
   setIsOpenDeleteFavoriteClubConfirmModal,
 }: IUseDeleteFavoriteClubProps) {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ["deleteFavorite"],
     mutationFn: deleteFavoriteClub,
     onSuccess: () => {
       alert("선호 구단을 삭제하였습니다.");
+      queryClient.invalidateQueries({ queryKey: ["userProfile"] });
       setIsOpenDeleteFavoriteClubConfirmModal(false);
     },
     onError: () => {

@@ -1,7 +1,6 @@
 import { atomUserAuth } from "@/jotai/user-auth";
 import Profile from "@/public/svg/profile.svg";
 import { useAtomValue } from "jotai";
-import BottomArrow from "@/public/svg/bottom-arrow.svg";
 import Link from "next/link";
 
 export default function HeaderProfile() {
