@@ -1,17 +1,12 @@
-import { MouseEvent, RefObject, useRef } from "react";
-
-interface IUseDragProps {
-  readonly sliderRef: RefObject<HTMLDivElement>;
-  readonly trackRef: RefObject<HTMLDivElement>;
-}
+import { MouseEvent, TouchEvent, useRef } from "react";
 
 export default function useDrag() {
   const sliderRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false); // useRef로 상태 관리
-  const startX = useRef(0); // useRef로 상태 관리
-  const currentTranslate = useRef(0); // useRef로 상태 관리
-  const prevTranslate = useRef(0); // useRef로 상태 관리
+  const isDragging = useRef(false); // 상태 관리
+  const startX = useRef(0); // 상태 관리
+  const currentTranslate = useRef(0); // 상태 관리
+  const prevTranslate = useRef(0); // 상태 관리
 
   const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
     isDragging.current = true;
@@ -26,6 +21,30 @@ export default function useDrag() {
     if (!isDragging.current) return;
 
     const currentX = e.clientX;
+    handleMove(currentX);
+  };
+
+  const handleMouseUp = () => {
+    endDrag();
+  };
+
+  const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
+    isDragging.current = true;
+    startX.current = e.touches[0].clientX; // 터치 시작 위치 저장
+  };
+
+  const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
+    if (!isDragging.current) return;
+
+    const currentX = e.touches[0].clientX; // 현재 터치 위치
+    handleMove(currentX);
+  };
+
+  const handleTouchEnd = () => {
+    endDrag();
+  };
+
+  const handleMove = (currentX: number) => {
     const delta = currentX - startX.current;
     currentTranslate.current = prevTranslate.current + delta;
 
@@ -34,11 +53,11 @@ export default function useDrag() {
       (sliderRef.current?.offsetWidth || 0);
 
     if (currentTranslate.current > 0) {
-      currentTranslate.current = 0; // 왼쪽 끝으로 스크롤 제한
+      currentTranslate.current = 0; // 왼쪽 끝 제한
     }
 
     if (currentTranslate.current < -maxTranslate) {
-      currentTranslate.current = -maxTranslate; // 오른쪽 끝으로 스크롤 제한
+      currentTranslate.current = -maxTranslate; // 오른쪽 끝 제한
     }
 
     if (trackRef.current) {
@@ -46,7 +65,7 @@ export default function useDrag() {
     }
   };
 
-  const handleMouseUp = () => {
+  const endDrag = () => {
     isDragging.current = false;
     prevTranslate.current = currentTranslate.current;
 
@@ -61,5 +80,8 @@ export default function useDrag() {
     handleMouseDown,
     handleMouseMove,
     handleMouseUp,
+    handleTouchStart,
+    handleTouchMove,
+    handleTouchEnd,
   };
 }
