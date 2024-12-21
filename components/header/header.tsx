@@ -109,17 +109,12 @@ export default function Header({ isOnlyUseLogo }: IHeaderProps) {
           <span className="size-full px-[24px] py-[26px]">주간 투표</span>
           {isHover && <HeaderDropdown setIsHover={setIsHover} />}
         </div>
-        <div
-          className={`px-[24px] py-[26px] ${selectedMenu === "/schedule" ? "border-b-[3px] border-b-black-001 font-bold" : "text-gray-009"} cursor-pointer`}
+        <Link
+          href="/game-schedule"
+          className={`px-[24px] py-[26px] ${selectedMenu === "/game-schedule" ? "border-b-[3px] border-b-black-001 font-bold" : "text-gray-009 hover:text-gray-010"}`}
         >
           경기 일정
-        </div>
-        {/* <Link
-          href="/"
-          className={`px-[24px] py-[26px] ${selectedMenu === "/schedule" ? "border-b-[3px] border-b-black-001 font-bold" : "text-gray-009 hover:text-gray-010"}`}
-        >
-          경기 일정
-        </Link> */}
+        </Link>
         <Link
           href="/today-news"
           className={`px-[24px] py-[26px] ${selectedMenu === "/today-news" ? "border-b-[3px] border-b-black-001 font-bold" : "text-gray-009 hover:text-gray-010"}`}
