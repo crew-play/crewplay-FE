@@ -8,7 +8,7 @@ export const replaceNumberFormat = (value: number) => {
   return value.toLocaleString();
 };
 
-export const formatWeekNumber = (dateString: String) => {
+export const formatWeekNumber = (dateString: string) => {
   // yyyy-mm-dd 형식의 문자열을 Date 객체로 변환
   const dateParts = dateString.split("-").map(Number);
   const currentDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]); // 월은 0부터 시작
