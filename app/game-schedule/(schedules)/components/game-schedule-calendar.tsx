@@ -1,23 +1,32 @@
 import { atomSelectedDate } from "@/jotai/game-schedule";
-import { getDayInMonth } from "@/utils/calendar";
-import { useAtom } from "jotai";
 import LeftArrow from "@/public/svg/schedule/left-arrow.svg";
 import RightArrow from "@/public/svg/schedule/right-arrow.svg";
-import useDrag from "@/hooks/use-drag";
+import { getDayInMonth } from "@/utils/calendar";
+import { useAtom } from "jotai";
+import { MouseEvent, RefObject, TouchEvent, useEffect } from "react";
 
-export default function GameScheduleCalendar() {
+interface IGameScheduleCalendarProps {
+  readonly sliderRef: RefObject<HTMLDivElement>;
+  readonly trackRef: RefObject<HTMLDivElement>;
+  readonly handleMouseMove: (_e: MouseEvent<HTMLDivElement>) => void;
+  readonly handleMouseDown: (_e: MouseEvent<HTMLDivElement>) => void;
+  readonly handleMouseUp: (_e: MouseEvent<HTMLDivElement>) => void;
+  readonly handleTouchStart: (_e: TouchEvent<HTMLDivElement>) => void;
+  readonly handleTouchMove: (_e: TouchEvent<HTMLDivElement>) => void;
+  readonly handleTouchEnd: (_e: TouchEvent<HTMLDivElement>) => void;
+}
+
+export default function GameScheduleCalendar({
+  sliderRef,
+  trackRef,
+  handleMouseMove,
+  handleMouseDown,
+  handleMouseUp,
+  handleTouchStart,
+  handleTouchMove,
+  handleTouchEnd,
+}: IGameScheduleCalendarProps) {
   const [selectedDate, setSelectedDate] = useAtom(atomSelectedDate);
-
-  const {
-    sliderRef,
-    trackRef,
-    handleMouseDown,
-    handleMouseMove,
-    handleMouseUp,
-    handleTouchStart,
-    handleTouchMove,
-    handleTouchEnd,
-  } = useDrag();
 
   const handleClickDate = (date: number) => {
     setSelectedDate((prev) => {
@@ -38,6 +47,19 @@ export default function GameScheduleCalendar() {
       }
     }
   };
+
+  useEffect(() => {
+    if (sliderRef.current) {
+      const selectedDateChild = sliderRef.current.children[0].children[
+        selectedDate.selectedDate - 1
+      ] as HTMLElement;
+
+      selectedDateChild.scrollIntoView({
+        behavior: "instant",
+        inline: "start",
+      });
+    }
+  }, []);
 
   return (
     <div className="flex items-center px-0 py-[16px] lg:px-[32px]">
@@ -72,17 +94,17 @@ export default function GameScheduleCalendar() {
             return (
               <div
                 key={index + 1}
-                className={`${selectedDate.endDate === index + 1 ? "mr-0" : "mr-0 lg:mr-[44.92px]"} ${selectedDate.selectedDate === index + 1 && "rounded-[40px] border border-black"} flex h-[70px] flex-col items-center justify-center px-[10px]`}
+                className={`${selectedDate.endDate === index + 1 ? "mr-0" : "mr-0 lg:mr-[44.92px]"} ${selectedDate.selectedDate === index + 1 && "rounded-[40px] border border-black"} flex h-[70px] w-[44px] flex-col items-center justify-center`}
                 onClick={() => {
                   return handleClickDate(index + 1);
                 }}
               >
                 <span
-                  className={`mb-[8px] align-middle text-[14px] leading-[16.71px] text-gray-015 ${isSunday ? "text-red-003" : "text-gray-015"}`}
+                  className={`mb-[8px] block w-[44px] text-center align-middle text-[14px] leading-[16.71px] text-gray-015 ${isSunday ? "text-red-003" : "text-gray-015"}`}
                 >
                   {dayOfWeek}
                 </span>
-                <span className="align-middle text-[18px] font-bold leading-[21.48px] text-black-005">
+                <span className="block align-middle text-[18px] font-bold leading-[21.48px] text-black-005">
                   {index + 1}
                 </span>
               </div>
