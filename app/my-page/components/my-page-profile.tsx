@@ -14,6 +14,8 @@ import useDeleteFavoriteClub from "../hooks/use-delete-favorite-club";
 import useGetUserProfile from "../hooks/use-get-user-profile";
 import useUpdateUserNickname from "../hooks/use-update-user-nickname";
 import ClubListModal from "./club-list-modal/club-list-modal";
+import useSecession from "../hooks/use-secession";
+import { useRouter } from "next/navigation";
 
 export default function MyPageProfile() {
   const {
@@ -27,7 +29,6 @@ export default function MyPageProfile() {
   });
 
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
-
   const [
     isOpenUpdateNicknameConfirmModal,
     setIsOpenUpdateNicknameConfirmModal,
@@ -41,14 +42,23 @@ export default function MyPageProfile() {
 
   const { isLoading, isError } = useGetUserProfile();
 
+  const router = useRouter();
+
   const { mutate: nickNameMutate } = useUpdateUserNickname({
     setIsOpenUpdateNicknameConfirmModal,
     setIsEditMode,
     getValues,
   });
+
   const { mutate: deleteFavoriteMutate } = useDeleteFavoriteClub({
     setIsOpenDeleteFavoriteClubConfirmModal,
   });
+
+  const handleMoveHome = () => {
+    router.push("/");
+  };
+
+  const { mutate: secessionMutate } = useSecession({ handleMoveHome });
 
   if (isLoading)
     return (
@@ -128,6 +138,14 @@ export default function MyPageProfile() {
 
   const handleClickOpenDeleteFavoriteClubModal = () => {
     setIsOpenDeleteFavoriteClubConfirmModal(true);
+  };
+
+  const handleSecession = () => {
+    const result = confirm("회원 탈퇴를 진행하시겠습니까?");
+
+    if (result) {
+      secessionMutate();
+    }
   };
 
   return (
@@ -231,6 +249,7 @@ export default function MyPageProfile() {
         <button
           type="button"
           className="mt-auto w-full rounded-[8px] border border-black-001 px-[16px] py-[16.5px] font-medium hover:bg-white-003 lg:mt-[40px] lg:w-auto"
+          onClick={handleSecession}
         >
           회원탈퇴
         </button>

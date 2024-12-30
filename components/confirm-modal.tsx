@@ -36,14 +36,14 @@ export default function ConfirmModal({
         <button
           type="button"
           onClick={onClickConfirm}
-          className="mr-[16px] h-[64px] w-[180px] rounded-[8px] bg-yellow-001 text-[18px] font-bold leading-[25.2px] text-black-001"
+          className="mr-[16px] h-[64px] w-[135px] rounded-[8px] bg-yellow-001 text-[18px] font-bold leading-[25.2px] text-black-001 lg:w-[180px]"
         >
           네
         </button>
         <button
           type="button"
           onClick={onClickCancel}
-          className="h-[64px] w-[180px] rounded-[8px] bg-gray-013 text-[18px] font-bold leading-[25.2px] text-gray-003"
+          className="h-[64px] w-[135px] rounded-[8px] bg-gray-013 text-[18px] font-bold leading-[25.2px] text-gray-003 lg:w-[180px]"
         >
           아니오
         </button>
