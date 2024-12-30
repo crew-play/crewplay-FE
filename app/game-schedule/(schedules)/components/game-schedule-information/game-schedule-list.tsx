@@ -29,7 +29,6 @@ export default function GameScheduleList() {
   if (isLoading) return <Spinner />;
 
   const isExist = data.length !== 0;
-
   return (
     <div
       className={`${!isExist && "flex items-center"} h-[375px] overflow-auto`}
@@ -42,6 +41,7 @@ export default function GameScheduleList() {
                 <GameScheduleItem
                   key={schedule.fixtureId}
                   fixtureId={schedule.fixtureId}
+                  fixtureDate={schedule.fixtureDate}
                   fixtureTime={schedule.fixtureTime}
                   awayClubName={schedule.awayClubName}
                   awayScore={schedule.awayScore}
@@ -49,6 +49,7 @@ export default function GameScheduleList() {
                   homeScore={schedule.homeScore}
                   season={schedule.season}
                   stadium={schedule.stadium}
+                  stadiumAddress={schedule.stadiumAddress}
                 />
                 {data.length !== index + 1 && (
                   <div className="w-full border-t border-white-005" />

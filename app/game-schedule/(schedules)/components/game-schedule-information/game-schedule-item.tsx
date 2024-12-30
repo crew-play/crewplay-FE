@@ -1,29 +1,50 @@
+import { atomFixtureData } from "@/jotai/fixture";
+import { useSetAtom } from "jotai";
 import { useRouter } from "next/navigation";
 
 interface IGameScheduleItemProps {
-  readonly fixtureId: number;
   readonly season: string;
+  readonly fixtureId: number;
   readonly fixtureTime: string;
+  readonly fixtureDate: string;
   readonly homeClubName: string;
   readonly awayClubName: string;
   readonly homeScore: number;
   readonly awayScore: number;
   readonly stadium: string;
+  readonly stadiumAddress: string;
 }
 
 export default function GameScheduleItem({
-  fixtureId,
   season,
+  fixtureId,
   fixtureTime,
+  fixtureDate,
   homeClubName,
   awayClubName,
   homeScore,
   awayScore,
   stadium,
+  stadiumAddress,
 }: IGameScheduleItemProps) {
   const router = useRouter();
 
+  const setFixture = useSetAtom(atomFixtureData);
+
   const handleClickDetailButton = () => {
+    setFixture({
+      season,
+      fixtureId,
+      fixtureTime,
+      fixtureDate,
+      homeClubName,
+      awayClubName,
+      homeScore,
+      awayScore,
+      stadium,
+      stadiumAddress,
+    });
+
     router.push(`/game-schedule/${fixtureId}`);
   };
 

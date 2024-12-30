@@ -111,7 +111,7 @@ export default function Header({ isOnlyUseLogo }: IHeaderProps) {
         </div>
         <Link
           href="/game-schedule"
-          className={`px-[24px] py-[26px] ${selectedMenu === "/game-schedule" ? "border-b-[3px] border-b-black-001 font-bold" : "text-gray-009 hover:text-gray-010"}`}
+          className={`px-[24px] py-[26px] ${selectedMenu.match("game-schedule") ? "border-b-[3px] border-b-black-001 font-bold" : "text-gray-009 hover:text-gray-010"}`}
         >
           경기 일정
         </Link>
@@ -126,12 +126,6 @@ export default function Header({ isOnlyUseLogo }: IHeaderProps) {
         >
           이벤트
         </div>
-        {/* <Link
-          href="/"
-          className={`px-[24px] py-[26px] ${selectedMenu === "/event" ? "border-b-[3px] border-b-black-001 font-bold" : "text-gray-009 hover:text-gray-010"}`}
-        >
-          이벤트
-        </Link> */}
       </div>
       <div className="hidden lg:block">
         {isLogin ? (

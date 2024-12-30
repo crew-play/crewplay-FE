@@ -6,8 +6,10 @@ let retryCount = 0;
 const MAX_RETRY_COUNT = 3;
 
 export const instance = axios.create({
-  baseURL: "/",
+  baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
 });
+
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 instance.interceptors.request.use(
   (config) => {

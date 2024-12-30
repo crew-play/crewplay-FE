@@ -12,12 +12,11 @@ export default function useGetGameSchedules({
   fixtureDate,
   clubName,
 }: IUseGameSchedulesProps) {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [data, setData] = useState<IGameSchedule[]>([]);
 
   const getSchedules = async () => {
     try {
-      setIsLoading(true);
       const { data } = await getGameSchedules({ fixtureDate, clubName });
 
       if (data) {

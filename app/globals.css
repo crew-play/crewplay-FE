@@ -26,12 +26,14 @@
   --gray-014: #f7f8f8;
   --gray-015: #808080;
   --gray-016: #969696;
+  --gray-017: #767676;
 
   --black-001: #111111;
   --black-002: #1e1e1e;
   --black-003: #2c2c2c;
   --black-004: #1d222b;
   --black-005: #333333;
+  --black-006: #34344c;
 
   --black-001-opacity: #00000080;
 
@@ -46,6 +48,7 @@
   --orange-001: #ff6f3c;
 
   --blue-001: #03038e;
+  --blue-002: #0000f4;
 }
 
 *::-webkit-scrollbar {

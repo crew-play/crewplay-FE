@@ -4,7 +4,7 @@ import Participant from "@/public/mobile/participant.svg";
 import BottomArrow from "@/public/svg/bottom-arrow.svg";
 import { useState } from "react";
 import DateAndParticipantCount from "./date-and-participant-count";
-import { formatWeekNumber } from "@/utils/format-value";
+import { formattingDateTime, formatWeekNumber } from "@/utils/format-value";
 
 interface ILastVoteResultItemProps {
   readonly startDate: string;
@@ -79,7 +79,7 @@ export default function LatestVoteResultItem({
           />
           <DateAndParticipantCount
             totalParticipantCount={totalCount}
-            voteDate={`${startDate} - ${endDate}`}
+            voteDate={`${formattingDateTime(startDate)} - ${formattingDateTime(endDate)}`}
           />
         </div>
       )}

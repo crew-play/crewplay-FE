@@ -2,11 +2,24 @@ import { atomSelectedDate } from "@/jotai/game-schedule";
 import LeftArrow from "@/public/svg/schedule/left-arrow.svg";
 import RightArrow from "@/public/svg/schedule/right-arrow.svg";
 import { useAtom } from "jotai";
+import { RefObject } from "react";
 
-export default function TitleMonth() {
+interface ITitleMonthProps {
+  readonly sliderRef: RefObject<HTMLDivElement>;
+}
+
+export default function TitleMonth({ sliderRef }: ITitleMonthProps) {
   const [selectedDate, setSelectedDate] = useAtom(atomSelectedDate);
 
+  const month =
+    selectedDate.month < 10 ? `0${selectedDate.month}` : selectedDate.month;
+
   const handleClickNextMonth = () => {
+    if (sliderRef.current) {
+      const firstDayNode = sliderRef.current.children[0] as HTMLElement;
+      firstDayNode.style.transform = "translateX(0px)";
+    }
+
     setSelectedDate(({ year, month, ...prev }) => {
       return {
         ...prev,
@@ -18,6 +31,11 @@ export default function TitleMonth() {
   };
 
   const handleClickPrevMonth = () => {
+    if (sliderRef.current && sliderRef.current.children) {
+      const firstDayNode = sliderRef.current.children[0] as HTMLElement;
+      firstDayNode.style.transform = "translateX(0px)";
+    }
+
     setSelectedDate(({ year, month, ...prev }) => {
       return {
         ...prev,
@@ -38,7 +56,7 @@ export default function TitleMonth() {
         >
           <LeftArrow width={7} height={11} fill="#C3CAD9" />
         </button>
-        <span className="mx-[8px]">{`${selectedDate.year}.${selectedDate.month}`}</span>
+        <span className="mx-[8px]">{`${selectedDate.year}.${month}`}</span>
         <button
           className="flex size-[24px] items-center justify-center"
           onClick={handleClickNextMonth}
