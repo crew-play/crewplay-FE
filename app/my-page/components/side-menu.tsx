@@ -35,10 +35,10 @@ export default function SideMenu({
   };
 
   return (
-    <div className="mt-[51px] flex w-[87.5px] flex-col text-[24px] font-bold leading-[33.6px] lg:mr-[202.5px]">
-      <ul>
+    <div className="w-full text-[20px] font-bold leading-[20px] lg:mr-[202.5px] lg:max-w-[87.5px] lg:pt-[51px] lg:text-[24px] lg:leading-[33.6px]">
+      <ul className="flex flex-row lg:flex-col">
         <li
-          className={`mb-[40px] cursor-pointer ${selectedMenu === "editProfile" ? "text-black" : "text-gray-009 hover:text-black-003"}`}
+          className={`w-full cursor-pointer py-[14px] text-center lg:mb-[40px] lg:py-0 ${selectedMenu === "editProfile" ? "border-b-2 border-black-001 text-black lg:border-none" : "text-gray-009 hover:text-black-003"}`}
           onClick={() => {
             return handleClickSideMenu("editProfile");
           }}
@@ -46,16 +46,16 @@ export default function SideMenu({
           정보수정
         </li>
         <li
-          className={`mb-[40px] cursor-pointer ${selectedMenu === "voteManage" ? "text-black" : "text-gray-009 hover:text-gray-010"}`}
+          className={`w-full cursor-pointer py-[14px] text-center lg:mb-[40px] lg:py-0 ${selectedMenu === "voteManage" ? "border-b-2 border-black-001 text-black lg:border-none" : "text-gray-009 hover:text-gray-010"}`}
           onClick={() => {
             return handleClickSideMenu("voteManage");
           }}
         >
           투표관리
         </li>
-        <div className="mb-[40px] border-t border-t-gray-012" />
+        <div className="mb-[40px] hidden border-t border-t-gray-012 lg:block" />
         <li
-          className="cursor-pointer text-gray-009 hover:text-gray-010"
+          className="hidden cursor-pointer text-gray-009 hover:text-gray-010 lg:block"
           onClick={handleClickLogout}
         >
           로그아웃
