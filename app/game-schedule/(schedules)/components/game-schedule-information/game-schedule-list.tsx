@@ -49,6 +49,7 @@ export default function GameScheduleList() {
                   homeScore={schedule.homeScore}
                   season={schedule.season}
                   stadium={schedule.stadium}
+                  stadiumAddress={schedule.stadiumAddress}
                 />
                 {data.length !== index + 1 && (
                   <div className="w-full border-t border-white-005" />

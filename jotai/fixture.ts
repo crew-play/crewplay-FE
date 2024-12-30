@@ -10,6 +10,7 @@ interface IFixtureData {
   readonly homeScore: number;
   readonly awayScore: number;
   readonly stadium: string;
+  readonly stadiumAddress: string;
 }
 
 export const atomFixtureData = atom<IFixtureData>({
@@ -22,4 +23,5 @@ export const atomFixtureData = atom<IFixtureData>({
   homeScore: 0,
   awayScore: 0,
   stadium: "",
+  stadiumAddress: "",
 });

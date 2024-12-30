@@ -12,6 +12,7 @@ interface IGameScheduleItemProps {
   readonly homeScore: number;
   readonly awayScore: number;
   readonly stadium: string;
+  readonly stadiumAddress: string;
 }
 
 export default function GameScheduleItem({
@@ -24,6 +25,7 @@ export default function GameScheduleItem({
   homeScore,
   awayScore,
   stadium,
+  stadiumAddress,
 }: IGameScheduleItemProps) {
   const router = useRouter();
 
@@ -40,6 +42,7 @@ export default function GameScheduleItem({
       homeScore,
       awayScore,
       stadium,
+      stadiumAddress,
     });
 
     router.push(`/game-schedule/${fixtureId}`);
