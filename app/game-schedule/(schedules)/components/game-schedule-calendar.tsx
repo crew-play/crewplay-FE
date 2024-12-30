@@ -25,16 +25,33 @@ export default function GameScheduleCalendar() {
     });
   };
 
+  const handleClickPrevNextButton = (type: "PREV" | "NEXT") => {
+    if (sliderRef.current) {
+      const currentScroll = sliderRef.current.scrollLeft;
+
+      if (type === "NEXT") {
+        sliderRef.current.scrollLeft = currentScroll + 300;
+      }
+
+      if (type === "PREV") {
+        sliderRef.current.scrollLeft = currentScroll - 300;
+      }
+    }
+  };
+
   return (
     <div className="flex items-center px-0 py-[16px] lg:px-[32px]">
       <button
         type="button"
         className="mr-[3.2px] flex size-[28px] items-center justify-center lg:mr-[44.92px]"
+        onClick={() => {
+          return handleClickPrevNextButton("PREV");
+        }}
       >
         <LeftArrow width={7} height={11} fill="#C3CAD9" />
       </button>
       <div
-        className="overflow-hidden"
+        className="overflow-x-auto scroll-smooth"
         ref={sliderRef}
         onMouseMove={handleMouseMove}
         onMouseDown={handleMouseDown}
@@ -76,6 +93,9 @@ export default function GameScheduleCalendar() {
       <button
         type="button"
         className="ml-[3.2px] flex size-[28px] items-center justify-center lg:ml-[44.92px]"
+        onClick={() => {
+          return handleClickPrevNextButton("NEXT");
+        }}
       >
         <RightArrow width={7} height={11} fill="#C3CAD9" />
       </button>

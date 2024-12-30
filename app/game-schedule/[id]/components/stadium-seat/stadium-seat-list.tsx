@@ -28,7 +28,7 @@ export default function StadiumSeatList({
   return (
     <div className="relative">
       <div
-        className="overflow-x-auto"
+        className="overflow-x-auto scroll-smooth"
         ref={sliderRef}
         onMouseMove={handleMouseMove}
         onMouseDown={handleMouseDown}
