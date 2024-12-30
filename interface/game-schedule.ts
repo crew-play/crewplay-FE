@@ -11,3 +11,22 @@ export interface IGameSchedule {
   readonly stadiumAddress: string;
   readonly notes: string;
 }
+
+export interface IRestaurant {
+  readonly restaurantName: string;
+  readonly restaurantAddress: string;
+  readonly lat: number;
+  readonly lnt: number;
+}
+
+export interface ITips {
+  readonly seatName: string;
+  readonly theme: string;
+  readonly seatNum: string;
+}
+
+export interface IGameScheduleDetail {
+  readonly restaurants: IRestaurant[];
+  readonly tips: ITips[];
+  readonly siteUrl: string;
+}

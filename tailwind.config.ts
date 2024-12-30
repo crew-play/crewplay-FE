@@ -34,12 +34,14 @@ export default {
         "gray-014": "var(--gray-014)",
         "gray-015": "var(--gray-015)",
         "gray-016": "var(--gray-016)",
+        "gray-017": "var(--gray-017)",
 
         "black-001": "var(--black-001)",
         "black-002": "var(--black-002)",
         "black-003": "var(--black-003)",
         "black-004": "var(--black-004)",
         "black-005": "var(--black-005)",
+        "black-006": "var(--black-006)",
 
         "black-001-opacity": "var(--black-001-opacity)",
 
@@ -54,6 +56,7 @@ export default {
         "orange-001": "var(--orange-001)",
 
         "blue-001": "var(--blue-001)",
+        "blue-002": "var(--blue-002)",
       },
       fontFamily: {
         pretendard: "var(--font-pretendard)",
@@ -80,6 +83,10 @@ export default {
       animation: {
         marquee: "marquee 25s linear infinite",
         "marquee-reverse": "marquee-reverse 25s linear infinite",
+      },
+      backgroundImage: {
+        "gradient-custom":
+          "linear-gradient(270deg, #F7F8F8 0%, rgba(247, 248, 248, 0) 100%)",
       },
     },
   },
