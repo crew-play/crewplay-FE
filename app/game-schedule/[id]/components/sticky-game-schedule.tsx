@@ -5,7 +5,7 @@ export default function StickyGameSchedule() {
   const fixtureData = useAtomValue(atomFixtureData);
 
   return (
-    <div className="sticky left-0 top-[114px] ml-[33px] mt-[28px] hidden min-w-[370px] rounded-[12px] border border-gray-012 bg-white-001 p-[24px] lg:block">
+    <div className="sticky left-0 top-[114px] ml-[33px] mt-[28px] hidden w-full rounded-[12px] border border-gray-012 bg-white-001 p-[24px] lg:block lg:basis-[370px]">
       <div className="mb-[26px] flex flex-col">
         <span className="mb-[10px] text-[18px] font-medium leading-[21.48px] text-gray-003">
           경기

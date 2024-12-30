@@ -2,7 +2,6 @@ import { IRestaurant, ITips } from "@/interface/game-schedule";
 import Link from "next/link";
 import Restaurant from "./restaurant/restaurant";
 import StadiumSeat from "./stadium-seat/stadium-seat";
-import StickyGameSchedule from "./sticky-game-schedule";
 
 interface IStadiumSeatProps {
   readonly tips: ITips[];
@@ -17,7 +16,7 @@ export default function StadiumSeatAndRestaurants({
 }: IStadiumSeatProps) {
   return (
     <>
-      <section className="mt-[40px] w-full lg:mt-[48px] lg:max-w-[880px]">
+      <section className="mt-[40px] w-full lg:mt-[48px] lg:basis-[880px]">
         <StadiumSeat stadiumSeats={tips} />
         <Restaurant restaurants={restaurants} />
       </section>

@@ -55,7 +55,7 @@ export default function StadiumSeatList({
           })}
         </div>
       </div>
-      <div className="bg-gradient-custom absolute right-0 top-0 h-full w-[100px]" />
+      <div className="absolute right-0 top-0 h-full w-[100px] bg-gradient-custom" />
     </div>
   );
 }
