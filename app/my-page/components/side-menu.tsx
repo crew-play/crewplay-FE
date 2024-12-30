@@ -28,6 +28,7 @@ export default function SideMenu({
     setUserAuth({
       nickname: "",
       role: "ANONYMOUS",
+      favoriteClub: "",
     });
 
     router.push("/");

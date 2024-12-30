@@ -31,22 +31,32 @@ export default {
         "gray-011": "var(--gray-011)",
         "gray-012": "var(--gray-012)",
         "gray-013": "var(--gray-013)",
+        "gray-014": "var(--gray-014)",
+        "gray-015": "var(--gray-015)",
+        "gray-016": "var(--gray-016)",
+        "gray-017": "var(--gray-017)",
 
         "black-001": "var(--black-001)",
         "black-002": "var(--black-002)",
         "black-003": "var(--black-003)",
         "black-004": "var(--black-004)",
+        "black-005": "var(--black-005)",
+        "black-006": "var(--black-006)",
 
         "black-001-opacity": "var(--black-001-opacity)",
 
         "red-001": "var(--red-001)",
         "red-002": "var(--red-002)",
+        "red-003": "var(--red-003)",
 
         "yellow-001": "var(--yellow-001)",
         "yellow-002": "var(--yellow-002)",
         "yellow-003": "var(--yellow-003)",
 
         "orange-001": "var(--orange-001)",
+
+        "blue-001": "var(--blue-001)",
+        "blue-002": "var(--blue-002)",
       },
       fontFamily: {
         pretendard: "var(--font-pretendard)",
@@ -73,6 +83,10 @@ export default {
       animation: {
         marquee: "marquee 25s linear infinite",
         "marquee-reverse": "marquee-reverse 25s linear infinite",
+      },
+      backgroundImage: {
+        "gradient-custom":
+          "linear-gradient(270deg, #F7F8F8 0%, rgba(247, 248, 248, 0) 100%)",
       },
     },
   },
