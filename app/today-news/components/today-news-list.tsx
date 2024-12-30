@@ -6,12 +6,14 @@ import NotExist from "@/components/not-exist";
 interface ITodayNewsListProps {
   readonly todayIssueList: INews[];
   readonly isExist: boolean;
+  readonly hasNextPage: boolean;
   readonly handleClickMoreButton: () => void;
 }
 
 export default function TodayNewsList({
   todayIssueList,
   isExist,
+  hasNextPage,
   handleClickMoreButton,
 }: ITodayNewsListProps) {
   return isExist ? (
@@ -29,9 +31,11 @@ export default function TodayNewsList({
           );
         })}
       </div>
-      <div className="mb-[40px] mt-[20px] lg:mb-[106px] lg:mt-[60px]">
-        <MainButton text="더보기" onClick={handleClickMoreButton} />
-      </div>
+      {hasNextPage && (
+        <div className="mb-[40px] mt-[20px] lg:mb-[106px] lg:mt-[60px]">
+          <MainButton text="더보기" onClick={handleClickMoreButton} />
+        </div>
+      )}
     </div>
   ) : (
     <div className="flex min-h-[calc(100vh-164px)] items-center">

@@ -1,6 +1,6 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { TSelectedMenu } from "../page";
 import { getTodayIssue } from "@/api/today-news";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { TSelectedMenu } from "../page";
 
 export default function useGetTodayIssue(selectedMenu: TSelectedMenu) {
   return useInfiniteQuery({

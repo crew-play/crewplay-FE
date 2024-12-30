@@ -62,6 +62,7 @@ export default function TodayNewsPage() {
       <TodayNewsList
         todayIssueList={issues}
         isExist={isExist}
+        hasNextPage={hasNextPage}
         handleClickMoreButton={handleClickMoreButton}
       />
     </>
