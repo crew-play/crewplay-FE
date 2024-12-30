@@ -12,8 +12,12 @@ export interface INews {
 
 export const getTodayIssue = async (
   selectedMenu: TSelectedMenu,
+  pageParam: number,
 ): Promise<IResponse<{ dataList: INews[] } & IPagination>> => {
-  const url = selectedMenu === "news" ? "/api/v1/news/" : "/api/v1/news/video";
+  const url =
+    selectedMenu === "news"
+      ? `/api/v1/news?page=${pageParam}&size=${9}`
+      : `/api/v1/news/video?page=${pageParam}&size=${9}`;
 
   try {
     const { data } = await axios.get(url);

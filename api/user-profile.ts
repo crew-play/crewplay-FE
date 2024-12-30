@@ -40,3 +40,8 @@ export const registerFavoriteClub = async (clubName: string) => {
   const response = await instance.post(`/api/v1/support/${clubName}`);
   return response;
 };
+
+export const secession = async () => {
+  const response = await instance.delete("/api/v1/auth");
+  return response;
+};
