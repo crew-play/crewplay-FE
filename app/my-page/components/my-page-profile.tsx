@@ -14,6 +14,8 @@ import useDeleteFavoriteClub from "../hooks/use-delete-favorite-club";
 import useGetUserProfile from "../hooks/use-get-user-profile";
 import useUpdateUserNickname from "../hooks/use-update-user-nickname";
 import ClubListModal from "./club-list-modal/club-list-modal";
+import useSecession from "../hooks/use-secession";
+import { useRouter } from "next/navigation";
 
 export default function MyPageProfile() {
   const {
@@ -27,7 +29,6 @@ export default function MyPageProfile() {
   });
 
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
-
   const [
     isOpenUpdateNicknameConfirmModal,
     setIsOpenUpdateNicknameConfirmModal,
@@ -39,16 +40,25 @@ export default function MyPageProfile() {
   const [isOpenSelectClubModal, setIsOpenSelectClubModal] =
     useState<boolean>(false);
 
-  const { data, isLoading, isError } = useGetUserProfile();
+  const { isLoading, isError } = useGetUserProfile();
+
+  const router = useRouter();
 
   const { mutate: nickNameMutate } = useUpdateUserNickname({
     setIsOpenUpdateNicknameConfirmModal,
     setIsEditMode,
     getValues,
   });
+
   const { mutate: deleteFavoriteMutate } = useDeleteFavoriteClub({
     setIsOpenDeleteFavoriteClubConfirmModal,
   });
+
+  const handleMoveHome = () => {
+    router.push("/");
+  };
+
+  const { mutate: secessionMutate } = useSecession({ handleMoveHome });
 
   if (isLoading)
     return (
@@ -63,6 +73,15 @@ export default function MyPageProfile() {
         <NotExist text="내 정보 조회에 실패하였습니다. 다시 조회 해주세요." />
       </div>
     );
+
+  const data = {
+    data: {
+      clubName: "SSG 랜더스",
+      email: "tjdwn9753@naver.com",
+      emblemImg: "",
+      nickname: "덩두",
+    },
+  };
 
   if (!data || !data.data)
     return (
@@ -121,32 +140,40 @@ export default function MyPageProfile() {
     setIsOpenDeleteFavoriteClubConfirmModal(true);
   };
 
+  const handleSecession = () => {
+    const result = confirm("회원 탈퇴를 진행하시겠습니까?");
+
+    if (result) {
+      secessionMutate();
+    }
+  };
+
   return (
     <>
-      <div className="mt-[51px] lg:ml-[217px] lg:w-[725px]">
-        <div className="mb-[40px]">
-          <h2 className="mb-[24px] text-[24px] font-bold leading-[33.6px] text-black">
+      <div className="flex min-h-[calc(100vh-192px)] w-full flex-col lg:ml-[217px] lg:block lg:min-h-[calc(100vh-164px)] lg:max-w-[725px] lg:pt-[51px]">
+        <div className="mb-[32px] lg:mb-[40px]">
+          <h2 className="mb-[24px] mt-[32px] text-[20px] font-bold leading-[28px] text-black lg:mt-0 lg:text-[24px] lg:leading-[33.6px]">
             내 정보
           </h2>
           <form>
             <div className="mb-[14px]">
               <div
-                className={`flex items-center rounded-[12px] border text-[20px] leading-[28px] text-black lg:p-[16px] ${isEditMode ? "border-yellow-003" : "border-gray-012"}`}
+                className={`flex items-center rounded-[12px] border px-[20px] py-[16px] text-[20px] leading-[28px] text-black lg:p-[16px] ${isEditMode ? (errors.nickname ? "border-red-001" : "border-yellow-003") : "border-gray-012"}`}
               >
-                <label htmlFor="nickname" className="font-bold">
+                <label htmlFor="nickname" className="min-w-[53px] font-bold">
                   닉네임
                 </label>
                 <input
                   type="text"
                   id="nickname"
-                  className={`mx-[16px] grow font-medium outline-none ${isEditMode ? "placeholder:text-gray-009" : "placeholder:text-black"}`}
+                  className={`w-full px-[16px] font-medium outline-none ${isEditMode ? "placeholder:text-gray-009" : "placeholder:text-black"}`}
                   placeholder={nickname}
                   readOnly={!isEditMode}
                   {...register("nickname")}
                 />
                 <button
                   type="button"
-                  className={`flex ${isEditMode ? "size-auto" : "size-[24px]"} items-center justify-center text-[20px] font-medium leading-[28px]`}
+                  className={`flex ${isEditMode ? "min-w-[35px]" : "size-[24px]"} items-center justify-center text-[20px] font-medium leading-[28px]`}
                   onClick={handleClickEditButton}
                 >
                   {isEditMode ? (
@@ -162,14 +189,14 @@ export default function MyPageProfile() {
                 </p>
               )}
             </div>
-            <div className="flex items-center rounded-[12px] border border-gray-012 text-[20px] leading-[28px] text-black lg:p-[16px]">
-              <label htmlFor="email" className="font-bold">
+            <div className="flex items-center rounded-[12px] border border-gray-012 px-[20px] py-[16px] text-[20px] leading-[28px] text-black lg:p-[16px]">
+              <label htmlFor="email" className="min-w-[35px] font-bold">
                 계정
               </label>
               <input
                 id="email"
                 type="text"
-                className="mx-[16px] grow font-medium outline-none"
+                className="w-full px-[16px] font-medium outline-none"
                 readOnly
                 defaultValue={email}
               />
@@ -177,8 +204,8 @@ export default function MyPageProfile() {
           </form>
         </div>
         <div>
-          <div className="flex items-center justify-between">
-            <h2 className="text-[24px] font-bold leading-[33.6px] text-black lg:mb-[24px]">
+          <div className="mb-[24px] flex items-center justify-between">
+            <h2 className="text-[20px] font-bold leading-[28px] text-black lg:text-[24px] lg:leading-[33.6px]">
               선호 구단
             </h2>
             <button
@@ -189,7 +216,7 @@ export default function MyPageProfile() {
             </button>
           </div>
           <div
-            className={`flex items-center rounded-[12px] border border-gray-012 bg-white-001 ${hasFavoriteClub ? "px-[20px] py-[16px]" : "py-[36px]"}`}
+            className={`mb-[40px] flex items-center rounded-[12px] border border-gray-012 bg-white-001 lg:mb-0 ${hasFavoriteClub ? "px-[20px] py-[16px]" : "py-[36px]"}`}
           >
             {hasFavoriteClub ? (
               <>
@@ -201,7 +228,7 @@ export default function MyPageProfile() {
                     height={35}
                   />
                 </div>
-                <span className="mx-[16px] grow text-[20px] font-bold leading-[28px] text-black">
+                <span className="mx-[16px] w-full text-[20px] font-bold leading-[28px] text-black">
                   {clubName}
                 </span>
                 <button
@@ -221,7 +248,8 @@ export default function MyPageProfile() {
         </div>
         <button
           type="button"
-          className="mt-[40px] rounded-[8px] border border-black-001 px-[16px] py-[16.5px] font-medium hover:bg-white-003"
+          className="mt-auto w-full rounded-[8px] border border-black-001 px-[16px] py-[16.5px] font-medium hover:bg-white-003 lg:mt-[40px] lg:w-auto"
+          onClick={handleSecession}
         >
           회원탈퇴
         </button>

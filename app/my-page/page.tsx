@@ -10,9 +10,9 @@ export default function MyPage() {
     useState<TUserProfileSelectedMenu>("editProfile");
 
   return (
-    <div className="flex justify-center">
+    <div className="flex flex-col px-[24px] py-[32px] lg:flex-row lg:justify-center lg:px-[16px] lg:py-0">
       <SideMenu selectedMenu={selectedMenu} setSelectedMenu={setSelectedMenu} />
-      <div className="border-l border-l-gray-012" />
+      <div className="hidden border-l border-l-gray-012 lg:block" />
       {selectedMenu === "editProfile" && <MyPageProfile />}
     </div>
   );
