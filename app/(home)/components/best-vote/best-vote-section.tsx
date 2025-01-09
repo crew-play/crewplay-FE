@@ -1,14 +1,6 @@
 import BestList from "@/components/topic/best-list";
-import MainButton from "@/components/main-button";
-import { useRouter } from "next/navigation";
 
 export default function BestVoteSection() {
-  const router = useRouter();
-
-  const handleClickButton = () => {
-    router.push("/vote-topic");
-  };
-
   return (
     <section className="mx-auto my-[40px] w-full px-[16px] lg:my-[120px] lg:max-w-screen-xl">
       <span className="mb-[4px] text-[14px] leading-[19.6px] text-black-001 lg:mb-0 lg:text-[24px] lg:leading-[33.6px]">
@@ -18,9 +10,6 @@ export default function BestVoteSection() {
         실시간 TOP 5
       </h2>
       <BestList />
-      <div className="mx-auto mt-[30px]">
-        <MainButton text="바로가기" onClick={handleClickButton} />
-      </div>
     </section>
   );
 }

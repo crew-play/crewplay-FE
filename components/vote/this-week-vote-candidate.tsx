@@ -1,18 +1,18 @@
 import DateAndParticipantCount from "@/app/vote-result/components/date-and-participant-count";
 import MainButton from "@/components/main-button";
 import CandidateList from "@/components/vote/vote-result-candidate-list";
+import { atomIsPending } from "@/jotai/pending";
 import { atomUserAuth } from "@/jotai/user-auth";
 import { atomSelectedCandidate } from "@/jotai/vote";
 import { formattingDateTime } from "@/utils/format-value";
 import { useAtomValue, useSetAtom } from "jotai";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import ThisWeekVoteCandidateList from "../../app/(home)/components/this-week-vote/this-week-vote-candidate-list";
 import useGetThisWeekVoteCandidates from "../../app/(home)/hooks/use-get-this-week-vote-candidates";
 import useThisWeekVote from "../../app/(home)/hooks/use-this-week-vote";
 import NotExist from "../not-exist";
-import Spinner from "../spinner";
-import { useEffect } from "react";
-import { atomIsPending } from "@/jotai/pending";
+import ThisWeekVoteCandidateSkeleton from "../skeleton/this-week-vote-candidate-skeleton";
 
 export default function ThisWeekVoteCandidate() {
   const pathname = usePathname();
@@ -42,7 +42,7 @@ export default function ThisWeekVoteCandidate() {
     mutate({ voteId: voteId, candidateId: selectedCandidateId });
   };
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <ThisWeekVoteCandidateSkeleton />;
 
   if (isError)
     return <NotExist text="에러가 발생하였습니다. 다시 조회해주세요." />;
