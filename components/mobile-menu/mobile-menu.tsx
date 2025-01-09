@@ -6,12 +6,15 @@ import { useSetAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import MobileWeeklyMenu from "./mobile-weekly-menu";
+import { removeToken } from "@/utils/token";
+import { atomUserAuth } from "@/jotai/user-auth";
 
 export default function MobileMenu() {
   const router = useRouter();
   const [isOpenWeekly, setIsOpenWeekly] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(0);
   const setIsOpenMobileMenu = useSetAtom(atomIsOpenMobileMenu);
+  const setUserAuth = useSetAtom(atomUserAuth);
 
   const handleClickOpenWeeklyMenu = () => {
     setIsOpenWeekly((prev) => {
@@ -25,6 +28,21 @@ export default function MobileMenu() {
 
   const handleClickMenu = (url: string) => {
     router.push(url);
+    setIsOpenMobileMenu(false);
+  };
+
+  const handleLogout = async () => {
+    await removeToken("refresh");
+    localStorage.removeItem("access");
+
+    setUserAuth({
+      nickname: "",
+      role: "ANONYMOUS",
+      favoriteClub: "",
+    });
+
+    router.push("/");
+    setIsOpenMobileMenu(false);
   };
 
   useEffect(() => {
@@ -55,7 +73,7 @@ export default function MobileMenu() {
         className="mb-[10px] ml-auto flex size-[40px] items-center justify-center"
         onClick={handleClickCloseMenu}
       >
-        <Exit />
+        <Exit width={12} height={12} stroke="#111111" />
       </div>
       <div className="mb-[10px] py-[16px]">
         <Logo />
@@ -94,6 +112,24 @@ export default function MobileMenu() {
         >
           <span className="text-[16px] font-bold leading-[22.4px] text-black-001">
             오늘의 소식
+          </span>
+        </div>
+        <div
+          className="mb-[10px] flex cursor-pointer justify-between border-b border-b-gray-003 bg-white-001 px-[24px] pb-[26px] pt-[16px]"
+          onClick={() => {
+            return handleClickMenu("/my-page");
+          }}
+        >
+          <span className="text-[16px] font-bold leading-[22.4px] text-black-001">
+            마이페이지
+          </span>
+        </div>
+        <div
+          className="mb-[10px] flex cursor-pointer justify-between bg-white-001 px-[24px] pb-[26px] pt-[16px]"
+          onClick={handleLogout}
+        >
+          <span className="text-[16px] font-bold leading-[22.4px] text-gray-003">
+            로그아웃
           </span>
         </div>
       </div>
