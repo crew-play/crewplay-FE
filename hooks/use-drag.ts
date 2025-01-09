@@ -3,10 +3,10 @@ import { MouseEvent, TouchEvent, useRef } from "react";
 export default function useDrag() {
   const sliderRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false); // 상태 관리
-  const startX = useRef(0); // 상태 관리
-  const currentTranslate = useRef(0); // 상태 관리
-  const prevTranslate = useRef(0); // 상태 관리
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const currentTranslate = useRef(0);
+  const prevTranslate = useRef(0);
 
   const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
     isDragging.current = true;

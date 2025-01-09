@@ -1,7 +1,7 @@
 "use client";
 
 import { SetStateAction } from "jotai";
-import { Dispatch, RefObject, useEffect, useRef } from "react";
+import { Dispatch, useEffect, useRef } from "react";
 
 interface IUseModalProps {
   readonly setIsOpenModal: Dispatch<SetStateAction<boolean>>;
